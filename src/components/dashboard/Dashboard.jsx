@@ -65,15 +65,7 @@ const Dashboard = () => {
         They are already rendered in MainLayout → Outlet renders only this content 
       */}
 
-      <div
-        className="
-          mt-16               /* below navbar */
-          ml-20               /* collapsed sidebar width */
-          group-hover:ml-64   /* expanded sidebar width – matches Sidebar hover */
-          transition-all duration-300 ease-in-out
-          p-6
-        "
-      >
+    <div className="mt-16 p-2 transition-all duration-300">
         {/* HEADER */}
         <h2 className="text-2xl font-semibold mb-8">
           Hello, <span className="font-bold">{username}</span>

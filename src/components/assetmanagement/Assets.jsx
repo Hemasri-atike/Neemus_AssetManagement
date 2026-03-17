@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Paper,
   Table,
@@ -12,52 +12,44 @@ import {
   Button,
 } from "@mui/material";
 import { Edit, Delete, Add } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
 
 const Assets = () => {
   const [search, setSearch] = useState("");
+  const [data, setData] = useState([]);
+  const navigate = useNavigate();
 
-  // 🔥 Dummy Data (more columns for horizontal scroll)
-  const data = [
-    {
-      id: 1,
-      assetId: "AST-001",
-      name: "Laptop",
-      category: "Electronics",
-      status: "Active",
-      location: "Hyderabad",
-      department: "IT",
-      cost: "₹60,000",
-      vendor: "Dell",
-    },
-    {
-      id: 2,
-      assetId: "AST-002",
-      name: "Printer",
-      category: "Office",
-      status: "Inactive",
-      location: "Chennai",
-      department: "Admin",
-      cost: "₹15,000",
-      vendor: "HP",
-    },
-  ];
+  // ✅ Load from localStorage
+  useEffect(() => {
+    const storedData =
+      JSON.parse(localStorage.getItem("assets")) || [];
+    setData(storedData);
+  }, []);
 
+  // ✅ Delete Function
+  const handleDelete = (id) => {
+    const updatedData = data.filter((item) => item.id !== id);
+    setData(updatedData);
+    localStorage.setItem("assets", JSON.stringify(updatedData));
+  };
+
+  // ✅ Search Filter
   const filteredData = data.filter((item) =>
     item.name.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
     <div className="p-4 md:p-6">
-      
+
       {/* 🔥 Top Section */}
       <div className="flex flex-col md:flex-row justify-between items-center gap-3 mb-5">
-        
+
         <h2 className="text-xl font-semibold text-slate-800">
           Asset Management
         </h2>
 
         <div className="flex gap-3 w-full md:w-auto">
-          
+
           {/* 🔍 Search */}
           <TextField
             size="small"
@@ -71,6 +63,7 @@ const Assets = () => {
           <Button
             variant="contained"
             startIcon={<Add />}
+            onClick={() => navigate("/assets/add-asset")}
             className="!bg-blue-600 hover:!bg-blue-700 !whitespace-nowrap"
           >
             Add Asset
@@ -81,7 +74,7 @@ const Assets = () => {
 
       {/* 🔥 Table */}
       <Paper className="rounded-2xl shadow-md">
-        
+
         <TableContainer
           className="
             max-h-[500px]
@@ -90,7 +83,7 @@ const Assets = () => {
           "
         >
           <Table stickyHeader className="min-w-[900px]">
-            
+
             {/* Header */}
             <TableHead>
               <TableRow>
@@ -117,54 +110,67 @@ const Assets = () => {
 
             {/* Body */}
             <TableBody>
-              {filteredData.map((row) => (
-                <TableRow
-                  key={row.id}
-                  hover
-                  className="hover:bg-slate-50 transition"
-                >
-                  <TableCell>{row.assetId}</TableCell>
-                  <TableCell>{row.name}</TableCell>
-                  <TableCell>{row.category}</TableCell>
-                  <TableCell>{row.department}</TableCell>
-                  <TableCell>{row.vendor}</TableCell>
-                  <TableCell>{row.cost}</TableCell>
+              {filteredData.length > 0 ? (
+                filteredData.map((row) => (
+                  <TableRow
+                    key={row.id}
+                    hover
+                    className="hover:bg-slate-50 transition"
+                  >
+                    <TableCell>{row.assetId}</TableCell>
+                    <TableCell>{row.name}</TableCell>
+                    <TableCell>{row.category}</TableCell>
+                    <TableCell>{row.department}</TableCell>
+                    <TableCell>{row.vendor}</TableCell>
+                    <TableCell>{row.cost}</TableCell>
 
-                  {/* Status */}
-                  <TableCell>
-                    <span
-                      className={`px-3 py-1 text-xs rounded-full font-medium ${
-                        row.status === "Active"
-                          ? "bg-green-100 text-green-600"
-                          : "bg-red-100 text-red-600"
-                      }`}
-                    >
-                      {row.status}
-                    </span>
-                  </TableCell>
-
-                  <TableCell>{row.location}</TableCell>
-
-                  {/* Actions */}
-                  <TableCell>
-                    <div className="flex gap-2">
-                      <IconButton
-                        size="small"
-                        className="!bg-blue-50 hover:!bg-blue-100"
+                    {/* Status */}
+                    <TableCell>
+                      <span
+                        className={`px-3 py-1 text-xs rounded-full font-medium ${
+                          row.status === "Active"
+                            ? "bg-green-100 text-green-600"
+                            : "bg-red-100 text-red-600"
+                        }`}
                       >
-                        <Edit className="!text-blue-600" fontSize="small" />
-                      </IconButton>
+                        {row.status}
+                      </span>
+                    </TableCell>
 
-                      <IconButton
-                        size="small"
-                        className="!bg-red-50 hover:!bg-red-100"
-                      >
-                        <Delete className="!text-red-600" fontSize="small" />
-                      </IconButton>
-                    </div>
+                    <TableCell>{row.location}</TableCell>
+
+                    {/* Actions */}
+                    <TableCell>
+                      <div className="flex gap-2">
+
+                        {/* EDIT (optional for later) */}
+                        <IconButton
+                          size="small"
+                          className="!bg-blue-50 hover:!bg-blue-100"
+                        >
+                          <Edit className="!text-blue-600" fontSize="small" />
+                        </IconButton>
+
+                        {/* DELETE */}
+                        <IconButton
+                          size="small"
+                          onClick={() => handleDelete(row.id)}
+                          className="!bg-red-50 hover:!bg-red-100"
+                        >
+                          <Delete className="!text-red-600" fontSize="small" />
+                        </IconButton>
+
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell colSpan={9} align="center">
+                    No Assets Found
                   </TableCell>
                 </TableRow>
-              ))}
+              )}
             </TableBody>
 
           </Table>
