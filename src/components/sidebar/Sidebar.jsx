@@ -54,17 +54,18 @@ const Sidebar = () => {
 
   return (
     <aside
-      className="
-        fixed top-16 left-0 z-40
-        h-[calc(100vh-4rem)]
-        w-20 hover:w-64
-        bg-gradient-to-b from-slate-900 to-slate-800
-        text-slate-200 border-r border-slate-700 shadow-xl
-        transition-all duration-300
-        group
-        overflow-hidden
-      "
-    >
+  className="
+    fixed top-16 left-0 z-50
+    h-[calc(100vh-4rem)]
+    w-20 hover:w-64
+    bg-gradient-to-b from-slate-900 to-slate-800
+    text-slate-200 border-r border-slate-700
+    shadow-xl hover:shadow-2xl
+    transition-all duration-300
+    group
+    overflow-hidden
+  "
+>
       {/* Branding */}
       <div className="px-4 py-5 border-b border-slate-700">
         <h2 className="text-lg font-bold text-white hidden group-hover:block">
