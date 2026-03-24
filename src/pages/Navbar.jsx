@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Bell, ChevronDown, Menu } from "lucide-react";
+import theme from "../theme";
 
 const Navbar = ({ setIsOpen }) => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -25,67 +26,92 @@ const Navbar = ({ setIsOpen }) => {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 w-full h-16 z-50 backdrop-blur-xl bg-white/70 border-b border-slate-200 shadow-sm">
+      {/* NAVBAR */}
+      <nav
+        className="fixed top-0 left-0 w-full h-16 z-50 backdrop-blur-xl shadow-sm"
+        style={{
+          backgroundColor: theme.colors.secondary,
+          borderBottom: `1px solid ${theme.colors.border}`,
+        }}
+      >
         <div className="h-full flex items-center justify-between px-4 md:px-6 lg:px-10">
           
-          {/* 🔥 Left Section */}
+          {/* LEFT */}
           <div className="flex items-center gap-3">
-            
-            {/* Sidebar Toggle (Mobile) */}
-            <button
-              className="md:hidden"
-              onClick={() => setIsOpen(true)}
-            >
+            <button className="md:hidden" onClick={() => setIsOpen(true)}>
               <Menu size={22} />
             </button>
 
-            {/* Logo */}
-            <div className="text-xl md:text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+            {/* LOGO */}
+            <div
+              className="text-xl md:text-2xl font-bold"
+              style={{
+                color: theme.colors.primary,
+              }}
+            >
               AssetPro
             </div>
           </div>
 
-          {/* 🔥 Desktop Navigation */}
+          {/* DESKTOP NAV */}
           <ul className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <li key={link.name} className="relative group">
-                <Link
-                  to={link.path}
-                  className={`text-sm font-medium transition ${
-                    location.pathname === link.path
-                      ? "text-slate-900"
-                      : "text-slate-600 hover:text-slate-900"
-                  }`}
-                >
-                  {link.name}
-                </Link>
+            {navLinks.map((link) => {
+              const isActive = location.pathname === link.path;
 
-                <span
-                  className={`absolute left-0 -bottom-1 h-0.5 bg-blue-600 transition-all duration-300 ${
-                    location.pathname === link.path
-                      ? "w-full"
-                      : "w-0 group-hover:w-full"
-                  }`}
-                />
-              </li>
-            ))}
+              return (
+                <li key={link.name} className="relative group">
+                  <Link
+                    to={link.path}
+                    className="text-sm font-medium transition"
+                    style={{
+                      color: isActive
+                        ? theme.colors.primary
+                        : theme.colors.border,
+                    }}
+                  >
+                    {link.name}
+                  </Link>
+
+                  <span
+                    className="absolute left-0 -bottom-1 h-0.5 transition-all duration-300"
+                    style={{
+                      backgroundColor: theme.colors.accent,
+                      width: isActive ? "100%" : "0%",
+                    }}
+                  />
+                </li>
+              );
+            })}
           </ul>
 
-          {/* 🔥 Right Section */}
+          {/* RIGHT */}
           <div className="flex items-center gap-4 md:gap-5 relative">
             
-            {/* Notification */}
+            {/* NOTIFICATION */}
             <div className="relative hidden sm:block">
-              <Bell className="text-slate-500 hover:text-slate-800 cursor-pointer transition" size={20} />
-              <span className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+              <Bell
+                size={20}
+                style={{ color: theme.colors.border }}
+                className="cursor-pointer transition"
+              />
+              <span
+                className="absolute -top-1 -right-1 w-2 h-2 rounded-full"
+                style={{ backgroundColor: theme.colors.error }}
+              ></span>
             </div>
 
-            {/* Profile */}
+            {/* PROFILE */}
             <div
               className="flex items-center gap-2 cursor-pointer"
               onClick={() => setProfileOpen(!profileOpen)}
             >
-              <div className="w-8 h-8 md:w-9 md:h-9 rounded-full bg-gradient-to-tr from-blue-500 to-indigo-600 text-white flex items-center justify-center font-semibold shadow-md">
+              <div
+                className="w-8 h-8 md:w-9 md:h-9 rounded-full flex items-center justify-center font-semibold shadow-md"
+                style={{
+                  backgroundColor: theme.colors.primary,
+                  color: theme.colors.secondary,
+                }}
+              >
                 H
               </div>
 
@@ -97,14 +123,21 @@ const Navbar = ({ setIsOpen }) => {
               />
             </div>
 
-            {/* Profile Dropdown */}
+            {/* DROPDOWN */}
             {profileOpen && (
-              <div className="absolute right-0 top-14 bg-white rounded-2xl shadow-xl w-48 py-3 border border-slate-200">
-                <p className="px-4 py-2 hover:bg-slate-100 cursor-pointer rounded-lg">
+              <div
+                className="absolute right-0 top-14 w-48 py-3 shadow-xl"
+                style={{
+                  backgroundColor: theme.colors.secondary,
+                  border: `1px solid ${theme.colors.border}`,
+                  borderRadius: theme.borderRadius.large,
+                }}
+              >
+                <p className="px-4 py-2 cursor-pointer">
                   My Profile
                 </p>
 
-                <p className="px-4 py-2 hover:bg-slate-100 cursor-pointer rounded-lg">
+                <p className="px-4 py-2 cursor-pointer">
                   Settings
                 </p>
 
@@ -112,14 +145,15 @@ const Navbar = ({ setIsOpen }) => {
 
                 <p
                   onClick={handleLogout}
-                  className="px-4 py-2 text-red-500 hover:bg-red-50 cursor-pointer rounded-lg"
+                  className="px-4 py-2 cursor-pointer"
+                  style={{ color: theme.colors.error }}
                 >
                   Logout
                 </p>
               </div>
             )}
 
-            {/* Mobile Menu Button */}
+            {/* MOBILE MENU BTN */}
             <button
               className="md:hidden text-xl"
               onClick={() => setMenuOpen(!menuOpen)}
@@ -130,35 +164,51 @@ const Navbar = ({ setIsOpen }) => {
         </div>
       </nav>
 
-      {/* 🔥 Mobile Menu (Right Slide) */}
+      {/* MOBILE MENU */}
       <div
-        className={`fixed top-16 right-0 w-64 h-[calc(100vh-4rem)] bg-white shadow-xl border-l border-slate-200 transform transition-transform duration-300 z-40 ${
+        className={`fixed top-16 right-0 w-64 h-[calc(100vh-4rem)] transform transition-transform duration-300 z-40 ${
           menuOpen ? "translate-x-0" : "translate-x-full"
         }`}
+        style={{
+          backgroundColor: theme.colors.secondary,
+          borderLeft: `1px solid ${theme.colors.border}`,
+        }}
       >
         <ul className="flex flex-col py-4">
-          {navLinks.map((link) => (
-            <li key={link.name}>
-              <Link
-                to={link.path}
-                onClick={() => setMenuOpen(false)}
-                className={`block px-6 py-3 text-sm ${
-                  location.pathname === link.path
-                    ? "bg-blue-50 text-blue-600 font-semibold border-l-4 border-blue-600"
-                    : "text-slate-700 hover:bg-slate-100"
-                }`}
-              >
-                {link.name}
-              </Link>
-            </li>
-          ))}
+          {navLinks.map((link) => {
+            const isActive = location.pathname === link.path;
+
+            return (
+              <li key={link.name}>
+                <Link
+                  to={link.path}
+                  onClick={() => setMenuOpen(false)}
+                  className="block px-6 py-3 text-sm"
+                  style={{
+                    backgroundColor: isActive
+                      ? theme.colors.accent + "20"
+                      : "transparent",
+                    color: isActive
+                      ? theme.colors.accent
+                      : theme.colors.primary,
+                    borderLeft: isActive
+                      ? `4px solid ${theme.colors.accent}`
+                      : "none",
+                  }}
+                >
+                  {link.name}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       </div>
 
-      {/*  Overlay */}
+      {/* OVERLAY */}
       {menuOpen && (
         <div
-          className="fixed inset-0 bg-black/40 z-30 md:hidden"
+          className="fixed inset-0 z-30 md:hidden"
+          style={{ backgroundColor: "rgba(0,0,0,0.4)" }}
           onClick={() => setMenuOpen(false)}
         />
       )}
