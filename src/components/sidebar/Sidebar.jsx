@@ -7,7 +7,10 @@ import {
   FactCheck,
   Inventory2,
   ExpandMore,
+ 
 } from "@mui/icons-material";
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
+
 
 const Sidebar = () => {
   const location = useLocation();
@@ -25,12 +28,23 @@ const Sidebar = () => {
       subMenu: [
         { name: "Request Asset", path: "/assets/requestasset" },
         { name: "View Asset List", path: "/assets/list" },
-        { name: "Status Change", path: "/assets/status" },
+        // { name: "Status Change", path: "/assets/status-change" },
         { name: "Add Documents", path: "/assets/add-documents" },
         { name: "View Export History", path: "/assets/export" },
         { name: "View Location", path: "/assets/location" },
+        { name: "Add Status", path: "/assets/add-status" }
       ],
     },
+
+    {
+     name: "Role Management",
+     icon: <AdminPanelSettingsIcon fontSize="small" />,
+     subMenu: [
+      { name: "View Roles", path: "/roles/view" },
+      { name: "Create Role", path: "/roles/create" },
+    ],
+    },
+    
     {
       name: "Reports",
       path: "/reports",
@@ -105,6 +119,8 @@ const Sidebar = () => {
                   }`}
                 />
               </button>
+
+              
 
               {/* Submenu */}
               <div
