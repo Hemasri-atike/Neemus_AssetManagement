@@ -51,7 +51,7 @@ const Reports = () => {
       <Sidebar />
 
       {/* Main Content */}
-      <div className="ml-64 mt-16 p-8">
+      <div className=" mt-16 p-8">
         {/* Page Title */}
         <h1 className="text-2xl font-semibold text-gray-800 mb-6">
           Print QR Codes for Selected Asset

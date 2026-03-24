@@ -11,7 +11,7 @@ const MainLayout = () => {
       <Navbar />
 
       {/* Layout */}
-      <div className="flex group">
+      <div className="flex">
         
         {/* Sidebar */}
         <Sidebar />
@@ -21,9 +21,7 @@ const MainLayout = () => {
           className="
             flex-1
             mt-16
-            ml-20
-            group-hover:ml-64
-            transition-all duration-300 ease-in-out
+            ml-24
             p-6
             min-h-screen
           "

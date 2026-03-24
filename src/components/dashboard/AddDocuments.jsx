@@ -33,7 +33,7 @@ export default function AddDocuments() {
       <Sidebar />
 
       {/* Main Content */}
-      <div className="ml-64 mt-16 p-8">
+      <div className=" mt-16 p-8">
         {/* Page Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-slate-800">

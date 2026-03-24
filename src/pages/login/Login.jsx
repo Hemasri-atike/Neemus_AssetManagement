@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import bgImage from "../../assets/bglogin.jpg";
+import theme from "../../theme";
 
 const Login = ({ setIsLoggedIn }) => {
   const navigate = useNavigate();
@@ -22,23 +23,42 @@ const Login = ({ setIsLoggedIn }) => {
     localStorage.setItem("role", selectedRole);
 
     setIsLoggedIn(true);
-
     navigate("/dashboard");
   };
 
   return (
     <div
-      className="h-screen bg-cover bg-center flex justify-center items-center font-poppins"
-      style={{ backgroundImage: `url(${bgImage})` }}
+      className="h-screen flex justify-center items-center"
+      style={{
+        backgroundImage: `url(${bgImage})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        fontFamily: theme.font.family,
+      }}
     >
-      <div className="w-full max-w-lg p-10 rounded-3xl bg-white/10 backdrop-blur-[25px] shadow-2xl text-white">
-        
+      {/* CARD */}
+      <div
+        className="w-full max-w-lg p-10 backdrop-blur-[25px] shadow-2xl"
+        style={{
+          backgroundColor: theme.colors.glass,
+          color: theme.colors.secondary,
+          borderRadius: theme.borderRadius.large,
+        }}
+      >
         <h2 className="text-center text-4xl font-medium mb-8">
           Log in
         </h2>
 
+        {/* ERROR */}
         {error && (
-          <div className="bg-red-500/60 text-white text-center py-2 mb-4 rounded">
+          <div
+            className="text-center py-2 mb-4"
+            style={{
+              backgroundColor: theme.colors.error,
+              color: theme.colors.secondary,
+              borderRadius: theme.borderRadius.medium,
+            }}
+          >
             {error}
           </div>
         )}
@@ -50,9 +70,14 @@ const Login = ({ setIsLoggedIn }) => {
           </label>
           <input
             type="text"
-            className="h-12 rounded-xl border border-white bg-transparent px-4 text-white text-base outline-none"
             value={userId}
             onChange={(e) => setUserId(e.target.value)}
+            className="h-12 px-4 bg-transparent outline-none"
+            style={{
+              border: `1px solid ${theme.colors.secondary}`,
+              color: theme.colors.secondary,
+              borderRadius: theme.borderRadius.medium,
+            }}
           />
         </div>
 
@@ -61,7 +86,8 @@ const Login = ({ setIsLoggedIn }) => {
           <div className="flex justify-between items-center mb-1">
             <label className="text-sm">PASSWORD</label>
             <span
-              className="text-sm cursor-pointer hover:text-gray-300"
+              className="text-sm cursor-pointer"
+              style={{ color: theme.colors.accent }}
               onClick={() => setShowPassword(!showPassword)}
             >
               {showPassword ? "Hide" : "Show"}
@@ -70,14 +96,22 @@ const Login = ({ setIsLoggedIn }) => {
 
           <input
             type={showPassword ? "text" : "password"}
-            className="h-12 rounded-xl border border-white bg-transparent px-4 text-white text-base outline-none"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            className="h-12 px-4 bg-transparent outline-none"
+            style={{
+              border: `1px solid ${theme.colors.secondary}`,
+              color: theme.colors.secondary,
+              borderRadius: theme.borderRadius.medium,
+            }}
           />
         </div>
 
         {/* FORGOT PASSWORD */}
-        <div className="text-sm underline mb-4 cursor-pointer">
+        <div
+          className="text-sm mb-4 cursor-pointer underline"
+          style={{ color: theme.colors.accent }}
+        >
           Forgot password?
         </div>
 
@@ -98,7 +132,8 @@ const Login = ({ setIsLoggedIn }) => {
                 value={role}
                 checked={selectedRole === role}
                 onChange={() => setSelectedRole(role)}
-            className="accent-blue-600 scale-110 focus:ring-2 focus:ring-blue-400"
+                className="scale-110"
+                style={{ accentColor: theme.colors.accent }}
               />
               {role}
             </label>
@@ -107,14 +142,27 @@ const Login = ({ setIsLoggedIn }) => {
 
         {/* LOGIN BUTTON */}
         <button
-          className="w-full h-12 bg-black rounded-2xl text-white text-lg mb-4 hover:bg-gray-800 transition"
+          className="w-full h-12 text-lg mb-4 transition"
+          style={{
+            backgroundColor: theme.colors.primary,
+            color: theme.colors.secondary,
+            borderRadius: theme.borderRadius.large,
+          }}
           onClick={handleLogin}
         >
           Log In
         </button>
 
         {/* DOWNLOAD BUTTON */}
-        <button className="w-full h-12 rounded-2xl text-lg border border-black bg-white/70 text-black hover:bg-white/90 transition">
+        <button
+          className="w-full h-12 text-lg transition"
+          style={{
+            border: `1px solid ${theme.colors.primary}`,
+            backgroundColor: theme.colors.secondary,
+            color: theme.colors.primary,
+            borderRadius: theme.borderRadius.large,
+          }}
+        >
           Download
         </button>
       </div>
