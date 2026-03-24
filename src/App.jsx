@@ -8,8 +8,13 @@ import AddDocuments from "./components/dashboard/AddDocuments";
 import Reports from "./components/dashboard/Reports";
 import Assets from "./components/assetmanagement/Assets";
 import AddAsset from "./components/assetmanagement/AddAsset";
-
 import MainLayout from "./layout/Mainlayout";
+
+import ViewRoles from "./components/roles/ViewRoles";
+import CreateRole from "./components/roles/CreateRole";
+
+import AddStatus from "./components/assetmanagement/AddStatus";
+import AssetStatusChange from "./components/assetmanagement/AssetStatusChange";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -50,6 +55,20 @@ const App = () => {
             <Route path="request-access" element={<RequestAccess />} />
             <Route path="add-documents" element={<AddDocuments />} />
           </Route>
+
+             {/* Roles */}
+          <Route path="/roles">
+            <Route path="view" element={<ViewRoles />} />
+            <Route path="create" element={<CreateRole />} />
+          </Route>
+
+          {/* Asset Status Change */}
+          <Route path="/assets/status-change" element={<AssetStatusChange />} />
+          <Route path="/assets/status" element={<AssetStatusChange />} />
+
+           {/* Add Status */}
+          <Route path="/assets/add-status" element={<AddStatus />} />
+          
 
           {/* Other Pages */}
           <Route path="/reports" element={<Reports />} />
