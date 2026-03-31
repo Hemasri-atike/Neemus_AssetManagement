@@ -5,25 +5,38 @@ import AssetStepper from "./AssetStepper";
 const AddAsset = () => {
   const navigate = useNavigate();
 
-  const handleSubmit = (formData) => {
-    const existingData =
-      JSON.parse(localStorage.getItem("assets")) || [];
+  // ✅ Send data to backend API
+  const handleSubmit = async (formData) => {
+    try {
+      const response = await fetch("http://localhost:5000/api/assets", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
-    const newData = [
-      ...existingData,
-      { id: Date.now(), ...formData },
-    ];
+      if (!response.ok) {
+        throw new Error("Failed to save asset");
+      }
 
-    localStorage.setItem("assets", JSON.stringify(newData));
+      const result = await response.json();
+      console.log("Saved:", result);
 
-    navigate("/assets/list");
+      // ✅ Navigate after success
+      navigate("/assets/list");
+
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Failed to save asset");
+    }
   };
 
   return (
     <div className="p-6">
       <h2 className="text-xl font-semibold mb-6">Add Asset</h2>
 
-      {/* 🔥 Stepper Component */}
+      {/* Stepper Form */}
       <AssetStepper onSubmit={handleSubmit} />
     </div>
   );

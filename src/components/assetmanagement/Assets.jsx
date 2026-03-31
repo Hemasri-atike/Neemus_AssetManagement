@@ -1,44 +1,45 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  IconButton,
-  TextField,
-  Button,
-} from "@mui/material";
-import { Edit, Delete, Add } from "@mui/icons-material";
+  useReactTable,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getSortedRowModel,
+  flexRender,
+} from "@tanstack/react-table";
 import { useNavigate } from "react-router-dom";
-import CustomizeColumns from "../../buttons/Customizecolumns";
+import CustomizeColumns from "../../buttons/CustomizeColumns";
+import theme from "../../theme";
+import { FaEdit, FaTrash, FaPlus, FaFileExcel, FaFilePdf } from "react-icons/fa";
+import { allColumns } from "../../constants/Columns";
+const columnLabels = {
+  assetId: "Asset ID",
+  assetNumber: "Asset Number",
+  subAssetNumber: "Sub Asset Number",
+  assetClass: "Asset Class",
+  intenderName: "Intender Name",
+  assetDescription: "Description",
+  custodianName: "Custodian",
+  serialNumber: "Serial No",
+  macId: "MAC ID",
+  locationId: "Location",
+  block: "Block",
+  model: "Model",
+  grNumber: "GR Number",
+  yearOfPurchase: "Year",
+  capitalizationDate: "Capitalization",
+  expiryDate: "Expiry",
+  costCenter: "Cost Center",
+  materialNumber: "Material No",
+  acceptDate: "Accept Date",
+  poNumber: "PO Number",
+  wbsNumber: "WBS",
+  installationDate: "Installation",
+  assetVendor: "Vendor",
+  department: "Department",
+  remarks: "Remarks",
+};
 
-const Assets = () => {
-  const [search, setSearch] = useState("");
-  const [data, setData] = useState([]);
-  const navigate = useNavigate();
-
-  // ✅ Load from localStorage
-  useEffect(() => {
-    const storedData = JSON.parse(localStorage.getItem("assets")) || [];
-    setData(storedData);
-  }, []);
-
-  // ✅ Delete Function
-  const handleDelete = (id) => {
-    const updatedData = data.filter((item) => item.id !== id);
-    setData(updatedData);
-    localStorage.setItem("assets", JSON.stringify(updatedData));
-  };
-
-  // ✅ Search
-  const filteredData = data.filter((item) =>
-    (item.assetId || "").toLowerCase().includes(search.toLowerCase())
-
-  );
-  const defaultColumns = [
+const defaultColumns = [
   "assetId",
   "assetNumber",
   "assetClass",
@@ -46,198 +47,250 @@ const Assets = () => {
   "custodianName",
   "locationId",
   "department",
-   "materialNumber",
+  "materialNumber",
   "poNumber",
   "wbsNumber",
   "assetVendor",
-  "department",
   "remarks",
 ];
 
+const Assets = () => {
+  const navigate = useNavigate();
 
-  // ✅ Columns
-  const columns = [
-    "Asset ID",
-    "Asset Number",
-    "Sub Asset Number",
-    "Asset Class",
-    "Intender Name",
-    "Asset Description",
-    "Custodian Name",
-    "Serial Number",
-    "Mac ID",
-    "Location ID",
-    "Block",
-    "Model",
-    "GR Number",
-    "Year of Purchase",
-    "Capitalization Date",
-    "Expiry Date",
-    "Cost Center",
-    "Material Number",
-    "Accept Date",
-    "PO Number",
-    "WBS Number",
-    "Installation Date",
-    "Vendor",
-    "Department",
-    "Remarks",
-    "Actions",
-  ];
-    const [visibleColumns, setVisibleColumns] = useState(columns);
+  const [assets, setAssets] = useState([]);
+  const [search, setSearch] = useState("");
+  const [visibleColumns, setVisibleColumns] = useState(defaultColumns);
+  const [sorting, setSorting] = useState([]);
+
+const fetchAssets = async () => {
+  try {
+    const res = await fetch("http://localhost:5000/api/assets");
+    const data = await res.json();
+
+    console.log("API DATA:", data);
+
+    if (Array.isArray(data)) {
+      setAssets(data);
+    } else {
+      setAssets([]);
+    }
+  } catch (err) {
+    console.error(err);
+    setAssets([]);
+  }
+};
+
+  useEffect(() => {
+    fetchAssets();
+  }, []);
+
+  // ✅ DELETE
+  const handleDelete = async (id) => {
+    if (!confirm("Delete asset?")) return;
+
+    await fetch(`http://localhost:5000/api/assets/${id}`, {
+      method: "DELETE",
+    });
+
+    fetchAssets();
+  };
+
+const filteredData = useMemo(() => {
+  return assets.filter((item) =>
+    [
+      item.assetId,
+      item.assetNumber,
+      item.assetClass,
+      item.department,
+      item.assetVendor,
+    ]
+      .map((val) => String(val || "")) // ✅ FIX
+      .join(" ")
+      .toLowerCase()
+      .includes(search.toLowerCase())
+  );
+}, [assets, search]);
+
+  // ✅ COLUMN DEFINITIONS
+const columns = useMemo(() => {
+  // ✅ only show selected columns
+  const dynamicCols = allColumns
+    .filter((col) => visibleColumns.includes(col))   // ⭐ IMPORTANT
+    .map((col) => ({
+      accessorKey: col,
+      header: columnLabels[col] || col,
+      cell: ({ getValue }) => getValue() || "-",
+    }));
+
+  // ✅ always keep Actions column at RIGHT
+  dynamicCols.push({
+    id: "actions",
+    header: "Actions",
+    cell: ({ row }) => (
+      <div className="flex justify-center gap-2">
+        <button
+          onClick={() => navigate(`/assets/edit/${row.original.id}`)}
+          className="p-2 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-600 hover:text-white transition-all duration-300 shadow-sm"
+          title="Edit Asset"
+        >
+          <FaEdit />
+        </button>
+
+        <button
+          onClick={() => handleDelete(row.original.id)}
+          className="p-2 rounded-lg bg-red-50 text-red-600 hover:bg-red-600 hover:text-white transition-all duration-300 shadow-sm"
+          title="Delete Asset"
+        >
+          <FaTrash />
+        </button>
+      </div>
+    ),
+  });
+
+  return dynamicCols;
+}, [visibleColumns]); // ⭐ dependency
+
+  const table = useReactTable({
+    data: filteredData,
+    columns,
+    state: { sorting },
+    onSortingChange: setSorting,
+    getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+  });
 
   return (
-    <div className="p-4 md:p-6">
-      
-      {/* 🔥 Header */}
-      <div className="flex flex-col md:flex-row justify-between items-center gap-3 mb-5">
-        <h2 className="text-xl font-semibold text-slate-800">
-          Asset Management
-        </h2>
+    <div
+      className="p-6"
+      style={{
+        fontFamily: theme.font.family,
+        background: theme.colors.background,
+      }}
+    >
+      {/* HEADER SECTION */}
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+        <div>
+          <h2
+            className="text-3xl font-extrabold tracking-tight"
+            style={{ color: theme.colors.text }}
+          >
+            Asset Management
+          </h2>
+          <p className="text-gray-500 text-sm mt-1">Manage and track your organization's assets in real-time.</p>
+        </div>
 
-      <div className="flex gap-3 w-full md:w-auto">
-  
-  <TextField
-    size="small"
-    placeholder="Search by Asset ID..."
-    fullWidth
-    value={search}
-    onChange={(e) => setSearch(e.target.value)}
-  />
+        <div className="flex flex-wrap items-center gap-3">
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="Search assets..."
+              className="pl-10 pr-4 py-2.5 w-64 border-0 bg-white shadow-sm ring-1 ring-inset ring-gray-300 rounded-xl focus:ring-2 focus:ring-inset focus:ring-blue-600 transition-all duration-200 outline-none"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+               <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+               </svg>
+            </div>
+          </div>
 
-  {/* ✅ Customize Columns */}
-  <CustomizeColumns
-    allColumns={columns}
-    visibleColumns={visibleColumns}
-    setVisibleColumns={setVisibleColumns}
-  />
+          <div className="p-0.5 bg-gray-100 rounded-xl shadow-inner inline-flex">
+            <CustomizeColumns
+              allColumns={allColumns}
+              visibleColumns={visibleColumns}
+              setVisibleColumns={setVisibleColumns}
+            />
+          </div>
 
-  <Button
-    variant="contained"
-    startIcon={<Add />}
-    onClick={() => navigate("/assets/add-asset")}
-    className="!bg-blue-600 hover:!bg-blue-700 !whitespace-nowrap"
-  >
-    Add Asset
-  </Button>
-</div>
+          <button
+            onClick={() => navigate("/assets/add-asset")}
+            className="flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-white shadow-lg hover:shadow-xl transform active:scale-95 transition-all duration-200"
+            style={{ 
+              background: `linear-gradient(135deg, ${theme.colors.primary} 0%, #333 100%)` 
+            }}
+          >
+            <FaPlus />
+            <span>Add Asset</span>
+          </button>
+        </div>
       </div>
 
-      {/* 🔥 Table */}
-      <Paper className="rounded-2xl shadow-md overflow-hidden">
+      {/* TABLE CONTAINER */}
+      <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
+        <div className="overflow-x-auto overflow-y-auto max-h-[600px] scrollbar-thin scrollbar-thumb-gray-200 scrollbar-track-transparent">
+          <table className="min-w-[2200px] w-full text-sm border-separate border-spacing-0">
+            {/* HEADER */}
+            <thead className="sticky top-0 z-40 bg-gray-50/95 backdrop-blur-md shadow-sm">
+              {table.getHeaderGroups().map((headerGroup) => (
+                <tr key={headerGroup.id}>
+                  {headerGroup.headers.map((header) => {
+                    const isLast = header.column.id === "actions";
 
-        <TableContainer
-          className="max-h-[500px] overflow-auto"
-        >
-          <Table stickyHeader className="min-w-[1800px] text-sm">
+                    return (
+                      <th
+                        key={header.id}
+                        className="px-6 py-4 font-bold text-gray-600 uppercase tracking-wider text-left border-b border-gray-100"
+                        style={{
+                          position: isLast ? "sticky" : "relative",
+                          right: isLast ? 0 : undefined,
+                          zIndex: isLast ? 50 : 10,
+                          backgroundColor: isLast ? "rgba(249, 250, 251, 0.95)" : "inherit",
+                          backdropFilter: isLast ? "blur(12px)" : "none",
+                          borderLeft: isLast ? "1px solid rgba(229, 231, 235, 0.5)" : "none",
+                        }}
+                      >
+                        {flexRender(
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
+                      </th>
+                    );
+                  })}
+                </tr>
+              ))}
+            </thead>
 
-            {/* 🔥 HEADER */}
-            <TableHead>
-              <TableRow>
-              {visibleColumns.map((col) => (
-                  <TableCell
-                    key={col}
-                    className={`
-                      !bg-slate-100 !font-semibold !text-slate-700 whitespace-nowrap
-                      
-                      ${col === "Asset ID" ? "sticky left-0 z-20 bg-slate-100" : ""}
-                      ${col === "Actions" ? "sticky right-0 z-30 bg-slate-100" : ""}
-                    `}
-                  >
-                    {col}
-                  </TableCell>
-                ))}
-              </TableRow>
-            </TableHead>
+            {/* BODY */}
+            <tbody className="divide-y divide-gray-100">
+              {table.getRowModel().rows.map((row) => (
+                <tr
+                  key={row.id}
+                  className="group hover:bg-blue-50/40 transition-colors duration-150"
+                >
+                  {row.getVisibleCells().map((cell) => {
+                    const isLast = cell.column.id === "actions";
 
-            {/* 🔥 BODY */}
-            <TableBody>
-              {filteredData.length > 0 ? (
-                filteredData.map((row) => (
-                  <TableRow
-                    key={row.id}
-                    hover
-                    className="hover:bg-slate-50 transition"
-                  >
+                    return (
+                      <td
+                        key={cell.id}
+                        className="px-6 py-4 whitespace-nowrap text-gray-600 font-medium"
+                        style={{
+                          position: isLast ? "sticky" : "relative",
+                          right: isLast ? 0 : undefined,
+                          zIndex: isLast ? 20 : 5,
+                          // Glassmorphism effect for the actions column
+                          backgroundColor: isLast ? "rgba(255, 255, 255, 0.7)" : "transparent",
+                          backdropFilter: isLast ? "blur(12px)" : "none",
+                          borderLeft: isLast ? "1px solid rgba(229, 231, 235, 0.5)" : "none",
+                          boxShadow: isLast ? "-4px 0 15px -10px rgba(0, 0, 0, 0.1)" : "none",
+                        }}
+                      >
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext()
+                        )}
+                      </td>
+                    );
+                  })}
+                </tr>
+              ))}
+            </tbody>
 
-                    {visibleColumns.map((col) => {
-                      switch (col) {
-                        case "Asset ID":
-                          return (
-                            <TableCell key={col} className="sticky left-0 bg-white z-10">
-                              {row.assetId}
-                            </TableCell>
-                          );
-                        case "Asset Number": return <TableCell key={col}>{row.assetNumber}</TableCell>;
-                        case "Sub Asset Number": return <TableCell key={col}>{row.subAssetNumber}</TableCell>;
-                        case "Asset Class": return <TableCell key={col}>{row.assetClass}</TableCell>;
-                        case "Intender Name": return <TableCell key={col}>{row.intenderName}</TableCell>;
-                        case "Asset Description": return <TableCell key={col}>{row.assetDescription}</TableCell>;
-                        case "Custodian Name": return <TableCell key={col}>{row.custodianName}</TableCell>;
-                        case "Serial Number": return <TableCell key={col}>{row.serialNumber}</TableCell>;
-                        case "Mac ID": return <TableCell key={col}>{row.macId}</TableCell>;
-                        case "Location ID": return <TableCell key={col}>{row.locationId}</TableCell>;
-                        case "Block": return <TableCell key={col}>{row.block}</TableCell>;
-                        case "Model": return <TableCell key={col}>{row.model}</TableCell>;
-                        case "GR Number": return <TableCell key={col}>{row.grNumber}</TableCell>;
-                        case "Year of Purchase": return <TableCell key={col}>{row.yearOfPurchase}</TableCell>;
-                        case "Capitalization Date": return <TableCell key={col}>{row.capitalizationDate}</TableCell>;
-                        case "Expiry Date": return <TableCell key={col}>{row.expiryDate}</TableCell>;
-                        case "Cost Center": return <TableCell key={col}>{row.costCenter}</TableCell>;
-                        case "Material Number": return <TableCell key={col}>{row.materialNumber}</TableCell>;
-                        case "Accept Date": return <TableCell key={col}>{row.acceptDate}</TableCell>;
-                        case "PO Number": return <TableCell key={col}>{row.poNumber}</TableCell>;
-                        case "WBS Number": return <TableCell key={col}>{row.wbsNumber}</TableCell>;
-                        case "Installation Date": return <TableCell key={col}>{row.installationDate}</TableCell>;
-                        case "Vendor": return <TableCell key={col}>{row.assetVendor}</TableCell>;
-                        case "Department": return <TableCell key={col}>{row.department}</TableCell>;
-                        case "Remarks": return <TableCell key={col}>{row.remarks}</TableCell>;
-                        case "Actions":
-                          return (
-                            <TableCell
-                              key={col}
-                              className="
-                                sticky right-0 bg-white z-20
-                                shadow-[-6px_0_8px_-2px_rgba(0,0,0,0.15)]
-                              "
-                            >
-                              <div className="flex gap-2">
-                                <IconButton
-                                  size="small"
-                                  className="!bg-blue-50 hover:!bg-blue-100"
-                                >
-                                  <Edit className="!text-blue-600" fontSize="small" />
-                                </IconButton>
-
-                                <IconButton
-                                  size="small"
-                                  onClick={() => handleDelete(row.id)}
-                                  className="!bg-red-50 hover:!bg-red-100"
-                                >
-                                  <Delete className="!text-red-600" fontSize="small" />
-                                </IconButton>
-                              </div>
-                            </TableCell>
-                          );
-                        default:
-                          return null;
-                      }
-                    })}
-
-                  </TableRow>
-                ))
-              ) : (
-                <TableRow>
-                  <TableCell colSpan={visibleColumns.length} align="center">
-                    No Assets Found
-                  </TableCell>
-                </TableRow>
-              )}
-            </TableBody>
-
-          </Table>
-        </TableContainer>
-      </Paper>
+    </table>
+  </div>
+</div>
     </div>
   );
 };

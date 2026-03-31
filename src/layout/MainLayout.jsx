@@ -2,6 +2,7 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 import Navbar from "../pages/Navbar";
 import Sidebar from "../components/sidebar/Sidebar";
+import SupportChat from "../support/SupportChat";
 
 const MainLayout = () => {
   return (
@@ -30,6 +31,7 @@ const MainLayout = () => {
         </main>
 
       </div>
+            <SupportChat />
     </div>
   );
 };

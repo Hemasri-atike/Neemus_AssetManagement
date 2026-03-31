@@ -16,6 +16,14 @@ import CreateRole from "./components/roles/CreateRole";
 import AddStatus from "./components/assetmanagement/AddStatus";
 import AssetStatusChange from "./components/assetmanagement/AssetStatusChange";
 
+import Location from "./components/dashboard/Location";
+import Chatbot from "./chatbot/Chatbot";
+import Custodian from "./components/custodian/Custodian";
+import AddCustodian from "./components/custodian/AddCustodian";
+import EditCustodian from "./components/custodian/EditCustodian";
+import "../src/leafletconfig";
+import "leaflet/dist/leaflet.css";
+
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -65,6 +73,7 @@ const App = () => {
           {/* Asset Status Change */}
           <Route path="/assets/status-change" element={<AssetStatusChange />} />
           <Route path="/assets/status" element={<AssetStatusChange />} />
+          <Route path="/assets/location" element={<Location />} />
 
            {/* Add Status */}
           <Route path="/assets/add-status" element={<AddStatus />} />
@@ -72,6 +81,17 @@ const App = () => {
 
           {/* Other Pages */}
           <Route path="/reports" element={<Reports />} />
+          
+            <Route path="/chatbot" element={<Chatbot />} />
+
+          {/* Custodian */}
+          <Route path="/custodian">
+            <Route path="view" element={<Custodian />} />
+            <Route path="add" element={<AddCustodian />} />
+            <Route path="edit/:id" element={<EditCustodian />} />
+          </Route>
+
+          
         </Route>
 
       </Routes>

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Bell, ChevronDown, Menu } from "lucide-react";
 import theme from "../theme";
+import logo from "../assets/logo.png";
 
 const Navbar = ({ setIsOpen }) => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -14,7 +15,7 @@ const Navbar = ({ setIsOpen }) => {
     { name: "Dashboard", path: "/dashboard" },
     { name: "Assets", path: "/assets" },
     { name: "Reports", path: "/reports" },
-    { name: "Settings", path: "/settings" },
+    { name: "Chatbot", path: "/chatbot" },
   ];
 
   const handleLogout = () => {
@@ -43,14 +44,63 @@ const Navbar = ({ setIsOpen }) => {
             </button>
 
             {/* LOGO */}
-            <div
-              className="text-xl md:text-2xl font-bold"
-              style={{
-                color: theme.colors.primary,
-              }}
-            >
-              AssetPro
-            </div>
+            {/* LOGO + BRANDING */}
+<div className="flex items-center gap-3 group cursor-pointer">
+  
+  {/* LOGO */}
+  <div
+    className="w-10 h-10 md:w-11 md:h-11 flex items-center justify-center rounded-xl shadow-sm transition group-hover:scale-105"
+    style={{
+      background: theme.colors.glass,
+      // backdropFilter: "blur(10px)",
+      border: `1px solid ${theme.colors.border}`,
+    }}
+  >
+    <img
+      src={logo}
+      alt="Company Logo"
+      className="w-6 h-6 md:w-7 md:h-7 object-contain"
+    />
+  </div>
+
+  {/* TEXT */}
+  <div className="flex flex-col leading-tight">
+    
+    {/* COMPANY NAME */}
+    <span
+      className="text-sm md:text-lg tracking-wide"
+      style={{
+        fontFamily: theme.font.family,
+        fontWeight: 600,
+        color: theme.colors.primary,
+      }}
+    >
+      Neemus Software Solutions
+    </span>
+
+    {/* SUBTITLE */}
+    {/* <span
+      className="text-[10px] md:text-xs tracking-wider uppercase"
+      style={{
+        fontFamily: "Inter, sans-serif",
+        color: theme.colors.border,
+        letterSpacing: "0.08em",
+      }}
+    >
+      Asset Management System
+    </span> */}
+    <span
+  className="text-[10px] md:text-xs tracking-wider uppercase"
+  style={{
+    fontFamily: "Inter, sans-serif",
+    color: "#4F46E5", // 👈 change color here
+    letterSpacing: "0.08em",
+  }}
+>
+  Asset Management System
+</span>
+  </div>
+</div>
           </div>
 
           {/* DESKTOP NAV */}

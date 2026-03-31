@@ -7,7 +7,7 @@ import {
   FactCheck,
   Inventory2,
   ExpandMore,
- 
+  People,
 } from "@mui/icons-material";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 
@@ -44,22 +44,35 @@ const Sidebar = () => {
       { name: "Create Role", path: "/roles/create" },
     ],
     },
+    {
+      name: "Custodian Management",
+      icon: <People fontSize="small" />,
+      subMenu: [
+        { name: "View Custodians", path: "/custodian/view" },
+        { name: "Add Custodian", path: "/custodian/add" },
+      ],
+    },
     
     {
       name: "Reports",
       path: "/reports",
       icon: <Assessment fontSize="small" />,
     },
+    // {
+    //   name: "Mapping",
+    //   path: "/mapping",
+    //   icon: <FactCheck fontSize="small" />,
+    // },
     {
-      name: "Auditing",
-      path: "/auditing",
-      icon: <FactCheck fontSize="small" />,
-    },
-    {
-      name: "Settings",
-      path: "/settings",
-      icon: <Settings fontSize="small" />,
-    },
+  name: "Chatbot",   // 🔥 ADD HERE
+  path: "/chatbot",
+  icon: <Assessment fontSize="small" />,
+},
+    // {
+    //   name: "Settings",
+    //   path: "/settings",
+    //   icon: <Settings fontSize="small" />,
+    // },
   ];
 
   const toggleSubmenu = (menuName) => {
@@ -80,15 +93,7 @@ const Sidebar = () => {
     overflow-hidden
   "
 >
-      {/* Branding */}
-      <div className="px-4 py-5 border-b border-slate-700">
-        <h2 className="text-lg font-bold text-white hidden group-hover:block">
-          MyCompany
-        </h2>
-        <p className="text-xs text-slate-400 hidden group-hover:block">
-          Asset Management
-        </p>
-      </div>
+   
 
       {/* Navigation */}
       <nav className="p-3 space-y-2 overflow-y-auto h-[calc(100%-80px)]">
