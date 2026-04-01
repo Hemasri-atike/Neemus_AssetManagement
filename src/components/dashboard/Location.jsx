@@ -59,152 +59,102 @@ const Location = () => {
     }
   };
 
- const handleSelect = (asset) => {
-  setSelected(asset);
+  const handleSelect = (asset) => {
+    setSelected(asset);
 
-  setSelectedPoints((prev) => {
-    if (prev.length === 0) {
-      return [asset]; // A (source)
-    }
-    return [prev[0], asset]; // always keep A, update second point
-  });
-};
+    setSelectedPoints((prev) => {
+      if (prev.length === 0) {
+        return [asset]; // A (source)
+      }
+      return [prev[0], asset]; // always keep A, update second point
+    });
+  };
 
   useEffect(() => {
     fetchAssets();
   }, []);
 
   return (
-    <div className="p-6 space-y-6 relative">
-      <h2 className="text-xl font-semibold">Asset Locations</h2>
+    <div className="min-h-screen bg-slate-100 p-6 md:p-8">
+      <div className="mx-auto max-w-7xl space-y-6">
+      
 
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <>
-          {/* ✅ Selected Asset Details */}
-          {selected && (
-            <div className="bg-slate-900 text-white p-4 rounded-xl shadow-md space-y-3">
-              {/* 🔹 Asset Info */}
-              <div className="flex justify-between text-sm">
-                <p>
-                  <span className="font-semibold text-blue-400">Asset ID:</span>{" "}
-                  {selected.assetId || "-"}
-                </p>
-                <p>
-                  <span className="font-semibold text-blue-400">Asset Desc:</span>{" "}
-                  {selected.AssetDesc || "-"}
-                </p>
-              </div>
-
-              {/* 🔹 Location Info */}
-              <div className="flex justify-between text-sm">
-                <p>
-                  <span className="font-semibold text-blue-400">Location:</span>{" "}
-                  {selected.location || "-"}
-                </p>
-                <p>
-                  <span className="font-semibold text-blue-400">Location Desc:</span>{" "}
-                  {selected.locationDesc || "-"}
-                </p>
-              </div>
-
-              {/* 🔹 Coordinates */}
-              <div className="flex justify-between text-sm">
-                <p>
-                  <span className="font-semibold text-blue-400">Lat:</span>{" "}
-                  {selected.latitude || "-"}
-                </p>
-                <p>
-                  <span className="font-semibold text-blue-400">Lng:</span>{" "}
-                  {selected.longitude || "-"}
-                </p>
-              </div>
-
-
-  
-            </div>
-          )}
-<button
-  onClick={() => {
-    setSelectedPoints([]);
-    setDistances([]);
-  }}
-  className="mt-2 text-xs text-red-500 underline"
->
-  Reset
-</button>
-
-          {/* ✅ Legend + Map */}
-          <div className="flex gap-6 items-start">
-            {/* LEFT: LEGEND */}
-            <div className="w-64 shrink-0 bg-white/70 backdrop-blur-xl border border-white/30 rounded-2xl shadow-xl p-4 text-sm space-y-3 h-fit">
-              <p className="font-semibold text-gray-700 mb-2">
-                Status of Assets
-              </p>
-
-              <div className="flex items-center gap-2">
-                <span className="w-3 h-3 bg-green-500 rounded-full"></span>
-                <span>AVAL (Available Assets)</span>
-              </div>
-
-              <div className="flex items-center gap-2">
-                <span className="w-3 h-3 bg-red-500 rounded-full"></span>
-                <span>DMG (Damaged Assets)</span>
-              </div>
-
-              <div className="flex items-center gap-2">
-                <span className="w-3 h-3 bg-yellow-400 rounded-full"></span>
-                <span>LTRF (Location Transfer)</span>
-              </div>
-
-              <div className="flex items-center gap-2">
-                <span className="w-3 h-3 bg-blue-500 rounded-full"></span>
-                <span>DMG-REP (Repaired Assets)</span>
-              </div>
-              {distances.length > 0 && (
-  <div className="mt-4 p-3 rounded-xl bg-blue-50 border border-blue-200 space-y-2">
-    <p className="text-xs font-semibold text-gray-600">
-      Distances from Source
-    </p>
-
-    {distances.map((d, index) => (
-      <div key={index} className="text-xs text-gray-700">
-        {d.from} → {d.to} :
-        <span className="font-bold text-blue-600 ml-1">
-          {d.value} KM
-        </span>
-      </div>
-    ))}
-  </div>
-  
-)}
+        {loading ? (
+          <div className="rounded-2xl border border-slate-200 bg-white p-8 text-center shadow-sm">
+            <p className="text-sm font-medium text-slate-500">Loading assets...</p>
+          </div>
+        ) : (
+          <div className="space-y-6">
+            <div className="flex flex-wrap items-center gap-3">
+              <button
+                onClick={() => {
+                  setSelectedPoints([]);
+                  setDistances([]);
+                  setSelected(null);
+                }}
+                className="rounded-xl bg-red-500 px-4 py-2 text-sm font-semibold text-white shadow-md transition hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-300"
+              >
+                Reset Selection
+              </button>
+            
             </div>
 
-            {/* RIGHT: MAP */}
-            <div className="flex-1">
-              <AssetMap
-                assets={assets}
-                selected={selected}
-                setSelected={handleSelect}
-                selectedPoints={selectedPoints}
-              />
+          
+
+            <div className="grid gap-6 lg:grid-cols-[280px_1fr]">
+              <div className="space-y-4">
+                <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+                  <p className="mb-3 text-sm font-semibold text-slate-800">Status of Assets</p>
+                  <div className="space-y-2 text-sm text-slate-700">
+                    <div className="flex items-center gap-2">
+                      <span className="h-3 w-3 rounded-full bg-green-500"></span>
+                      <span>AVAL (Available Assets)</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="h-3 w-3 rounded-full bg-red-500"></span>
+                      <span>DMG (Damaged Assets)</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="h-3 w-3 rounded-full bg-yellow-400"></span>
+                      <span>LTRF (Location Transfer)</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="h-3 w-3 rounded-full bg-blue-500"></span>
+                      <span>DMG-REP (Repaired Assets)</span>
+                    </div>
+                  </div>
+                </div>
+
+                {distances.length > 0 && (
+                  <div className="rounded-2xl border border-blue-200 bg-blue-50 p-4 shadow-sm">
+                    <p className="mb-2 text-sm font-semibold text-slate-800">Distances from Source</p>
+                    <div className="space-y-2">
+                      {distances.map((d, index) => (
+                        <div
+                          key={index}
+                          className="rounded-lg border border-blue-100 bg-white px-3 py-2 text-xs text-slate-700"
+                        >
+                          {d.from} to {d.to}
+                          <span className="ml-1 font-bold text-blue-700">{d.value} KM</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              <div className="rounded-2xl border border-slate-200 bg-white p-3 shadow-sm">
+                <AssetMap
+                  assets={assets}
+                  selected={selected}
+                  setSelected={handleSelect}
+                  selectedPoints={selectedPoints}
+                />
+              </div>
             </div>
           </div>
-          {/* {selectedPoints.length === 2 && distance && (
-            <div className="bg-white shadow-lg rounded-xl p-4 mt-4 w-fit">
-              <p className="text-sm font-semibold text-gray-700">
-                Distance Between Assets
-              </p>
-              <p className="text-sm mt-2">From: {selectedPoints[0].assetId}</p>
-              <p className="text-sm">To: {selectedPoints[1].assetId}</p>
-              <p className="text-lg font-bold text-blue-600 mt-2">
-                {distance} KM
-              </p>
-            </div>
-          )} */}
-        </>
-      )}
+        )}
+      </div>
     </div>
   );
 };
