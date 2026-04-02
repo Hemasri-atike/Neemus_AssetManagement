@@ -4,10 +4,11 @@ import {
   Box,
   TextField,
   MenuItem,
-  Button,
-  Paper,
   Typography,
 } from "@mui/material";
+
+import RequestFormCard from "../common/RequestFormCard";
+import SendRequestButton from "../common/SendRequestButton";
 
 
 
@@ -33,7 +34,7 @@ const CustodianTransfer = () => {
   alert("Request Submitted!");
 
   // 🔥 Navigate to table page
-  navigate("/assets/reqassettable");
+  navigate("/assets/reqcustodiantable");
 };
 
   return (
@@ -41,7 +42,7 @@ const CustodianTransfer = () => {
       sx={{
        
         display: "flex",
-        // justifyContent: "center",
+        justifyContent: "center",
         alignItems: "center",
         background: "#f4f6f8",
         p: 3,
@@ -49,18 +50,7 @@ const CustodianTransfer = () => {
     >
       <Box width="100%" maxWidth="900px">
         
-        {/* 🔹 FLOATING CARD */}
-        <Paper
-          elevation={6}
-          sx={{
-            p: 5,
-            borderRadius: 3,
-          }}
-        >
-          <Typography variant="h5" fontWeight="bold" mb={4}>
-         Request for Custodian Change
-          </Typography>
-
+        <RequestFormCard title="Request for Custodian Change">
           {/* 🔥 FORM ROWS */}
           <Box display="flex" flexDirection="column" gap={3}>
 
@@ -146,25 +136,11 @@ const CustodianTransfer = () => {
               />
             </Box>
           </Box>
-        </Paper>
+        </RequestFormCard>
 
         {/* 🔹 BUTTON */}
-        <Box textAlign="center">
-          <Button
-            variant="contained"
-            sx={{
-              mt: 4,
-              px: 8,
-              py: 1.5,
-              fontWeight: "bold",
-              borderRadius: 2,
-              backgroundColor: "#000",
-              "&:hover": { backgroundColor: "#333" },
-            }}
-            onClick={handleSubmit}
-          >
-            Send Request
-          </Button>
+        <Box textAlign="center" mt={4}>
+          <SendRequestButton onClick={handleSubmit} label="Send Request" />
         </Box>
       </Box>
     </Box>

@@ -4,11 +4,11 @@ import {
   Box,
   TextField,
   MenuItem,
-  Button,
-  Paper,
   Typography,
 } from "@mui/material";
 
+import RequestFormCard from "../common/RequestFormCard";
+import SendRequestButton from "../common/SendRequestButton";
 
 const RequestAsset = () => {
   const navigate = useNavigate();
@@ -48,18 +48,7 @@ const RequestAsset = () => {
     >
       <Box width="100%" maxWidth="900px">
         
-        {/* 🔹 FLOATING CARD */}
-        <Paper
-          elevation={6}
-          sx={{
-            p: 5,
-            borderRadius: 3,
-          }}
-        >
-          <Typography variant="h5" fontWeight="bold" mb={4}>
-            Request Asset
-          </Typography>
-
+        <RequestFormCard title="Request Asset">
           {/* 🔥 FORM ROWS */}
           <Box display="flex" flexDirection="column" gap={3}>
 
@@ -145,25 +134,11 @@ const RequestAsset = () => {
               />
             </Box>
           </Box>
-        </Paper>
+        </RequestFormCard>
 
         {/* 🔹 BUTTON */}
-        <Box textAlign="center">
-          <Button
-            variant="contained"
-            sx={{
-              mt: 4,
-              px: 8,
-              py: 1.5,
-              fontWeight: "bold",
-              borderRadius: 2,
-              backgroundColor: "#000",
-              "&:hover": { backgroundColor: "#333" },
-            }}
-            onClick={handleSubmit}
-          >
-            Send Request
-          </Button>
+        <Box textAlign="center" mt={4}>
+          <SendRequestButton onClick={handleSubmit} label="Send Request" />
         </Box>
       </Box>
     </Box>

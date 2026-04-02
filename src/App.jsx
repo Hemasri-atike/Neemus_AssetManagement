@@ -28,7 +28,7 @@ import RequestorDashboard from "./pages/RequestorDashboard";
 import ItDashboard from "./pages/ItDashboard";
 import HrDashboard from "./pages/HrDashboard";
 import AllocatedAssets from "./components/Requestor/AllocatedAssets";
-import ReqAssetTable from "./components/Requestor/ReqAssetTable"; 
+import ReqAssetTable from "./components/tables/ReqAssetTable"; 
 
 import "../src/leafletconfig";
 import "leaflet/dist/leaflet.css";
@@ -36,6 +36,10 @@ import ReqBuyback from "./components/Requestor/ReqBuyback";
 import LocationTransfer from "./components/Requestor/LocationTransfer";
 import CustodianTranfer from "./components/Requestor/CustodianTranfer";
 import AssetReturn from "./components/Requestor/AssetReturn";
+import ReqBuyBackTable from "./components/tables/ReqBuyBackTable";
+import ReqLocTable from "./components/tables/ReqLocTable";
+import ReqCustodianTable from "./components/tables/ReqCustodianTable";
+
 
 
 const App = () => {
@@ -223,11 +227,35 @@ const App = () => {
     </RoleRoute>
   }
 />
+ <Route
+  path="/assets/reqbuybacktable"
+  element={
+    <RoleRoute allowedRoles={["Requester"]}>
+      <ReqBuyBackTable/>
+    </RoleRoute>
+  }
+/>
+ <Route
+  path="/assets/reqloctable"
+  element={
+    <RoleRoute allowedRoles={["Requester"]}>
+      <ReqLocTable/>
+    </RoleRoute>
+  }
+/>
    <Route
   path="/assets/custodian-transfer"
   element={
     <RoleRoute allowedRoles={["Requester"]}>
       <CustodianTranfer/>
+    </RoleRoute>
+  }
+/>
+ <Route
+  path="/assets/reqcustodiantable"
+  element={
+    <RoleRoute allowedRoles={["Requester"]}>
+      <ReqCustodianTable/>
     </RoleRoute>
   }
 />
