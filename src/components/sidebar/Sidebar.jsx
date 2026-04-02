@@ -1,32 +1,35 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import Drawer from "@mui/material/Drawer";
+import IconButton from "@mui/material/IconButton";
 import {
-  Dashboard,
-  Settings,
   Assessment,
+  AssignmentTurnedIn,
+  Close,
+  Dashboard,
+  ExpandMore,
   FactCheck,
   Inventory2,
-  ExpandMore,
-  People,
-  AssignmentTurnedIn,
-  ShoppingCart,
-  SwapHoriz,
+  KeyboardReturn,
   LocationOn,
   PeopleAlt,
-  KeyboardReturn,
+  Settings,
+  ShoppingCart,
 } from "@mui/icons-material";
-import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
+
+/** Brand sidebar surface — semi-transparent deep blue */
+const SIDEBAR_BG = "#004b80b8";
 
 const roleMenus = {
   Admin: [
     {
       name: "Dashboard",
       path: "/dashboard",
-      icon: <Dashboard fontSize="small" />,
+      icon: <Dashboard fontSize="small" className="text-white/90" />,
     },
     {
       name: "Asset Register",
-      icon: <Inventory2 fontSize="small" />,
+      icon: <Inventory2 fontSize="small" className="text-white/90" />,
       subMenu: [
         { name: "View Assets", path: "/assets/list" },
         { name: "Add Asset", path: "/assets/add-asset" },
@@ -34,7 +37,7 @@ const roleMenus = {
     },
     {
       name: "Masters",
-      icon: <Settings fontSize="small" />,
+      icon: <Settings fontSize="small" className="text-white/90" />,
       subMenu: [
         { name: "Roles", path: "/roles/view" },
         { name: "Create Role", path: "/roles/create" },
@@ -47,16 +50,16 @@ const roleMenus = {
     {
       name: "Dashboard",
       path: "/dashboard",
-      icon: <Dashboard fontSize="small" />,
+      icon: <Dashboard fontSize="small" className="text-white/90" />,
     },
     {
       name: "Asset Request",
-      icon: <Inventory2 fontSize="small" />,
+      icon: <Inventory2 fontSize="small" className="text-white/90" />,
       subMenu: [{ name: "Request Asset", path: "/assets/request-access" }],
     },
     {
       name: "Asset Register",
-      icon: <Inventory2 fontSize="small" />,
+      icon: <Inventory2 fontSize="small" className="text-white/90" />,
       subMenu: [
         { name: "View Assets", path: "/assets/list" },
         { name: "Add Asset", path: "/assets/add-asset" },
@@ -64,22 +67,22 @@ const roleMenus = {
     },
     {
       name: "Print QR Codes",
-      icon: <FactCheck fontSize="small" />,
+      icon: <FactCheck fontSize="small" className="text-white/90" />,
       path: "/assets/print-qr",
     },
     {
       name: "Asset Auditing",
-      icon: <Assessment fontSize="small" />,
+      icon: <Assessment fontSize="small" className="text-white/90" />,
       path: "/assets/auditing",
     },
     {
       name: "Audit Reports",
-      icon: <Assessment fontSize="small" />,
+      icon: <Assessment fontSize="small" className="text-white/90" />,
       path: "/assets/audit-reports",
     },
     {
       name: "View Reports",
-      icon: <Assessment fontSize="small" />,
+      icon: <Assessment fontSize="small" className="text-white/90" />,
       path: "/reports",
     },
   ],
@@ -88,16 +91,16 @@ const roleMenus = {
     {
       name: "Dashboard",
       path: "/dashboard",
-      icon: <Dashboard fontSize="small" />,
+      icon: <Dashboard fontSize="small" className="text-white/90" />,
     },
     {
       name: "Asset Request",
-      icon: <Inventory2 fontSize="small" />,
+      icon: <Inventory2 fontSize="small" className="text-white/90" />,
       subMenu: [{ name: "Request Asset", path: "/assets/request-access" }],
     },
     {
       name: "Asset Register",
-      icon: <Inventory2 fontSize="small" />,
+      icon: <Inventory2 fontSize="small" className="text-white/90" />,
       subMenu: [
         { name: "View Assets", path: "/assets/list" },
         { name: "Add Asset", path: "/assets/add-asset" },
@@ -105,22 +108,22 @@ const roleMenus = {
     },
     {
       name: "Print QR Codes",
-      icon: <FactCheck fontSize="small" />,
+      icon: <FactCheck fontSize="small" className="text-white/90" />,
       path: "/assets/print-qr",
     },
     {
       name: "Asset Auditing",
-      icon: <Assessment fontSize="small" />,
+      icon: <Assessment fontSize="small" className="text-white/90" />,
       path: "/assets/auditing",
     },
     {
       name: "Audit Reports",
-      icon: <Assessment fontSize="small" />,
+      icon: <Assessment fontSize="small" className="text-white/90" />,
       path: "/assets/audit-reports",
     },
     {
       name: "View Reports",
-      icon: <Assessment fontSize="small" />,
+      icon: <Assessment fontSize="small" className="text-white/90" />,
       path: "/reports",
     },
   ],
@@ -129,51 +132,49 @@ const roleMenus = {
     {
       name: "Dashboard",
       path: "/requestor-dashboard",
-      icon: <Dashboard fontSize="small" />,
+      icon: <Dashboard fontSize="small" className="text-white/90" />,
     },
-    
-        {
-          name: "View Allocated Assets",
-          path: "/allocatedassets",
-          icon: <AssignmentTurnedIn fontSize="small" />,
-        },
-        {
-          name: "Request Asset",
-          path: "/assets/request-access",
-          icon: <Inventory2 fontSize="small" />,
-        },
-        {
-          name: "Buyback",
-          path: "/assets/buyback",
-          icon: <ShoppingCart fontSize="small" />,
-        },
-        {
-          name: "Location Transfer",
-          path: "/assets/location-transfer",
-          icon: <LocationOn fontSize="small" />,
-        },
-        {
-          name: "Custodian Transfer",
-          path: "/assets/custodian-transfer",
-          icon: <PeopleAlt fontSize="small" />,
-        },
-        {
-          name: "Asset Return",
-          path: "/assets/asset-return",
-          icon: <KeyboardReturn fontSize="small" />,
-        },
-    
+    {
+      name: "View Allocated Assets",
+      path: "/allocatedassets",
+      icon: <AssignmentTurnedIn fontSize="small" className="text-white/90" />,
+    },
+    {
+      name: "Request Asset",
+      path: "/assets/request-access",
+      icon: <Inventory2 fontSize="small" className="text-white/90" />,
+    },
+    {
+      name: "Buyback",
+      path: "/assets/buyback",
+      icon: <ShoppingCart fontSize="small" className="text-white/90" />,
+    },
+    {
+      name: "Location Transfer",
+      path: "/assets/location-transfer",
+      icon: <LocationOn fontSize="small" className="text-white/90" />,
+    },
+    {
+      name: "Custodian Transfer",
+      path: "/assets/custodian-transfer",
+      icon: <PeopleAlt fontSize="small" className="text-white/90" />,
+    },
+    {
+      name: "Asset Return",
+      path: "/assets/asset-return",
+      icon: <KeyboardReturn fontSize="small" className="text-white/90" />,
+    },
   ],
 
   Auditor: [
     {
       name: "Dashboard",
       path: "/dashboard",
-      icon: <Dashboard fontSize="small" />,
+      icon: <Dashboard fontSize="small" className="text-white/90" />,
     },
     {
       name: "Audits",
-      icon: <Inventory2 fontSize="small" />,
+      icon: <Inventory2 fontSize="small" className="text-white/90" />,
       subMenu: [
         { name: "View Audits", path: "/audits/view" },
         { name: "Asset Audits", path: "/assets/request-access" },
@@ -188,11 +189,11 @@ const roleMenus = {
     {
       name: "Dashboard",
       path: "/dashboard",
-      icon: <Dashboard fontSize="small" />,
+      icon: <Dashboard fontSize="small" className="text-white/90" />,
     },
     {
       name: "Approvals",
-      icon: <Inventory2 fontSize="small" />,
+      icon: <Inventory2 fontSize="small" className="text-white/90" />,
       subMenu: [
         { name: "Asset Requests", path: "/assets/requests" },
         {
@@ -208,20 +209,22 @@ const roleMenus = {
   ],
 };
 
-const Sidebar = () => {
+const labelVisibility = (alwaysShow) =>
+  alwaysShow ? "inline" : "hidden md:group-hover:inline";
+
+const Sidebar = ({ mobileOpen = false, onMobileClose }) => {
   const role = localStorage.getItem("role") || "";
   const location = useLocation();
   const [openMenu, setOpenMenu] = useState("Asset Request");
 
   const menuItems = roleMenus[role] || roleMenus["Requester"] || [];
 
-  // Add Chatbot for everyone
   const finalMenuItems = [
     ...menuItems,
     {
       name: "Chatbot",
       path: "/chatbot",
-      icon: <Assessment fontSize="small" />,
+      icon: <Assessment fontSize="small" className="text-white/90" />,
     },
   ];
 
@@ -229,62 +232,59 @@ const Sidebar = () => {
     setOpenMenu(openMenu === menuName ? null : menuName);
   };
 
-  return (
-    <aside
-      className="
-        fixed top-16 left-0 z-50
-        h-[calc(100vh-4rem)]
-        w-20 hover:w-64
-        bg-gradient-to-b from-slate-900 to-slate-800
-        text-slate-200 border-r border-slate-700
-        shadow-xl hover:shadow-2xl
-        transition-all duration-300
-        group
-        overflow-hidden
-      "
-    >
-      <nav className="p-3 space-y-2 overflow-y-auto h-full scrollbar-hide">
+  const afterNavigate = () => {
+    onMobileClose?.();
+  };
+
+  const NavList = ({ alwaysShowLabels }) => {
+    const lbl = labelVisibility(alwaysShowLabels);
+    const expandVisible = alwaysShowLabels ? "block" : "hidden md:group-hover:block";
+
+    return (
+      <div className="space-y-1">
         {finalMenuItems.map((item) =>
           item.subMenu ? (
             <div key={item.name}>
               <button
+                type="button"
                 onClick={() => toggleSubmenu(item.name)}
-                className="w-full flex items-center justify-between px-2 group-hover:px-4 py-2.5 rounded-xl hover:bg-slate-700/50 transition"
+                className="flex w-full items-center justify-between rounded-xl px-2 py-2.5 text-left text-sm text-white/95 transition md:px-2 md:group-hover:px-4 hover:bg-white/10 active:bg-white/15"
               >
-                <div className="flex items-center justify-center group-hover:justify-start gap-3 w-full">
+                <div className="flex w-full items-center justify-center gap-3 md:justify-center md:group-hover:justify-start">
                   {item.icon}
-                  <span className="hidden group-hover:inline transition-opacity duration-300">
-                    {item.name}
-                  </span>
+                  <span className={`${lbl} truncate transition-opacity duration-200`}>{item.name}</span>
                 </div>
                 <ExpandMore
-                  className={`hidden group-hover:block transition-transform ${
-                    openMenu === item.name ? "rotate-180 text-blue-400" : ""
+                  className={`shrink-0 transition-transform ${expandVisible} ${
+                    openMenu === item.name ? "rotate-180 text-sky-200" : "text-white/70"
                   }`}
+                  fontSize="small"
                 />
               </button>
 
               <div
-                className={`transition-all duration-300 overflow-hidden ${
-                  openMenu === item.name ? "max-h-[500px] mt-2 opacity-100" : "max-h-0 opacity-0"
+                className={`overflow-hidden transition-all duration-300 ${
+                  openMenu === item.name ? "mt-1 max-h-[min(60vh,500px)] opacity-100" : "max-h-0 opacity-0"
                 }`}
               >
-                <div className="ml-6 pl-3 border-l border-slate-600 space-y-1">
-                  {item.subMenu.map((sub) => (
-                    <Link
-                      key={sub.name}
-                      to={sub.path}
-                      className={`block px-3 py-2 rounded-lg text-sm transition ${
-                        location.pathname === sub.path
-                          ? "bg-blue-500/10 text-blue-400 font-semibold shadow-[inset_0_0_10px_rgba(59,130,246,0.1)]"
-                          : "text-slate-400 hover:bg-slate-700/50 hover:text-white"
-                      }`}
-                    >
-                      <span className="hidden group-hover:inline whitespace-nowrap">
-                        {sub.name}
-                      </span>
-                    </Link>
-                  ))}
+                <div className="ml-2 space-y-0.5 border-l border-white/20 pl-3 sm:ml-4 sm:pl-3">
+                  {item.subMenu.map((sub) => {
+                    const active = location.pathname === sub.path;
+                    return (
+                      <Link
+                        key={sub.name}
+                        to={sub.path}
+                        onClick={afterNavigate}
+                        className={`block rounded-lg px-3 py-2.5 text-sm transition sm:py-2 ${
+                          active
+                            ? "bg-white/15 font-semibold text-white shadow-inner ring-1 ring-white/20"
+                            : "text-white/80 hover:bg-white/10 hover:text-white"
+                        }`}
+                      >
+                        <span className={`${lbl} whitespace-normal break-words`}>{sub.name}</span>
+                      </Link>
+                    );
+                  })}
                 </div>
               </div>
             </div>
@@ -292,23 +292,82 @@ const Sidebar = () => {
             <Link
               key={item.name}
               to={item.path}
-              className={`flex items-center justify-center group-hover:justify-start gap-3 px-2 group-hover:px-4 py-2.5 rounded-xl transition ${
+              onClick={afterNavigate}
+              className={`flex items-center justify-center gap-3 rounded-xl px-2 py-2.5 text-sm transition md:group-hover:justify-start md:group-hover:px-4 ${
                 location.pathname === item.path
-                  ? "bg-blue-500/10 text-blue-400 font-semibold shadow-[inset_0_0_10px_rgba(59,130,246,0.1)]"
-                  : "hover:bg-slate-700/50 text-slate-300 hover:text-white"
+                  ? "bg-white/15 font-semibold text-white ring-1 ring-white/25 shadow-md"
+                  : "text-white/90 hover:bg-white/10 hover:text-white"
               }`}
             >
               {item.icon}
-              <span className="hidden group-hover:inline transition-opacity duration-300 whitespace-nowrap">
-                {item.name}
-              </span>
+              <span className={`${lbl} whitespace-nowrap`}>{item.name}</span>
             </Link>
           )
         )}
-      </nav>
-    </aside>
+      </div>
+    );
+  };
+
+  const surfaceClass =
+    "border-r border-white/15 shadow-[0_8px_32px_rgba(0,30,60,0.25)] backdrop-blur-md";
+
+  return (
+    <>
+      {/* Mobile: MUI Drawer */}
+      <Drawer
+        anchor="left"
+        open={mobileOpen}
+        onClose={() => onMobileClose?.()}
+        ModalProps={{ keepMounted: true }}
+        sx={{
+          display: { xs: "block", md: "none" },
+          "& .MuiBackdrop-root": {
+            backgroundColor: "rgba(0, 20, 40, 0.45)",
+            backdropFilter: "blur(4px)",
+          },
+          "& .MuiDrawer-paper": {
+            width: "min(18rem, 88vw)",
+            maxWidth: "100%",
+            backgroundColor: SIDEBAR_BG,
+            backdropFilter: "blur(14px)",
+            WebkitBackdropFilter: "blur(14px)",
+            borderRight: "1px solid rgba(255,255,255,0.12)",
+            boxSizing: "border-box",
+          },
+        }}
+      >
+        <div
+          className={`flex h-full flex-col ${surfaceClass}`}
+          style={{ backgroundColor: SIDEBAR_BG }}
+        >
+          <div className="flex items-center justify-between border-b border-white/10 px-3 py-3 sm:px-4">
+            <span className="text-sm font-semibold tracking-wide text-white sm:text-base">Navigation</span>
+            <IconButton
+              onClick={() => onMobileClose?.()}
+              aria-label="Close menu"
+              size="small"
+              sx={{ color: "rgba(255,255,255,0.9)" }}
+            >
+              <Close />
+            </IconButton>
+          </div>
+          <nav className="min-h-0 flex-1 overflow-y-auto overscroll-contain p-3 sm:p-4">
+            <NavList alwaysShowLabels />
+          </nav>
+        </div>
+      </Drawer>
+
+      {/* md+: rail sidebar — width animates on hover, pushes main content */}
+      <aside
+        className={`group relative z-40 hidden h-[calc(100vh-4rem)] w-14 shrink-0 overflow-hidden transition-all duration-300 ease-out sm:w-16 md:flex md:hover:w-64 md:hover:shadow-xl ${surfaceClass}`}
+        style={{ backgroundColor: SIDEBAR_BG }}
+      >
+        <nav className="h-full w-full space-y-1 overflow-y-auto overflow-x-hidden p-2 sm:p-3 scrollbar-hide md:space-y-2">
+          <NavList alwaysShowLabels={false} />
+        </nav>
+      </aside>
+    </>
   );
 };
 
 export default Sidebar;
-

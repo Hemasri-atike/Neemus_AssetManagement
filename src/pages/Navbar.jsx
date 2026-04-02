@@ -4,9 +4,14 @@ import { Bell, ChevronDown, Menu } from "lucide-react";
 import theme from "../theme";
 import logo from "../assets/logo.png";
 
-const Navbar = ({ setIsOpen }) => {
+const Navbar = ({ setIsOpen, onMenuClick }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
+
+  const openMobileMenu = () => {
+    if (onMenuClick) onMenuClick();
+    else setIsOpen?.(true);
+  };
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -39,7 +44,7 @@ const Navbar = ({ setIsOpen }) => {
           
           {/* LEFT */}
           <div className="flex items-center gap-3">
-            <button className="md:hidden" onClick={() => setIsOpen(true)}>
+            <button type="button" className="md:hidden" onClick={openMobileMenu} aria-label="Open menu">
               <Menu size={22} />
             </button>
 
