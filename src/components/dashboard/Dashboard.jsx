@@ -60,10 +60,7 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-slate-100">
-      {/* 
-        IMPORTANT: Do NOT put <Navbar /> or <Sidebar /> here!
-        They are already rendered in MainLayout → Outlet renders only this content 
-      */}
+     
 
     <div className="mt-16 p-2 transition-all duration-300">
         {/* HEADER */}

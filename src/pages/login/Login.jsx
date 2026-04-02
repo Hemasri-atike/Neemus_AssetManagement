@@ -12,19 +12,30 @@ const Login = ({ setIsLoggedIn }) => {
   const [selectedRole, setSelectedRole] = useState("");
   const [error, setError] = useState("");
 
-  const handleLogin = () => {
-    if (!userId || !password || !selectedRole) {
-      setError("Please enter all fields and select a role.");
-      return;
-    }
+ const handleLogin = () => {
+  if (!userId || !password || !selectedRole) {
+    setError("Please enter all fields and select a role.");
+    return;
+  }
 
-    localStorage.setItem("token", "dummyToken");
-    localStorage.setItem("user", userId);
-    localStorage.setItem("role", selectedRole);
+  localStorage.setItem("token", "dummyToken");
+  localStorage.setItem("user", userId);
+  localStorage.setItem("role", selectedRole);
 
-    setIsLoggedIn(true);
-    navigate("/dashboard");
-  };
+  setIsLoggedIn(true);
+
+  const roleRoutes = {
+  Admin: "/admin-dashboard",
+  "IT- Admin": "/it-dashboard",
+  "HR Admin": "/hr-dashboard",
+  Approver: "/approver-dashboard",
+  Auditor: "/auditor-dashboard",
+  Requester: "/requestor-dashboard",
+  Custodian: "/custodian-dashboard",
+};
+
+navigate(roleRoutes[selectedRole] || "/dashboard");
+};
 
   return (
     <div
@@ -124,6 +135,7 @@ const Login = ({ setIsLoggedIn }) => {
             "Admin",
             "IT- Admin",
             "HR Admin",
+            
           ].map((role) => (
             <label key={role} className="flex items-center gap-2">
               <input

@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 
 
-const RequestAsset = () => {
+const LocationTransfer = () => {
   const navigate = useNavigate();
   const [form, setForm] = useState({
     assetClass: "",
@@ -57,7 +57,7 @@ const RequestAsset = () => {
           }}
         >
           <Typography variant="h5" fontWeight="bold" mb={4}>
-            Request Asset
+            Request for Location  change
           </Typography>
 
           {/* 🔥 FORM ROWS */}
@@ -132,13 +132,13 @@ const RequestAsset = () => {
             {/* Quantity */}
             <Box display="flex" alignItems="center" gap={3}>
               <Typography sx={{ width: "220px", fontWeight: 500 }}>
-                Quantity :
+                Comments :
               </Typography>
               <TextField
                 fullWidth
                 size="small"
-                type="number"
-                value={form.quantity}
+                type="text"
+                value={form.comments}
                 onChange={(e) =>
                   handleChange("quantity", e.target.value)
                 }
@@ -170,4 +170,4 @@ const RequestAsset = () => {
   );
 };
 
-export default RequestAsset;
+export default LocationTransfer;

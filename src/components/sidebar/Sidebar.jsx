@@ -8,15 +8,42 @@ import {
   Inventory2,
   ExpandMore,
   People,
+  AssignmentTurnedIn,
+  ShoppingCart,
+  SwapHoriz,
+  LocationOn,
+  PeopleAlt,
+  KeyboardReturn,
 } from "@mui/icons-material";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 
+const roleMenus = {
+  Admin: [
+    {
+      name: "Dashboard",
+      path: "/dashboard",
+      icon: <Dashboard fontSize="small" />,
+    },
+    {
+      name: "Asset Register",
+      icon: <Inventory2 fontSize="small" />,
+      subMenu: [
+        { name: "View Assets", path: "/assets/list" },
+        { name: "Add Asset", path: "/assets/add-asset" },
+      ],
+    },
+    {
+      name: "Masters",
+      icon: <Settings fontSize="small" />,
+      subMenu: [
+        { name: "Roles", path: "/roles/view" },
+        { name: "Create Role", path: "/roles/create" },
+        { name: "Custodians", path: "/custodian/view" },
+      ],
+    },
+  ],
 
-const Sidebar = () => {
-  const location = useLocation();
-  const [openMenu, setOpenMenu] = useState("Asset Request");
-
-  const menuItems = [
+  "IT Admin": [
     {
       name: "Dashboard",
       path: "/dashboard",
@@ -25,54 +52,177 @@ const Sidebar = () => {
     {
       name: "Asset Request",
       icon: <Inventory2 fontSize="small" />,
+      subMenu: [{ name: "Request Asset", path: "/assets/request-access" }],
+    },
+    {
+      name: "Asset Register",
+      icon: <Inventory2 fontSize="small" />,
       subMenu: [
-        { name: "Request Asset", path: "/assets/requestasset" },
-        { name: "View Asset List", path: "/assets/list" },
-        // { name: "Status Change", path: "/assets/status-change" },
-        { name: "Add Documents", path: "/assets/add-documents" },
-        { name: "View Export History", path: "/assets/export" },
-        { name: "View Location", path: "/assets/location" },
-        { name: "Add Status", path: "/assets/add-status" }
+        { name: "View Assets", path: "/assets/list" },
+        { name: "Add Asset", path: "/assets/add-asset" },
       ],
     },
+    {
+      name: "Print QR Codes",
+      icon: <FactCheck fontSize="small" />,
+      path: "/assets/print-qr",
+    },
+    {
+      name: "Asset Auditing",
+      icon: <Assessment fontSize="small" />,
+      path: "/assets/auditing",
+    },
+    {
+      name: "Audit Reports",
+      icon: <Assessment fontSize="small" />,
+      path: "/assets/audit-reports",
+    },
+    {
+      name: "View Reports",
+      icon: <Assessment fontSize="small" />,
+      path: "/reports",
+    },
+  ],
 
+  "HR Admin": [
     {
-     name: "Role Management",
-     icon: <AdminPanelSettingsIcon fontSize="small" />,
-     subMenu: [
-      { name: "View Roles", path: "/roles/view" },
-      { name: "Create Role", path: "/roles/create" },
-    ],
+      name: "Dashboard",
+      path: "/dashboard",
+      icon: <Dashboard fontSize="small" />,
     },
     {
-      name: "Custodian Management",
-      icon: <People fontSize="small" />,
+      name: "Asset Request",
+      icon: <Inventory2 fontSize="small" />,
+      subMenu: [{ name: "Request Asset", path: "/assets/request-access" }],
+    },
+    {
+      name: "Asset Register",
+      icon: <Inventory2 fontSize="small" />,
       subMenu: [
-        { name: "View Custodians", path: "/custodian/view" },
-        { name: "Add Custodian", path: "/custodian/add" },
+        { name: "View Assets", path: "/assets/list" },
+        { name: "Add Asset", path: "/assets/add-asset" },
       ],
+    },
+    {
+      name: "Print QR Codes",
+      icon: <FactCheck fontSize="small" />,
+      path: "/assets/print-qr",
+    },
+    {
+      name: "Asset Auditing",
+      icon: <Assessment fontSize="small" />,
+      path: "/assets/auditing",
+    },
+    {
+      name: "Audit Reports",
+      icon: <Assessment fontSize="small" />,
+      path: "/assets/audit-reports",
+    },
+    {
+      name: "View Reports",
+      icon: <Assessment fontSize="small" />,
+      path: "/reports",
+    },
+  ],
+
+  Requester: [
+    {
+      name: "Dashboard",
+      path: "/requestor-dashboard",
+      icon: <Dashboard fontSize="small" />,
     },
     
+        {
+          name: "View Allocated Assets",
+          path: "/allocatedassets",
+          icon: <AssignmentTurnedIn fontSize="small" />,
+        },
+        {
+          name: "Request Asset",
+          path: "/assets/request-access",
+          icon: <Inventory2 fontSize="small" />,
+        },
+        {
+          name: "Buyback",
+          path: "/assets/buyback",
+          icon: <ShoppingCart fontSize="small" />,
+        },
+        {
+          name: "Location Transfer",
+          path: "/assets/location-transfer",
+          icon: <LocationOn fontSize="small" />,
+        },
+        {
+          name: "Custodian Transfer",
+          path: "/assets/custodian-transfer",
+          icon: <PeopleAlt fontSize="small" />,
+        },
+        {
+          name: "Asset Return",
+          path: "/assets/asset-return",
+          icon: <KeyboardReturn fontSize="small" />,
+        },
+    
+  ],
+
+  Auditor: [
     {
-      name: "Reports",
-      path: "/reports",
+      name: "Dashboard",
+      path: "/dashboard",
+      icon: <Dashboard fontSize="small" />,
+    },
+    {
+      name: "Audits",
+      icon: <Inventory2 fontSize="small" />,
+      subMenu: [
+        { name: "View Audits", path: "/audits/view" },
+        { name: "Asset Audits", path: "/assets/request-access" },
+        { name: "Edit Audit Assets", path: "/assets/edit-audit-assets" },
+        { name: "Audit wise status", path: "/assets/audit-wise-status" },
+        { name: "Assets by Audits", path: "/assets/by-audits" },
+      ],
+    },
+  ],
+
+  Approver: [
+    {
+      name: "Dashboard",
+      path: "/dashboard",
+      icon: <Dashboard fontSize="small" />,
+    },
+    {
+      name: "Approvals",
+      icon: <Inventory2 fontSize="small" />,
+      subMenu: [
+        { name: "Asset Requests", path: "/assets/requests" },
+        {
+          name: "Location Transfer Requests",
+          path: "/assets/location-transfer-requests",
+        },
+        {
+          name: "Custodian Transfer Requests",
+          path: "/assets/custodian-transfer-requests",
+        },
+      ],
+    },
+  ],
+};
+
+const Sidebar = () => {
+  const role = localStorage.getItem("role") || "";
+  const location = useLocation();
+  const [openMenu, setOpenMenu] = useState("Asset Request");
+
+  const menuItems = roleMenus[role] || roleMenus["Requester"] || [];
+
+  // Add Chatbot for everyone
+  const finalMenuItems = [
+    ...menuItems,
+    {
+      name: "Chatbot",
+      path: "/chatbot",
       icon: <Assessment fontSize="small" />,
     },
-    // {
-    //   name: "Mapping",
-    //   path: "/mapping",
-    //   icon: <FactCheck fontSize="small" />,
-    // },
-    {
-  name: "Chatbot",   // 🔥 ADD HERE
-  path: "/chatbot",
-  icon: <Assessment fontSize="small" />,
-},
-    // {
-    //   name: "Settings",
-    //   path: "/settings",
-    //   icon: <Settings fontSize="small" />,
-    // },
   ];
 
   const toggleSubmenu = (menuName) => {
@@ -81,59 +231,42 @@ const Sidebar = () => {
 
   return (
     <aside
-  className="
-    fixed top-16 left-0 z-50
-    h-[calc(100vh-4rem)]
-    w-20 hover:w-64
-    bg-gradient-to-b from-slate-900 to-slate-800
-    text-slate-200 border-r border-slate-700
-    shadow-xl hover:shadow-2xl
-    transition-all duration-300
-    group
-    overflow-hidden
-  "
->
-   
-
-      {/* Navigation */}
-      <nav className="p-3 space-y-2 overflow-y-auto h-[calc(100%-80px)]">
-        {menuItems.map((item) =>
+      className="
+        fixed top-16 left-0 z-50
+        h-[calc(100vh-4rem)]
+        w-20 hover:w-64
+        bg-gradient-to-b from-slate-900 to-slate-800
+        text-slate-200 border-r border-slate-700
+        shadow-xl hover:shadow-2xl
+        transition-all duration-300
+        group
+        overflow-hidden
+      "
+    >
+      <nav className="p-3 space-y-2 overflow-y-auto h-full scrollbar-hide">
+        {finalMenuItems.map((item) =>
           item.subMenu ? (
             <div key={item.name}>
-              {/* Main Menu */}
               <button
                 onClick={() => toggleSubmenu(item.name)}
-                className="
-                  w-full flex items-center justify-between
-                  px-2 group-hover:px-4 py-2.5 rounded-xl
-                  hover:bg-slate-700/50 transition
-                "
+                className="w-full flex items-center justify-between px-2 group-hover:px-4 py-2.5 rounded-xl hover:bg-slate-700/50 transition"
               >
                 <div className="flex items-center justify-center group-hover:justify-start gap-3 w-full">
                   {item.icon}
-                  <span className="hidden group-hover:inline">
+                  <span className="hidden group-hover:inline transition-opacity duration-300">
                     {item.name}
                   </span>
                 </div>
-
-                {/* Arrow */}
                 <ExpandMore
                   className={`hidden group-hover:block transition-transform ${
-                    openMenu === item.name
-                      ? "rotate-180 text-blue-400"
-                      : ""
+                    openMenu === item.name ? "rotate-180 text-blue-400" : ""
                   }`}
                 />
               </button>
 
-              
-
-              {/* Submenu */}
               <div
                 className={`transition-all duration-300 overflow-hidden ${
-                  openMenu === item.name
-                    ? "max-h-[500px] mt-2"
-                    : "max-h-0"
+                  openMenu === item.name ? "max-h-[500px] mt-2 opacity-100" : "max-h-0 opacity-0"
                 }`}
               >
                 <div className="ml-6 pl-3 border-l border-slate-600 space-y-1">
@@ -141,16 +274,13 @@ const Sidebar = () => {
                     <Link
                       key={sub.name}
                       to={sub.path}
-                      className={`
-                        block px-3 py-2 rounded-lg text-sm transition
-                        ${
-                          location.pathname === sub.path
-                            ? "bg-blue-500/20 text-blue-400 font-semibold"
-                            : "text-slate-400 hover:bg-slate-700/50 hover:text-white"
-                        }
-                      `}
+                      className={`block px-3 py-2 rounded-lg text-sm transition ${
+                        location.pathname === sub.path
+                          ? "bg-blue-500/10 text-blue-400 font-semibold shadow-[inset_0_0_10px_rgba(59,130,246,0.1)]"
+                          : "text-slate-400 hover:bg-slate-700/50 hover:text-white"
+                      }`}
                     >
-                      <span className="hidden group-hover:inline">
+                      <span className="hidden group-hover:inline whitespace-nowrap">
                         {sub.name}
                       </span>
                     </Link>
@@ -162,18 +292,14 @@ const Sidebar = () => {
             <Link
               key={item.name}
               to={item.path}
-              className={`
-                flex items-center justify-center group-hover:justify-start gap-3
-                px-2 group-hover:px-4 py-2.5 rounded-xl transition
-                ${
-                  location.pathname === item.path
-                    ? "bg-blue-500/20 text-blue-400 font-semibold"
-                    : "hover:bg-slate-700/50 text-slate-300 hover:text-white"
-                }
-              `}
+              className={`flex items-center justify-center group-hover:justify-start gap-3 px-2 group-hover:px-4 py-2.5 rounded-xl transition ${
+                location.pathname === item.path
+                  ? "bg-blue-500/10 text-blue-400 font-semibold shadow-[inset_0_0_10px_rgba(59,130,246,0.1)]"
+                  : "hover:bg-slate-700/50 text-slate-300 hover:text-white"
+              }`}
             >
               {item.icon}
-              <span className="hidden group-hover:inline">
+              <span className="hidden group-hover:inline transition-opacity duration-300 whitespace-nowrap">
                 {item.name}
               </span>
             </Link>
@@ -185,3 +311,4 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
+

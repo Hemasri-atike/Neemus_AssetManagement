@@ -21,28 +21,51 @@ import Chatbot from "./chatbot/Chatbot";
 import Custodian from "./components/custodian/Custodian";
 import AddCustodian from "./components/custodian/AddCustodian";
 import EditCustodian from "./components/custodian/EditCustodian";
+import ApproverDashboard from "./pages/ApproverDashboard";
+import AuditorDashboard from "./pages/AuditorDashboard";
+import CustodianDashboard from "./pages/CustodianDashboard";
+import RequestorDashboard from "./pages/RequestorDashboard";
+import ItDashboard from "./pages/ItDashboard";
+import HrDashboard from "./pages/HrDashboard";
+import AllocatedAssets from "./components/Requestor/AllocatedAssets";
+import ReqAssetTable from "./components/Requestor/ReqAssetTable"; 
+
 import "../src/leafletconfig";
 import "leaflet/dist/leaflet.css";
+import ReqBuyback from "./components/Requestor/ReqBuyback";
+import LocationTransfer from "./components/Requestor/LocationTransfer";
+
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // 🔥 Protected Route Wrapper
+  // ✅ Protected Route (Login check)
   const ProtectedRoute = ({ children }) => {
     return isLoggedIn ? children : <Navigate to="/" />;
+  };
+
+  // ✅ Role-Based Route
+  const RoleRoute = ({ children, allowedRoles }) => {
+    const role = localStorage.getItem("role");
+
+    if (!isLoggedIn) return <Navigate to="/" />;
+
+    return allowedRoles.includes(role)
+      ? children
+      : <Navigate to="/dashboard" />;
   };
 
   return (
     <Router>
       <Routes>
 
-        {/* ✅ Login (No Layout) */}
+        {/* ✅ Login */}
         <Route
           path="/"
           element={<Login setIsLoggedIn={setIsLoggedIn} />}
         />
 
-        {/* ✅ Protected Layout Routes */}
+        {/* ✅ Protected Layout */}
         <Route
           element={
             <ProtectedRoute>
@@ -50,48 +73,203 @@ const App = () => {
             </ProtectedRoute>
           }
         >
-          {/* Dashboard */}
-          <Route path="/dashboard" element={<Dashboard />} />
-           <Route path="/assets/add-asset" element={<AddAsset />} />
 
-          {/* Assets Nested */}
-       <Route path="/assets">
-  <Route path="list" element={<Assets />} />
-  <Route path="add-asset" element={<AddAsset />} />
+          {/* 🔥 Role-based Dashboards */}
+          <Route
+            path="/admin-dashboard"
+            element={
+              <RoleRoute allowedRoles={["Admin"]}>
+                <Dashboard />
+              </RoleRoute>
+            }
+          />
 
+          <Route
+            path="/it-dashboard"
+            element={
+              <RoleRoute allowedRoles={["IT- Admin"]}>
+                <ItDashboard />
+              </RoleRoute>
+            }
+          />
+
+          <Route
+            path="/hr-dashboard"
+            element={
+              <RoleRoute allowedRoles={["HR Admin"]}>
+                <HrDashboard />
+              </RoleRoute>
+            }
+          />
+            <Route
+            path="/approver-dashboard"
+            element={
+              <RoleRoute allowedRoles={["Approver"]}>
+                <ApproverDashboard />
+              </RoleRoute>
+            }
+          />
+
+          <Route
+            path="/auditor-dashboard"
+            element={
+              <RoleRoute allowedRoles={["Auditor"]}>
+                <AuditorDashboard />
+              </RoleRoute>
+            }
+          />
           
+         <Route
+  path="/requestor-dashboard"
+  element={
+    <RoleRoute allowedRoles={["Requester"]}>
+      
+      <RequestorDashboard />
+    </RoleRoute>
+  }
+/>
+
+
+          <Route
+            path="/custodian-dashboard"
+            element={
+              <RoleRoute allowedRoles={["Custodian"]}>
+                <CustodianDashboard />
+              </RoleRoute>
+            }
+          />
+
+          {/* 🔥 Common Dashboard (fallback) */}
+          <Route path="/dashboard" element={<Dashboard />} />
+
+          {/* Assets */}
+          <Route path="/assets">
+            <Route
+              path="list"
+              element={
+                <RoleRoute allowedRoles={["Admin", "IT- Admin"]}>
+                  <Assets />
+                </RoleRoute>
+              }
+            />
+            <Route
+              path="add-asset"
+              element={
+                <RoleRoute allowedRoles={["Admin"]}>
+                  <AddAsset />
+                </RoleRoute>
+              }
+            />
             <Route path="request-access" element={<RequestAccess />} />
+            {/* <Route path="reqassettable" element={<ReqAssetTable />} /> */}
             <Route path="add-documents" element={<AddDocuments />} />
           </Route>
 
-             {/* Roles */}
+          {/* Roles */}
           <Route path="/roles">
-            <Route path="view" element={<ViewRoles />} />
-            <Route path="create" element={<CreateRole />} />
+            <Route
+              path="view"
+              element={
+                <RoleRoute allowedRoles={["Admin"]}>
+                  <ViewRoles />
+                </RoleRoute>
+              }
+            />
+            <Route
+              path="create"
+              element={
+                <RoleRoute allowedRoles={["Admin"]}>
+                  <CreateRole />
+                </RoleRoute>
+              }
+            />
           </Route>
 
-          {/* Asset Status Change */}
-          <Route path="/assets/status-change" element={<AssetStatusChange />} />
-          <Route path="/assets/status" element={<AssetStatusChange />} />
-          <Route path="/assets/location" element={<Location />} />
+          {/* Asset Status */}
+          <Route
+            path="/assets/status-change"
+            element={<AssetStatusChange />}
+          />
+          <Route
+            path="/assets/status"
+            element={<AssetStatusChange />}
+          />
+          <Route
+            path="/assets/location"
+            element={<Location />}
+          />
+          <Route
+            path="/assets/add-status"
+            element={<AddStatus />}
+          />
+         
 
-           {/* Add Status */}
-          <Route path="/assets/add-status" element={<AddStatus />} />
-          
+
+          <Route
+  path="/allocatedassets"
+  element={
+    <RoleRoute allowedRoles={["Requester"]}>
+      <AllocatedAssets />
+    </RoleRoute>
+  }
+/>
+      <Route
+  path="/assets/location-transfer"
+  element={
+    <RoleRoute allowedRoles={["Requester"]}>
+      <LocationTransfer/>
+    </RoleRoute>
+  }
+/>
+          <Route
+  path="/assets/buyback"
+  element={
+    <RoleRoute allowedRoles={["Requester"]}>
+      <ReqBuyback />
+    </RoleRoute>
+  }
+/>
+       <Route
+  path="/assets/reqassettable"
+  element={
+    <RoleRoute allowedRoles={["Requester"]}>
+      <ReqAssetTable />
+    </RoleRoute>
+  }
+/>
 
           {/* Other Pages */}
           <Route path="/reports" element={<Reports />} />
-          
-            <Route path="/chatbot" element={<Chatbot />} />
+          <Route path="/chatbot" element={<Chatbot />} />
 
           {/* Custodian */}
           <Route path="/custodian">
-            <Route path="view" element={<Custodian />} />
-            <Route path="add" element={<AddCustodian />} />
-            <Route path="edit/:id" element={<EditCustodian />} />
+            <Route
+              path="view"
+              element={
+                <RoleRoute allowedRoles={["Admin", "HR Admin"]}>
+                  <Custodian />
+                </RoleRoute>
+              }
+            />
+            <Route
+              path="add"
+              element={
+                <RoleRoute allowedRoles={["HR Admin"]}>
+                  <AddCustodian />
+                </RoleRoute>
+              }
+            />
+            <Route
+              path="edit/:id"
+              element={
+                <RoleRoute allowedRoles={["HR Admin"]}>
+                  <EditCustodian />
+                </RoleRoute>
+              }
+            />
           </Route>
 
-          
         </Route>
 
       </Routes>
