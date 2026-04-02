@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { fetchJson } from "../../utils/http";
 
 import {
   Card,
   CardContent,
   Typography,
   Button,
-  IconButton
+  IconButton,
 } from "@mui/material";
 
 import { DataGrid } from "@mui/x-data-grid";
+import { dataGridPlasticBlueSx } from "../../theme/plasticBlueTable";
 
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import EditIcon from "@mui/icons-material/Edit";
@@ -21,6 +22,10 @@ const Custodian = () => {
   const navigate = useNavigate();
 
   const [rows, setRows] = useState([]);
+  const [paginationModel, setPaginationModel] = useState({
+    page: 0,
+    pageSize: 10,
+  });
   const handleDelete = async (id) => {
 
   const confirmDelete = window.confirm("Are you sure you want to delete this custodian?");
@@ -29,7 +34,9 @@ const Custodian = () => {
 
   try {
 
-    await axios.delete(`http://localhost:5000/custodians/${id}`);
+    await fetchJson(`http://localhost:5000/custodians/${id}`, {
+      method: "DELETE",
+    });
 
     alert("Custodian deleted successfully ");
 
@@ -48,9 +55,9 @@ const Custodian = () => {
 
     try {
 
-      const res = await axios.get("http://localhost:5000/custodians");
+      const list = await fetchJson("http://localhost:5000/custodians");
 
-      const formatted = res.data.map((item, index) => ({
+      const formatted = (Array.isArray(list) ? list : []).map((item) => ({
         id: item.id,
         custodianId: item.custodian_id,
         department: item.department,
@@ -116,11 +123,14 @@ const Custodian = () => {
   ];
 
   return (
-    <div className="p-6 bg-gray-100 min-h-screen">
+    <div className="min-h-screen bg-gradient-to-br from-slate-100 via-sky-50/40 to-slate-100 p-4 sm:p-6">
 
-      <div className="flex justify-between items-center mb-6">
+      <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
 
-        <Typography variant="h5">
+        <Typography
+          variant="h5"
+          className="!font-bold bg-gradient-to-r from-slate-800 to-blue-900 bg-clip-text text-transparent"
+        >
           Custodian Management
         </Typography>
 
@@ -128,25 +138,43 @@ const Custodian = () => {
           variant="contained"
           startIcon={<PersonAddIcon />}
           onClick={() => navigate("/custodian/add")}
+          className="!rounded-xl !shadow-md"
+          sx={{
+            background: "linear-gradient(135deg, #3a78b8 0%, #2a5a94 100%)",
+            textTransform: "none",
+            fontWeight: 600,
+          }}
         >
           Add Custodian
         </Button>
 
       </div>
 
-      <Card>
+      <Card
+        className="!rounded-2xl !border-slate-200/90 !shadow-[0_12px_40px_-18px_rgba(15,60,110,0.35)] overflow-hidden"
+        sx={{
+          background:
+            "linear-gradient(145deg, rgba(154,204,242,0.12) 0%, #ffffff 38%)",
+        }}
+      >
 
-        <CardContent>
+        <CardContent className="!p-3 sm:!p-4">
 
-          <div style={{ height: 500 }}>
-
+          <div className="min-h-[420px] w-full sm:min-h-[520px]">
             <DataGrid
               rows={rows}
               columns={columns}
-              pageSize={5}
-              rowsPerPageOptions={[5, 10]}
+              pagination
+              paginationModel={paginationModel}
+              onPaginationModelChange={setPaginationModel}
+              pageSizeOptions={[5, 10, 25, 50]}
+              disableRowSelectionOnClick
+              sx={{
+                ...dataGridPlasticBlueSx,
+                minHeight: 400,
+                width: "100%",
+              }}
             />
-
           </div>
 
         </CardContent>

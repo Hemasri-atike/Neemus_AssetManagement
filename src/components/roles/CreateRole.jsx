@@ -1,6 +1,6 @@
 import { useState } from "react"
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { fetchJson } from "../../utils/http";
 
 const PAGES = [
 "Home",
@@ -125,7 +125,10 @@ const createRole = async () => {
       pages: pageIds
     };
 
-    await axios.post("http://localhost:5000/api/roles", data);
+    await fetchJson("http://localhost:5000/api/roles", {
+      method: "POST",
+      body: data,
+    });
 
     alert("Role Created Successfully");
 
@@ -216,15 +219,15 @@ Select All
 
 {/* Pages Table */}
 
-<table className="w-full border">
+<table className="plastic-table w-full border">
 
-<thead className="bg-gray-200">
+<thead>
 
 <tr>
 
-<th >S.No</th>
-<th>Page Name</th>
-<th>Permission</th>
+<th className="p-2">S.No</th>
+<th className="p-2">Page Name</th>
+<th className="p-2">Permission</th>
 
 </tr>
 

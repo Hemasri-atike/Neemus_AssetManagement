@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "../../pages/Navbar";
-import Sidebar from "../sidebar/Sidebar";
+
 
 const Reports = () => {
   const data = [
@@ -48,7 +48,7 @@ const Reports = () => {
   return (
     <div className="bg-gray-100 min-h-screen">
       <Navbar />
-      <Sidebar />
+      
 
       {/* Main Content */}
       <div className=" mt-16 p-8">
@@ -58,15 +58,15 @@ const Reports = () => {
         </h1>
 
         {/* Report Card */}
-        <div className="bg-white border border-blue-200 rounded-xl shadow-sm p-6">
+        <div className="rounded-xl border border-slate-200/90 bg-gradient-to-br from-white via-sky-50/30 to-white p-4 shadow-[0_12px_40px_-18px_rgba(15,60,110,0.2)] sm:p-6">
 
           {/* Scrollable Table Container */}
-          <div className="border rounded-lg overflow-x-auto">
-            <table className="min-w-[1300px] w-full text-sm">
+          <div className="overflow-x-auto rounded-xl border border-slate-200/80">
+            <table className="plastic-table min-w-[1300px] w-full text-sm">
               
               {/* Table Header */}
               <thead>
-                <tr className="bg-gray-100 text-gray-700 text-xs uppercase tracking-wider">
+                <tr className="text-xs tracking-wider">
                   <th className="p-3 text-left">#</th>
                   <th className="p-3 text-left">Main Asset Number</th>
                   <th className="p-3 text-center">Sub Number</th>

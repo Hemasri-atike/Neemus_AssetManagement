@@ -1,5 +1,37 @@
 @import "tailwindcss";
 
+/* Plastic Blue (dxgvControl_PlasticBlue–style) — reuse on any native <table> */
+:root {
+  --plastic-blue-header: linear-gradient(
+    180deg,
+    #9cccf2 0%,
+    #5a9fd4 38%,
+    #3a78b8 72%,
+    #2a5a94 100%
+  );
+}
+
+table.plastic-table thead th {
+  background: var(--plastic-blue-header);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.055em;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.28);
+  box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.2);
+}
+
+table.plastic-table thead tr.search-row th,
+table.plastic-table thead tr.search-row td {
+  background: linear-gradient(180deg, #e8f2fc 0%, #f1f6fb 100%);
+  color: #334155;
+  text-transform: none;
+  font-weight: 500;
+  font-size: 0.8125rem;
+  box-shadow: none;
+}
+
 /* 🔥 Global Scrollbar Styling */
 
 /* width (vertical) & height (horizontal) */

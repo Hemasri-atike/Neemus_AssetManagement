@@ -156,14 +156,14 @@ const AssetStatusChange = () => {
       {/* Table */}
       <div className="bg-white p-3 border rounded">
 
-        <table className="w-full border text-sm">
-          <thead className="bg-gray-200">
+        <table className="plastic-table w-full border text-sm">
+          <thead>
             <tr>
-              <th className="border p-2">Main Asset Number</th>
-              <th className="border p-2">Sub Number</th>
-              <th className="border p-2">Asset Class</th>
-              <th className="border p-2">Asset Description</th>
-              <th className="border p-2">Asset Status</th>
+              <th className="border border-white/15 p-2">Main Asset Number</th>
+              <th className="border border-white/15 p-2">Sub Number</th>
+              <th className="border border-white/15 p-2">Asset Class</th>
+              <th className="border border-white/15 p-2">Asset Description</th>
+              <th className="border border-white/15 p-2">Asset Status</th>
             </tr>
           </thead>
 

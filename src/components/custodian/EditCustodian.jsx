@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
+import { fetchJson } from "../../utils/http";
 
 import {
   Card,
@@ -33,10 +33,10 @@ const EditCustodian = () => {
 
     try {
 
-      await axios.put(
-        `http://localhost:5000/custodians/${id}`,
-        formData
-      );
+      await fetchJson(`http://localhost:5000/custodians/${id}`, {
+        method: "PUT",
+        body: formData,
+      });
 
       alert("Custodian updated successfully ✅");
 

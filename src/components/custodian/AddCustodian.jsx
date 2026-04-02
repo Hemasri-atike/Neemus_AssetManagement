@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { fetchJson } from "../../utils/http";
 
 import {
   Card,
@@ -56,17 +56,20 @@ export default function AddCustodian() {
       return;
     }
 
-   await axios.post("http://localhost:5000/custodians", {
-  custodianId: formData.custodianId,
-  custodianName: formData.custodianName,
-  department: formData.department,
-  designation: formData.designation,
-  authority: formData.reportingAuthority,   // ✅ FIXED
-  email: formData.email,
-  userName: formData.userName,
-  phone: formData.phone,
-  password: formData.password
-});
+    await fetchJson("http://localhost:5000/custodians", {
+      method: "POST",
+      body: {
+        custodianId: formData.custodianId,
+        custodianName: formData.custodianName,
+        department: formData.department,
+        designation: formData.designation,
+        authority: formData.reportingAuthority,
+        email: formData.email,
+        userName: formData.userName,
+        phone: formData.phone,
+        password: formData.password,
+      },
+    });
 
     alert("Custodian Added Successfully");
 

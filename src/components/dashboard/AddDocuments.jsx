@@ -109,10 +109,10 @@ export default function AddDocuments() {
             Documents List
           </h2>
 
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm text-left">
+          <div className="overflow-x-auto rounded-xl border border-slate-200/80">
+            <table className="plastic-table w-full text-left text-sm">
               <thead>
-                <tr className="bg-slate-50 text-slate-600 uppercase text-xs tracking-wider">
+                <tr className="text-xs tracking-wider">
                   <th className="p-3">Asset</th>
                   <th className="p-3">Document Name</th>
                   <th className="p-3">File</th>

@@ -16,14 +16,14 @@ const AssetsTable = () => {
       </div>
 
       {/* Table */}
-      <div className="overflow-x-auto">
-        <table className="w-full text-sm">
+      <div className="overflow-x-auto rounded-b-2xl">
+        <table className="plastic-table w-full text-sm">
           <thead>
-            <tr className="bg-black text-white">
-              <th className="px-6 py-3 text-left font-medium rounded-tl-2xl">
+            <tr>
+              <th className="px-6 py-3 text-left font-medium first:rounded-tl-2xl">
                 Audit Name
               </th>
-              <th className="px-6 py-3 text-left font-medium rounded-tr-2xl">
+              <th className="px-6 py-3 text-left font-medium last:rounded-tr-2xl">
                 No of Assets
               </th>
             </tr>

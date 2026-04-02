@@ -27,9 +27,9 @@
   border-spacing: 0;
 }
 
-/* Header Styling - Professional Midnight Navy Gradient */
+/* Header — Plastic Blue (align with dxgvControl_PlasticBlue / global --plastic-blue-header) */
 .modern-table th {
-  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  background: var(--plastic-blue-header);
   color: #ffffff;
   font-weight: 600;
   text-transform: uppercase;

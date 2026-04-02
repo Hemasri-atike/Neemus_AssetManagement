@@ -34,6 +34,8 @@ import "../src/leafletconfig";
 import "leaflet/dist/leaflet.css";
 import ReqBuyback from "./components/Requestor/ReqBuyback";
 import LocationTransfer from "./components/Requestor/LocationTransfer";
+import CustodianTranfer from "./components/Requestor/CustodianTranfer";
+import AssetReturn from "./components/Requestor/AssetReturn";
 
 
 const App = () => {
@@ -221,6 +223,22 @@ const App = () => {
     </RoleRoute>
   }
 />
+   <Route
+  path="/assets/custodian-transfer"
+  element={
+    <RoleRoute allowedRoles={["Requester"]}>
+      <CustodianTranfer/>
+    </RoleRoute>
+  }
+/>
+<Route
+  path="/assets/asset-return"
+  element={
+    <RoleRoute allowedRoles={["Requester"]}>
+      <AssetReturn/>
+    </RoleRoute>
+  }
+/>
           <Route
   path="/assets/buyback"
   element={
@@ -237,6 +255,7 @@ const App = () => {
     </RoleRoute>
   }
 />
+
 
           {/* Other Pages */}
           <Route path="/reports" element={<Reports />} />

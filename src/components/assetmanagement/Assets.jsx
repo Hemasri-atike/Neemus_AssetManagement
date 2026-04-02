@@ -9,6 +9,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import CustomizeColumns from "../../buttons/CustomizeColumns";
 import theme from "../../theme";
+import { PLASTIC_BLUE_HEADER_GRADIENT } from "../../theme/plasticBlueTable";
 import { FaEdit, FaTrash, FaPlus, FaFileExcel, FaFilePdf } from "react-icons/fa";
 import { allColumns } from "../../constants/Columns";
 const columnLabels = {
@@ -220,9 +221,9 @@ const columns = useMemo(() => {
       {/* TABLE CONTAINER */}
       <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
         <div className="overflow-x-auto overflow-y-auto max-h-[600px] scrollbar-thin scrollbar-thumb-gray-200 scrollbar-track-transparent">
-          <table className="min-w-[2200px] w-full text-sm border-separate border-spacing-0">
+          <table className="min-w-[2200px] w-full border-separate border-spacing-0 text-sm">
             {/* HEADER */}
-            <thead className="sticky top-0 z-40 bg-gray-50/95 backdrop-blur-md shadow-sm">
+            <thead className="sticky top-0 z-40 shadow-sm">
               {table.getHeaderGroups().map((headerGroup) => (
                 <tr key={headerGroup.id}>
                   {headerGroup.headers.map((header) => {
@@ -231,14 +232,16 @@ const columns = useMemo(() => {
                     return (
                       <th
                         key={header.id}
-                        className="px-6 py-4 font-bold text-gray-600 uppercase tracking-wider text-left border-b border-gray-100"
+                        className="border-b border-white/20 px-4 py-3 text-left text-xs font-bold uppercase tracking-wider text-white sm:px-6 sm:py-4"
                         style={{
                           position: isLast ? "sticky" : "relative",
                           right: isLast ? 0 : undefined,
                           zIndex: isLast ? 50 : 10,
-                          backgroundColor: isLast ? "rgba(249, 250, 251, 0.95)" : "inherit",
+                          background: isLast
+                            ? "linear-gradient(180deg, #3d6b96 0%, #2a5a94 100%)"
+                            : PLASTIC_BLUE_HEADER_GRADIENT,
                           backdropFilter: isLast ? "blur(12px)" : "none",
-                          borderLeft: isLast ? "1px solid rgba(229, 231, 235, 0.5)" : "none",
+                          borderLeft: isLast ? "1px solid rgba(255,255,255,0.2)" : "none",
                         }}
                       >
                         {flexRender(
