@@ -199,7 +199,7 @@ const roleMenus = {
     {
       name: "Location Transfer Requests",
       icon: <Inventory2 fontSize="small" className="text-white/90" />,
-    path: "/assets/location-transfer-requests",
+    path: "/assets/reqloctable",
     },
     {
       name: "Custodian Transfer Requests",

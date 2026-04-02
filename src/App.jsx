@@ -41,6 +41,7 @@ import ReqLocTable from "./components/tables/ReqLocTable";
 import ReqCustodianTable from "./components/tables/ReqCustodianTable";
 import ApproverAsset from "./components/Approver/ApproverAsset";
 import ApprovedAssetList from "./components/tables/ApprovedAssetList";
+import ApproverLocTransfer from "./components/Approver/ApproverLocTransfer";
 
 
 
@@ -130,6 +131,14 @@ const App = () => {
             element={
               <RoleRoute allowedRoles={["Approver"]}>
                 <ApprovedAssetList />
+              </RoleRoute>
+            }
+          />
+           <Route
+            path="/assets/reqloctable"
+            element={
+              <RoleRoute allowedRoles={["Approver"]}>
+                <ApproverLocTransfer />
               </RoleRoute>
             }
           />
