@@ -39,6 +39,8 @@ import AssetReturn from "./components/Requestor/AssetReturn";
 import ReqBuyBackTable from "./components/tables/ReqBuyBackTable";
 import ReqLocTable from "./components/tables/ReqLocTable";
 import ReqCustodianTable from "./components/tables/ReqCustodianTable";
+import ApproverAsset from "./components/Approver/ApproverAsset";
+import ApprovedAssetList from "./components/tables/ApprovedAssetList";
 
 
 
@@ -112,6 +114,22 @@ const App = () => {
             element={
               <RoleRoute allowedRoles={["Approver"]}>
                 <ApproverDashboard />
+              </RoleRoute>
+            }
+          />
+           <Route
+            path="/assets/reqassettable"
+            element={
+              <RoleRoute allowedRoles={["Approver"]}>
+                <ApproverAsset />
+              </RoleRoute>
+            }
+          />
+          <Route
+            path="/assets/reqassettable"
+            element={
+              <RoleRoute allowedRoles={["Approver"]}>
+                <ApprovedAssetList />
               </RoleRoute>
             }
           />

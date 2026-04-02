@@ -188,23 +188,23 @@ const roleMenus = {
   Approver: [
     {
       name: "Dashboard",
-      path: "/dashboard",
+      path: "/approver-dashboard",
       icon: <Dashboard fontSize="small" className="text-white/90" />,
     },
     {
-      name: "Approvals",
+      name: "Asset Requests",
       icon: <Inventory2 fontSize="small" className="text-white/90" />,
-      subMenu: [
-        { name: "Asset Requests", path: "/assets/requests" },
-        {
-          name: "Location Transfer Requests",
-          path: "/assets/location-transfer-requests",
-        },
-        {
-          name: "Custodian Transfer Requests",
-          path: "/assets/custodian-transfer-requests",
-        },
-      ],
+      path: "/assets/reqassettable",
+    },
+    {
+      name: "Location Transfer Requests",
+      icon: <Inventory2 fontSize="small" className="text-white/90" />,
+    path: "/assets/location-transfer-requests",
+    },
+    {
+      name: "Custodian Transfer Requests",
+      icon: <Inventory2 fontSize="small" className="text-white/90" />,
+   path: "/assets/custodian-transfer-requests",
     },
   ],
 };
