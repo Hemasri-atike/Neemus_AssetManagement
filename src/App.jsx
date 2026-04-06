@@ -77,14 +77,10 @@ const App = () => {
   return (
     <Router>
       <Routes>
+        {/* ✅ Public Routes */}
+        <Route path="/" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
 
-        {/* ✅ Login */}
-        <Route
-          path="/"
-          element={<Login setIsLoggedIn={setIsLoggedIn} />}
-        />
-
-        {/* ✅ Protected Layout */}
+        {/* ✅ Protected Layout (Common for all roles) */}
         <Route
           element={
             <ProtectedRoute>
@@ -92,8 +88,9 @@ const App = () => {
             </ProtectedRoute>
           }
         >
-
-          {/* 🔥 Role-based Dashboards */}
+          {/* 🔥 DASHBOARDS BY ROLE */}
+          <Route path="/dashboard" element={<Dashboard />} /> {/* Default Dashboard */}
+          
           <Route
             path="/admin-dashboard"
             element={
@@ -102,7 +99,6 @@ const App = () => {
               </RoleRoute>
             }
           />
-
           <Route
             path="/it-dashboard"
             element={
@@ -111,7 +107,6 @@ const App = () => {
               </RoleRoute>
             }
           />
-
           <Route
             path="/hr-dashboard"
             element={
@@ -120,7 +115,7 @@ const App = () => {
               </RoleRoute>
             }
           />
-            <Route
+          <Route
             path="/approver-dashboard"
             element={
               <RoleRoute allowedRoles={["Approver"]}>
@@ -128,31 +123,6 @@ const App = () => {
               </RoleRoute>
             }
           />
-           <Route
-            path="/assets/reqassettable"
-            element={
-              <RoleRoute allowedRoles={["Approver"]}>
-                <ApproverAsset />
-              </RoleRoute>
-            }
-          />
-          <Route
-            path="/assets/reqassettable"
-            element={
-              <RoleRoute allowedRoles={["Approver"]}>
-                <ApprovedAssetList />
-              </RoleRoute>
-            }
-          />
-           <Route
-            path="/assets/reqloctable"
-            element={
-              <RoleRoute allowedRoles={["Approver"]}>
-                <ApproverLocTransfer />
-              </RoleRoute>
-            }
-          />
-
           <Route
             path="/auditor-dashboard"
             element={
@@ -161,18 +131,14 @@ const App = () => {
               </RoleRoute>
             }
           />
-          
-         <Route
-  path="/requestor-dashboard"
-  element={
-    <RoleRoute allowedRoles={["Requester"]}>
-      
-      <RequestorDashboard />
-    </RoleRoute>
-  }
-/>
-
-
+          <Route
+            path="/requestor-dashboard"
+            element={
+              <RoleRoute allowedRoles={["Requester"]}>
+                <RequestorDashboard />
+              </RoleRoute>
+            }
+          />
           <Route
             path="/custodian-dashboard"
             element={
@@ -182,33 +148,83 @@ const App = () => {
             }
           />
 
-          {/* 🔥 Common Dashboard (fallback) */}
-          <Route path="/dashboard" element={<Dashboard />} />
-
-          {/* Assets */}
-          <Route path="/assets">
+          {/* 🛠️ ADMIN ROUTES */}
+          <Route path="/admin">
             <Route
-              path="list"
-              element={
-                <RoleRoute allowedRoles={["Admin", "IT- Admin"]}>
-                  <Assets />
-                </RoleRoute>
-              }
-            />
-            <Route
-              path="add-asset"
+              path="assign-role"
               element={
                 <RoleRoute allowedRoles={["Admin"]}>
-                  <AddAsset />
+                  <AssignRole />
                 </RoleRoute>
               }
             />
-            <Route path="request-access" element={<RequestAccess />} />
-            {/* <Route path="reqassettable" element={<ReqAssetTable />} /> */}
-            <Route path="add-documents" element={<AddDocuments />} />
+            <Route
+              path="add-employee"
+              element={
+                <RoleRoute allowedRoles={["Admin"]}>
+                  <AddEmployee />
+                </RoleRoute>
+              }
+            />
+            <Route
+              path="asset-class-mapping"
+              element={
+                <RoleRoute allowedRoles={["Admin"]}>
+                  <AssetClassMapping />
+                </RoleRoute>
+              }
+            />
+            <Route
+              path="add-asset-class"
+              element={
+                <RoleRoute allowedRoles={["Admin"]}>
+                  <AddAssetClass />
+                </RoleRoute>
+              }
+            />
+            <Route
+              path="assign-buyback-mail"
+              element={
+                <RoleRoute allowedRoles={["Admin"]}>
+                  <BuyBackMailAssign />
+                </RoleRoute>
+              }
+            />
+            <Route
+              path="dept-custodian-list"
+              element={
+                <RoleRoute allowedRoles={["Admin"]}>
+                  <DeptCustodianlist />
+                </RoleRoute>
+              }
+            />
+            <Route
+              path="assign-role-table"
+              element={
+                <RoleRoute allowedRoles={["Admin"]}>
+                  <AssignEmproletable />
+                </RoleRoute>
+              }
+            />
+            <Route
+              path="view-departments"
+              element={
+                <RoleRoute allowedRoles={["Admin"]}>
+                  <ViewDept />
+                </RoleRoute>
+              }
+            />
+            <Route
+              path="view-employees"
+              element={
+                <RoleRoute allowedRoles={["Admin"]}>
+                  <ViewEmpDetails />
+                </RoleRoute>
+              }
+            />
           </Route>
 
-          {/* Roles */}
+          {/* 👥 ROLES MANAGEMENT (Admin) */}
           <Route path="/roles">
             <Route
               path="view"
@@ -228,177 +244,137 @@ const App = () => {
             />
           </Route>
 
-          {/* Asset Status */}
-          <Route
-            path="/assets/status-change"
-            element={<AssetStatusChange />}
-          />
-          <Route
-            path="/assets/status"
-            element={<AssetStatusChange />}
-          />
-          <Route
-            path="/assets/location"
-            element={<Location />}
-          />
-          <Route
-            path="/assets/add-status"
-            element={<AddStatus />}
-          />
-         
+          {/* 🏗️ ASSET MANAGEMENT (Admin / IT-Admin) */}
+          <Route path="/assets">
+            <Route
+              path="list"
+              element={
+                <RoleRoute allowedRoles={["Admin", "IT- Admin"]}>
+                  <Assets />
+                </RoleRoute>
+              }
+            />
+            <Route
+              path="add-asset"
+              element={
+                <RoleRoute allowedRoles={["Admin"]}>
+                  <AddAsset />
+                </RoleRoute>
+              }
+            />
+            <Route path="request-access" element={<RequestAccess />} />
+            <Route path="add-documents" element={<AddDocuments />} />
+            <Route path="status-change" element={<AssetStatusChange />} />
+            <Route path="status" element={<AssetStatusChange />} />
+            <Route path="location" element={<Location />} />
+            <Route path="add-status" element={<AddStatus />} />
+          </Route>
 
+          {/* ✅ APPROVER ROUTES */}
+          <Route path="/approver">
+            <Route
+              path="asset-requests"
+              element={
+                <RoleRoute allowedRoles={["Approver"]}>
+                  <ApproverAsset />
+                </RoleRoute>
+              }
+            />
+            <Route
+              path="approved-list"
+              element={
+                <RoleRoute allowedRoles={["Approver"]}>
+                  <ApprovedAssetList />
+                </RoleRoute>
+              }
+            />
+            <Route
+              path="location-transfers"
+              element={
+                <RoleRoute allowedRoles={["Approver"]}>
+                  <ApproverLocTransfer />
+                </RoleRoute>
+              }
+            />
+          </Route>
 
-          <Route
-  path="/allocatedassets"
-  element={
-    <RoleRoute allowedRoles={["Requester"]}>
-      <AllocatedAssets />
-    </RoleRoute>
-  }
-/>
-      <Route
-  path="/assets/location-transfer"
-  element={
-    <RoleRoute allowedRoles={["Requester"]}>
-      <LocationTransfer/>
-    </RoleRoute>
-  }
-/>
-    <Route
-  path="/assign-role"
-  element={
-    <RoleRoute allowedRoles={["Admin"]}>
-      <AssignRole/>
-    </RoleRoute>
-  }
-/>
-  <Route
-  path="/add-employee"
-  element={
-    <RoleRoute allowedRoles={["Admin"]}>
-      <AddEmployee/>
-    </RoleRoute>
-  }
-/>
- <Route
-  path="/add/edit"
-  element={
-    <RoleRoute allowedRoles={["Admin"]}>
-      <AssetClassMapping/>
-    </RoleRoute>
-  }
-/>
- <Route
-  path="/add-asset-class"
-  element={
-    <RoleRoute allowedRoles={["Admin"]}>
-      <AddAssetClass/>
-    </RoleRoute>
-  }
-/>
- <Route
-  path="/assign-buyback-mail"
-  element={
-    <RoleRoute allowedRoles={["Admin"]}>
-      <BuyBackMailAssign/>
-    </RoleRoute>
-  }
-/>
- <Route
-  path="/dept-custodian-list"
-  element={
-    <RoleRoute allowedRoles={["Admin"]}>
-      <DeptCustodianlist/>
-    </RoleRoute>
-  }
-/>
- <Route
-  path="/assign-role-table"
-  element={
-    <RoleRoute allowedRoles={["Admin"]}>
-      <AssignEmproletable/>
-    </RoleRoute>
-  }
-/>
- <Route
-  path="/view-departments"
-  element={
-    <RoleRoute allowedRoles={["Admin"]}>
-      <ViewDept/>
-    </RoleRoute>
-  }
-/>
- <Route
-  path="/view-employees"
-  element={
-    <RoleRoute allowedRoles={["Admin"]}>
-      <ViewEmpDetails/>
-    </RoleRoute>
-  }
-/>
- <Route
-  path="/assets/reqbuybacktable"
-  element={
-    <RoleRoute allowedRoles={["Requester"]}>
-      <ReqBuyBackTable/>
-    </RoleRoute>
-  }
-/>
- <Route
-  path="/assets/reqloctable"
-  element={
-    <RoleRoute allowedRoles={["Requester"]}>
-      <ReqLocTable/>
-    </RoleRoute>
-  }
-/>
-   <Route
-  path="/assets/custodian-transfer"
-  element={
-    <RoleRoute allowedRoles={["Requester"]}>
-      <CustodianTranfer/>
-    </RoleRoute>
-  }
-/>
- <Route
-  path="/assets/reqcustodiantable"
-  element={
-    <RoleRoute allowedRoles={["Requester"]}>
-      <ReqCustodianTable/>
-    </RoleRoute>
-  }
-/>
-<Route
-  path="/assets/asset-return"
-  element={
-    <RoleRoute allowedRoles={["Requester"]}>
-      <AssetReturn/>
-    </RoleRoute>
-  }
-/>
-          <Route
-  path="/assets/buyback"
-  element={
-    <RoleRoute allowedRoles={["Requester"]}>
-      <ReqBuyback />
-    </RoleRoute>
-  }
-/>
-       <Route
-  path="/assets/reqassettable"
-  element={
-    <RoleRoute allowedRoles={["Requester"]}>
-      <ReqAssetTable />
-    </RoleRoute>
-  }
-/>
+          {/* ✅ REQUESTER ROUTES */}
+          <Route path="/requester">
+            <Route
+              path="allocated-assets"
+              element={
+                <RoleRoute allowedRoles={["Requester"]}>
+                  <AllocatedAssets />
+                </RoleRoute>
+              }
+            />
+            <Route
+              path="location-transfer"
+              element={
+                <RoleRoute allowedRoles={["Requester"]}>
+                  <LocationTransfer />
+                </RoleRoute>
+              }
+            />
+            <Route
+              path="custodian-transfer"
+              element={
+                <RoleRoute allowedRoles={["Requester"]}>
+                  <CustodianTranfer />
+                </RoleRoute>
+              }
+            />
+            <Route
+              path="asset-return"
+              element={
+                <RoleRoute allowedRoles={["Requester"]}>
+                  <AssetReturn />
+                </RoleRoute>
+              }
+            />
+            <Route
+              path="buyback"
+              element={
+                <RoleRoute allowedRoles={["Requester"]}>
+                  <ReqBuyback />
+                </RoleRoute>
+              }
+            />
+            <Route
+              path="request-table"
+              element={
+                <RoleRoute allowedRoles={["Requester"]}>
+                  <ReqAssetTable />
+                </RoleRoute>
+              }
+            />
+            <Route
+              path="buyback-table"
+              element={
+                <RoleRoute allowedRoles={["Requester"]}>
+                  <ReqBuyBackTable />
+                </RoleRoute>
+              }
+            />
+            <Route
+              path="location-table"
+              element={
+                <RoleRoute allowedRoles={["Requester"]}>
+                  <ReqLocTable />
+                </RoleRoute>
+              }
+            />
+            <Route
+              path="custodian-table"
+              element={
+                <RoleRoute allowedRoles={["Requester"]}>
+                  <ReqCustodianTable />
+                </RoleRoute>
+              }
+            />
+          </Route>
 
-
-          {/* Other Pages */}
-          <Route path="/reports" element={<Reports />} />
-          <Route path="/chatbot" element={<Chatbot />} />
-
-          {/* Custodian */}
+          {/* 👥 CUSTODIAN MANAGEMENT (Admin / HR Admin) */}
           <Route path="/custodian">
             <Route
               path="view"
@@ -426,8 +402,10 @@ const App = () => {
             />
           </Route>
 
+          {/* 📊 MISC / SHARED */}
+          <Route path="/reports" element={<Reports />} />
+          <Route path="/chatbot" element={<Chatbot />} />
         </Route>
-
       </Routes>
     </Router>
   );
