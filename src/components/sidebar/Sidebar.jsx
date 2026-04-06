@@ -39,9 +39,22 @@ const roleMenus = {
       name: "Masters",
       icon: <Settings fontSize="small" className="text-white/90" />,
       subMenu: [
-        { name: "Roles", path: "/roles/view" },
-        { name: "Create Role", path: "/roles/create" },
-        { name: "Custodians", path: "/custodian/view" },
+        { name: "Assign Admin&Approver", path: "/assign-role" },
+        { name: "Assign Non NRL User", path: "/add-employee" },
+        { name: "Assign Asset Class to Department", path: "/add-asset-class" },
+        { name: "Assign Dept wise Admin,Auditor", path: "/add/edit" },
+        {name: "Hr Finance Master", path: "/assign-buyback-mail" },
+        { name: "Dept Master", path: "/view-departments" },
+        {name: "Employee Details", path: "/view-employees" },
+        { name: "Dept wise Employees", path: "/dept-custodian-list" },
+      ],
+    },
+      {
+      name: "Location Master",
+      icon: <Settings fontSize="small" className="text-white/90" />,
+      subMenu: [
+        
+        { name: "View Location", path: "/assets/location" },
       ],
     },
   ],

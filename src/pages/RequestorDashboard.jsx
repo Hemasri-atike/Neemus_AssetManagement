@@ -196,7 +196,16 @@ const NavigationCard = ({ item, navigate }) => (
     }}
   >
     {/* Colored Accent Top Strip */}
-    <Box sx={{ height: 6, bgcolor: item.color }} />
+ <Box
+  sx={{
+    position: "absolute",
+    left: 0,
+    top: 0,
+    bottom: 0,
+    width: 6,
+    bgcolor: item.color,
+  }}
+/>
 
     <CardContent sx={{ p: 4, flexGrow: 1 }}>
       <Box 

@@ -42,6 +42,16 @@ import ReqCustodianTable from "./components/tables/ReqCustodianTable";
 import ApproverAsset from "./components/Approver/ApproverAsset";
 import ApprovedAssetList from "./components/tables/ApprovedAssetList";
 import ApproverLocTransfer from "./components/Approver/ApproverLocTransfer";
+import AssignRole from "./components/admin/AssignRole";
+import AddEmployee from "./components/admin/AddEmployee";
+import AssetClassMapping from "./components/admin/AssetClassMapping";
+import BuyBackMailAssign from "./components/admin/BuyBackMailAssign";
+import DeptCustodianlist from "./components/admin/DeptCustodianlist";
+import ViewDept from "./components/admin/ViewDept";
+import ViewEmpDetails from "./components/admin/ViewEmpDetails";
+import AddAssetClass from "./components/admin/AddAssetClass";
+import AssignEmproletable from "./components/tables/AssignEmproletable";
+
 
 
 
@@ -251,6 +261,78 @@ const App = () => {
   element={
     <RoleRoute allowedRoles={["Requester"]}>
       <LocationTransfer/>
+    </RoleRoute>
+  }
+/>
+    <Route
+  path="/assign-role"
+  element={
+    <RoleRoute allowedRoles={["Admin"]}>
+      <AssignRole/>
+    </RoleRoute>
+  }
+/>
+  <Route
+  path="/add-employee"
+  element={
+    <RoleRoute allowedRoles={["Admin"]}>
+      <AddEmployee/>
+    </RoleRoute>
+  }
+/>
+ <Route
+  path="/add/edit"
+  element={
+    <RoleRoute allowedRoles={["Admin"]}>
+      <AssetClassMapping/>
+    </RoleRoute>
+  }
+/>
+ <Route
+  path="/add-asset-class"
+  element={
+    <RoleRoute allowedRoles={["Admin"]}>
+      <AddAssetClass/>
+    </RoleRoute>
+  }
+/>
+ <Route
+  path="/assign-buyback-mail"
+  element={
+    <RoleRoute allowedRoles={["Admin"]}>
+      <BuyBackMailAssign/>
+    </RoleRoute>
+  }
+/>
+ <Route
+  path="/dept-custodian-list"
+  element={
+    <RoleRoute allowedRoles={["Admin"]}>
+      <DeptCustodianlist/>
+    </RoleRoute>
+  }
+/>
+ <Route
+  path="/assign-role-table"
+  element={
+    <RoleRoute allowedRoles={["Admin"]}>
+      <AssignEmproletable/>
+    </RoleRoute>
+  }
+/>
+ <Route
+  path="/view-departments"
+  element={
+    <RoleRoute allowedRoles={["Admin"]}>
+      <ViewDept/>
+    </RoleRoute>
+  }
+/>
+ <Route
+  path="/view-employees"
+  element={
+    <RoleRoute allowedRoles={["Admin"]}>
+      <ViewEmpDetails/>
     </RoleRoute>
   }
 />
