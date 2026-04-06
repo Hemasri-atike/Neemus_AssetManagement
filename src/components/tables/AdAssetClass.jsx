@@ -1,27 +1,28 @@
 import React, { useState } from "react";
 import ModernTable from "../common/ModernTable";
 import { Add } from "@mui/icons-material";
+import AddAssetClass from "../admin/AddAssetClass";
 
 // ✅ Correct data according to labels
 const rawData = [
   {
-    userId: "USR001",
-    userName: "Devajit Jaradhara",
-    email: "devajit.jaradhara@example.com",
+    assetClassCode: "AC001",
+    assetClassName: "Furniture",
+    departmentName: "Admin",
   },
   {
-    userId: "USR002",
-    userName: "Rahul Sharma",
-    email: "rahul.sharma@example.com",
+    assetClassCode: "AC002",
+    assetClassName: "Electrical",
+    departmentName: "Maintenance",
   },
   {
-    userId: "USR003",
-    userName: "Anita Verma",
-    email: "anita.verma@example.com",
+    assetClassCode: "AC003",
+    assetClassName: "IT Equipment",
+    departmentName: "IT",
   },
 ];
 
-const AddnonNrluser = () => {
+const AdAssetClass = () => {
   const [search, setSearch] = useState({});
 
   const handleSearch = (field, value) => {
@@ -37,16 +38,15 @@ const AddnonNrluser = () => {
     )
   );
 
-  // ✅ Labels perfectly match fields
+  // ✅ Columns match labels perfectly
   const columns = [
-    { field: "userId", label: "User id" },
-    { field: "userName", label: "User Name" },
-    { field: "email", label: "Email" },
+    { field: "assetClassCode", label: "Asset Class Code" },
+    { field: "assetClassName", label: "Asset Class Name" },
+    { field: "departmentName", label: "Department Name" },
     { field: "actions", label: "Actions" },
   ];
 
   const renderCustomCell = (field, row) => {
-    // ✅ Actions column
     if (field === "actions") {
       return (
         <div style={{ display: "flex", gap: "8px" }}>
@@ -62,7 +62,7 @@ const AddnonNrluser = () => {
   return (
     <div style={{ padding: "1.5rem" }}>
       <ModernTable
-        title="Non-NRL Users List"
+        title="Asset Class List"
         columns={columns}
         data={filteredData}
         onSearch={handleSearch}
@@ -72,4 +72,4 @@ const AddnonNrluser = () => {
   );
 };
 
-export default AddnonNrluser;
+export default AdAssetClass;

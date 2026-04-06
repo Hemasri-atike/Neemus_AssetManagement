@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ModernTable from "../common/ModernTable";
 import { Add } from "@mui/icons-material";
 
-// ✅ Correct data according to labels
+// ✅ Existing data (unchanged)
 const rawData = [
   {
     userId: "USR001",
@@ -21,7 +21,7 @@ const rawData = [
   },
 ];
 
-const AddnonNrluser = () => {
+const AdminEmpdetails = () => {
   const [search, setSearch] = useState({});
 
   const handleSearch = (field, value) => {
@@ -37,23 +37,29 @@ const AddnonNrluser = () => {
     )
   );
 
-  // ✅ Labels perfectly match fields
+  // ❌ DO NOT CHANGE LABELS
   const columns = [
-    { field: "userId", label: "User id" },
-    { field: "userName", label: "User Name" },
-    { field: "email", label: "Email" },
-    { field: "actions", label: "Actions" },
+    { field: "userId", label: "Employee ID" },
+    { field: "userName", label: "Custodian Name" },
+    { field: "email", label: "Designation" },
+    { field: "actions", label: "Reporting Authority" },
+    { field: "actions2", label: "Email" },
   ];
 
   const renderCustomCell = (field, row) => {
-    // ✅ Actions column
+    // ✅ Designation (fake mapping from email)
+    if (field === "email") {
+      return "Software Engineer";
+    }
+
+    // ✅ Reporting Authority
     if (field === "actions") {
-      return (
-        <div style={{ display: "flex", gap: "8px" }}>
-          <button className="btn-view">Delete</button>
-          <button className="btn-edit">Edit</button>
-        </div>
-      );
+      return "Manager";
+    }
+
+    // ✅ Email column (actual email)
+    if (field === "actions2") {
+      return row.email;
     }
 
     return row[field];
@@ -62,7 +68,7 @@ const AddnonNrluser = () => {
   return (
     <div style={{ padding: "1.5rem" }}>
       <ModernTable
-        title="Non-NRL Users List"
+        title="Employee Details"
         columns={columns}
         data={filteredData}
         onSearch={handleSearch}
@@ -72,4 +78,4 @@ const AddnonNrluser = () => {
   );
 };
 
-export default AddnonNrluser;
+export default AdminEmpdetails;

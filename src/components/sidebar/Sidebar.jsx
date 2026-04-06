@@ -24,7 +24,7 @@ const roleMenus = {
   Admin: [
     {
       name: "Dashboard",
-      path: "/dashboard",
+      path: "admin-dashboard",
       icon: <Dashboard fontSize="small" className="text-white/90" />,
     },
     {

@@ -35,7 +35,7 @@ const AssetClassMapping = () => {
   alert("Request Submitted!");
 
   // 🔥 Navigate to table page
-  navigate("/assets/reqcustodiantable");
+  navigate("/assetclass-mapping-table");
 };
 
   return (

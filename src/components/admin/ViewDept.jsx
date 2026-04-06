@@ -1,9 +1,10 @@
 import React from 'react'
+import ViewDeptstable from '../tables/ViewDeptstable'
 
 const ViewDept = () => {
   return (
     <div>
-      <h2>View Department</h2>
+      <ViewDeptstable/> 
     </div>
   )
 }
