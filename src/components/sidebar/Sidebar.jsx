@@ -18,7 +18,7 @@ import {
   Assignment,
   BarChart,
   QrCode
-  
+
 } from "@mui/icons-material";
 import ItDashboard from "../../pages/ItDashboard";
 
@@ -26,10 +26,10 @@ import ItDashboard from "../../pages/ItDashboard";
 const SIDEBAR_BG = "#004b80b8";
 
 const roleMenus = {
-  Admin: [
+  "Admin": [
     {
       name: "Dashboard",
-      path: "admin-dashboard",
+      path: "/admin-dashboard",
       icon: <Dashboard fontSize="small" className="text-white/90" />,
     },
     {
@@ -48,231 +48,231 @@ const roleMenus = {
         { name: "Assign Non NRL User", path: "/add-employee" },
         { name: "Assign Asset Class to Department", path: "/add-asset-class" },
         { name: "Assign Dept wise Admin,Auditor", path: "/add/edit" },
-        {name: "Hr Finance Master", path: "/assign-buyback-mail" },
+        { name: "Hr Finance Master", path: "/assign-buyback-mail" },
         { name: "Dept Master", path: "/view-departments" },
-        {name: "Employee Details", path: "/view-employees" },
+        { name: "Employee Details", path: "/view-employees" },
         { name: "Dept wise Employees", path: "/dept-custodian-list" },
       ],
     },
-      {
+    {
       name: "Location Master",
       icon: <Settings fontSize="small" className="text-white/90" />,
       subMenu: [
-        
+
         { name: "View Location", path: "/assets/location" },
       ],
     },
   ],
 
   "IT-Admin": [
-  {
-    name: "Dashboard",
-    path: "/it-dashboard",
-    icon: <Dashboard fontSize="small" className="text-white/90" />,
-  },
-
-  {
-    name: "Asset Register",
-    icon: <Inventory2 fontSize="small" className="text-white/90" />,
-    subMenu: [
-      { name: "View Assets List", path: "/assets/list" },
-      { name: "Asset Status Change", path: "/assets/add-asset" },
-      { name: "Add Asset Documents", path: "/assets/disposal" },
-      { name: "View Asset Export History", path: "/assets/write-off" },
-      { name: "View Asset Location on map", path: "/assets/reinstatement" },
-    ],
-  },
-
-  {
-    name: "Asset Requests",
-    icon: <Assignment fontSize="small" className="text-white/90" />,
-    subMenu: [
-      { name: "Asset Allocation", path: "/assets/list" },
-      { name: "Asset Parking", path: "/assets/add-asset" },
-      { name: "Custodian Transfer", path: "/assets/disposal" },
-      { name: "Asset Return", path: "/assets/write-off" },
-      { name: "Asset Buyback", path: "/assets/reinstatement" },
-      { name: "View All Requests", path: "/assets/location-transfer" },
-    ],
-  },
-
-  {
-    name: "Print QR Codes",
-    icon: <QrCode fontSize="small" className="text-white/90" />,
-    subMenu: [
-      { name: "QRCodes for Double Sticker", path: "/assets/print-qr" },
-      { name: "QRCodes for Single Sticker", path: "/assets/print-qr" },
-      { name: "QRCodes for Single Asset", path: "/assets/print-qr" },
-      { name: "QRCodes for Asset type", path: "/assets/print-qr" },
-      { name: "QRCodes for Asset Create Date", path: "/assets/print-qr" },
-    ],
-  },
-
-  {
-    name: "Asset Auditing",
-    icon: <FactCheck fontSize="small" className="text-white/90" />,
-    subMenu: [
-      { name: "Create Audit", path: "/assets/auditing" },
-      { name: "Approve Audits Assets", path: "/audits/view" },
-      { name: "Edit Audit Assets", path: "/assets/edit-audit-assets" },
-      { name: "Audit wise status", path: "/assets/audit-wise-status" },
-      { name: "Completed Audits", path: "/assets/by-audits" },
-    ],
-  },
-
-  {
-    name: "Audit Reports",
-    icon: <Assessment fontSize="small" className="text-white/90" />,
-    subMenu: [
-      { name: "View All Audits", path: "/assets/audit-reports" },
-      { name: "View Current Audits", path: "/assets/audit-reports" },
-      { name: "View Pending Audits", path: "/assets/audit-reports" },
-      { name: "View Audit Finding", path: "/assets/audit-reports" },
-      { name: "View Approved Audits", path: "/assets/audit-reports" },
-      { name: "Location wise Audits", path: "/assets/audit-reports" },
-      { name: "List of Assets & Status in Audits", path: "/assets/audit-reports" },
-      { name: "View Assets by status in Audits", path: "/assets/audit-reports" },
-    ],
-  },
-
-  {
-    name: "View Reports",
-    icon: <BarChart fontSize="small" className="text-white/90" />,
-    subMenu: [
-      { name: "Dashboard", path: "/reports" },
-      { name: "Asset Available", path: "/reports" },
-      { name: "Asset Damaged but Repaired", path: "/reports" },
-      { name: "Asset Deactivated", path: "/reports" },
-      { name: "Asset Available but Damaged", path: "/reports" },
-      { name: "Asset Location Transferred", path: "/reports" },
-      { name: "Asset by Asset Type", path: "/reports" },
-      { name: "Asset by Location", path: "/reports" },
-      { name: "Asset by Custodian", path: "/reports" },
-      { name: "Asset Documents", path: "/reports" },
-    ],
-  },
-],
-
-  "HR Admin": [
     {
       name: "Dashboard",
-      path: "/dashboard",
+      path: "/it-dashboard",
       icon: <Dashboard fontSize="small" className="text-white/90" />,
     },
-    {
-      name: "Asset Request",
-      icon: <Inventory2 fontSize="small" className="text-white/90" />,
-      subMenu: [{ name: "Request Asset", path: "/assets/request-access" }],
-    },
+
     {
       name: "Asset Register",
       icon: <Inventory2 fontSize="small" className="text-white/90" />,
       subMenu: [
-        { name: "View Assets", path: "/assets/list" },
-        { name: "Add Asset", path: "/assets/add-asset" },
+        { name: "View Assets List", path: "/assets/list" },
+        { name: "Asset Status Change", path: "/assets/add-asset" },
+        { name: "Add Asset Documents", path: "/assets/disposal" },
+        { name: "View Asset Export History", path: "/assets/write-off" },
+        { name: "View Asset Location on map", path: "/assets/reinstatement" },
       ],
     },
+
+    {
+      name: "Asset Requests",
+      icon: <Assignment fontSize="small" className="text-white/90" />,
+      subMenu: [
+        { name: "Asset Allocation", path: "/assets/list" },
+        { name: "Asset Parking", path: "/assets/add-asset" },
+        { name: "Custodian Transfer", path: "/assets/disposal" },
+        { name: "Asset Return", path: "/assets/write-off" },
+        { name: "Asset Buyback", path: "/assets/reinstatement" },
+        { name: "View All Requests", path: "/assets/location-transfer" },
+      ],
+    },
+
     {
       name: "Print QR Codes",
-      icon: <FactCheck fontSize="small" className="text-white/90" />,
-      path: "/assets/print-qr",
+      icon: <QrCode fontSize="small" className="text-white/90" />,
+      subMenu: [
+        { name: "QRCodes for Double Sticker", path: "/assets/print-qr" },
+        { name: "QRCodes for Single Sticker", path: "/assets/print-qr" },
+        { name: "QRCodes for Single Asset", path: "/assets/print-qr" },
+        { name: "QRCodes for Asset type", path: "/assets/print-qr" },
+        { name: "QRCodes for Asset Create Date", path: "/assets/print-qr" },
+      ],
     },
+
     {
       name: "Asset Auditing",
-      icon: <Assessment fontSize="small" className="text-white/90" />,
-      path: "/assets/auditing",
+      icon: <FactCheck fontSize="small" className="text-white/90" />,
+      subMenu: [
+        { name: "Create Audit", path: "/assets/auditing" },
+        { name: "Approve Audits Assets", path: "/audits/view" },
+        { name: "Edit Audit Assets", path: "/assets/edit-audit-assets" },
+        { name: "Audit wise status", path: "/assets/audit-wise-status" },
+        { name: "Completed Audits", path: "/assets/by-audits" },
+      ],
     },
+
     {
       name: "Audit Reports",
       icon: <Assessment fontSize="small" className="text-white/90" />,
-      path: "/assets/audit-reports",
+      subMenu: [
+        { name: "View All Audits", path: "/assets/audit-reports" },
+        { name: "View Current Audits", path: "/assets/audit-reports" },
+        { name: "View Pending Audits", path: "/assets/audit-reports" },
+        { name: "View Audit Finding", path: "/assets/audit-reports" },
+        { name: "View Approved Audits", path: "/assets/audit-reports" },
+        { name: "Location wise Audits", path: "/assets/audit-reports" },
+        { name: "List of Assets & Status in Audits", path: "/assets/audit-reports" },
+        { name: "View Assets by status in Audits", path: "/assets/audit-reports" },
+      ],
     },
+
     {
       name: "View Reports",
-      icon: <Assessment fontSize="small" className="text-white/90" />,
-      path: "/reports",
-    },
-  ],
-
-  Requester: [
-    {
-      name: "Dashboard",
-      path: "/requestor-dashboard",
-      icon: <Dashboard fontSize="small" className="text-white/90" />,
-    },
-    {
-      name: "View Allocated Assets",
-      path: "/allocatedassets",
-      icon: <AssignmentTurnedIn fontSize="small" className="text-white/90" />,
-    },
-    {
-      name: "Request Asset",
-      path: "/assets/request-access",
-      icon: <Inventory2 fontSize="small" className="text-white/90" />,
-    },
-    {
-      name: "Buyback",
-      path: "/assets/buyback",
-      icon: <ShoppingCart fontSize="small" className="text-white/90" />,
-    },
-    {
-      name: "Location Transfer",
-      path: "/assets/location-transfer",
-      icon: <LocationOn fontSize="small" className="text-white/90" />,
-    },
-    {
-      name: "Custodian Transfer",
-      path: "/assets/custodian-transfer",
-      icon: <PeopleAlt fontSize="small" className="text-white/90" />,
-    },
-    {
-      name: "Asset Return",
-      path: "/assets/asset-return",
-      icon: <KeyboardReturn fontSize="small" className="text-white/90" />,
-    },
-  ],
-
-  Auditor: [
-    {
-      name: "Dashboard",
-      path: "/dashboard",
-      icon: <Dashboard fontSize="small" className="text-white/90" />,
-    },
-    {
-      name: "Audits",
-      icon: <Inventory2 fontSize="small" className="text-white/90" />,
+      icon: <BarChart fontSize="small" className="text-white/90" />,
       subMenu: [
-        { name: "View Audits", path: "/audits/view" },
-        { name: "Asset Audits", path: "/assets/request-access" },
-        { name: "Edit Audit Assets", path: "/assets/edit-audit-assets" },
-        { name: "Audit wise status", path: "/assets/audit-wise-status" },
-        { name: "Assets by Audits", path: "/assets/by-audits" },
+        { name: "Dashboard", path: "/reports" },
+        { name: "Asset Available", path: "/reports" },
+        { name: "Asset Damaged but Repaired", path: "/reports" },
+        { name: "Asset Deactivated", path: "/reports" },
+        { name: "Asset Available but Damaged", path: "/reports" },
+        { name: "Asset Location Transferred", path: "/reports" },
+        { name: "Asset by Asset Type", path: "/reports" },
+        { name: "Asset by Location", path: "/reports" },
+        { name: "Asset by Custodian", path: "/reports" },
+        { name: "Asset Documents", path: "/reports" },
       ],
     },
   ],
 
-  Approver: [
-    {
-      name: "Dashboard",
-      path: "/approver-dashboard",
-      icon: <Dashboard fontSize="small" className="text-white/90" />,
-    },
-    {
-      name: "Asset Requests",
-      icon: <Inventory2 fontSize="small" className="text-white/90" />,
-      path: "/assets/reqassettable",
-    },
-    {
-      name: "Location Transfer Requests",
-      icon: <Inventory2 fontSize="small" className="text-white/90" />,
-    path: "/assets/reqloctable",
-    },
-    {
-      name: "Custodian Transfer Requests",
-      icon: <Inventory2 fontSize="small" className="text-white/90" />,
-   path: "/assets/custodian-transfer-requests",
-    },
-  ],
+    "HR Admin": [
+      {
+        name: "Dashboard",
+        path: "/dashboard",
+        icon: <Dashboard fontSize="small" className="text-white/90" />,
+      },
+      {
+        name: "Asset Request",
+        icon: <Inventory2 fontSize="small" className="text-white/90" />,
+        subMenu: [{ name: "Request Asset", path: "/assets/request-access" }],
+      },
+      {
+        name: "Asset Register",
+        icon: <Inventory2 fontSize="small" className="text-white/90" />,
+        subMenu: [
+          { name: "View Assets", path: "/assets/list" },
+          { name: "Add Asset", path: "/assets/add-asset" },
+        ],
+      },
+      {
+        name: "Print QR Codes",
+        icon: <FactCheck fontSize="small" className="text-white/90" />,
+        path: "/assets/print-qr",
+      },
+      {
+        name: "Asset Auditing",
+        icon: <Assessment fontSize="small" className="text-white/90" />,
+        path: "/assets/auditing",
+      },
+      {
+        name: "Audit Reports",
+        icon: <Assessment fontSize="small" className="text-white/90" />,
+        path: "/assets/audit-reports",
+      },
+      {
+        name: "View Reports",
+        icon: <Assessment fontSize="small" className="text-white/90" />,
+        path: "/reports",
+      },
+    ],
+
+      Requester: [
+        {
+          name: "Dashboard",
+          path: "/requestor-dashboard",
+          icon: <Dashboard fontSize="small" className="text-white/90" />,
+        },
+        {
+          name: "View Allocated Assets",
+          path: "/allocatedassets",
+          icon: <AssignmentTurnedIn fontSize="small" className="text-white/90" />,
+        },
+        {
+          name: "Request Asset",
+          path: "/assets/request-access",
+          icon: <Inventory2 fontSize="small" className="text-white/90" />,
+        },
+        {
+          name: "Buyback",
+          path: "/assets/buyback",
+          icon: <ShoppingCart fontSize="small" className="text-white/90" />,
+        },
+        {
+          name: "Location Transfer",
+          path: "/assets/location-transfer",
+          icon: <LocationOn fontSize="small" className="text-white/90" />,
+        },
+        {
+          name: "Custodian Transfer",
+          path: "/assets/custodian-transfer",
+          icon: <PeopleAlt fontSize="small" className="text-white/90" />,
+        },
+        {
+          name: "Asset Return",
+          path: "/assets/asset-return",
+          icon: <KeyboardReturn fontSize="small" className="text-white/90" />,
+        },
+      ],
+
+        Auditor: [
+          {
+            name: "Dashboard",
+            path: "/dashboard",
+            icon: <Dashboard fontSize="small" className="text-white/90" />,
+          },
+          {
+            name: "Audits",
+            icon: <Inventory2 fontSize="small" className="text-white/90" />,
+            subMenu: [
+              { name: "View Audits", path: "/audits/view" },
+              { name: "Asset Audits", path: "/assets/request-access" },
+              { name: "Edit Audit Assets", path: "/assets/edit-audit-assets" },
+              { name: "Audit wise status", path: "/assets/audit-wise-status" },
+              { name: "Assets by Audits", path: "/assets/by-audits" },
+            ],
+          },
+        ],
+
+          Approver: [
+            {
+              name: "Dashboard",
+              path: "/approver-dashboard",
+              icon: <Dashboard fontSize="small" className="text-white/90" />,
+            },
+            {
+              name: "Asset Requests",
+              icon: <Inventory2 fontSize="small" className="text-white/90" />,
+              path: "/assets/reqassettable",
+            },
+            {
+              name: "Location Transfer Requests",
+              icon: <Inventory2 fontSize="small" className="text-white/90" />,
+              path: "/assets/reqloctable",
+            },
+            {
+              name: "Custodian Transfer Requests",
+              icon: <Inventory2 fontSize="small" className="text-white/90" />,
+              path: "/assets/custodian-transfer-requests",
+            },
+          ],
 };
 
 const labelVisibility = (alwaysShow) =>
@@ -287,6 +287,11 @@ const Sidebar = ({ mobileOpen = false, onMobileClose }) => {
 
   const finalMenuItems = [
     ...menuItems,
+    {
+      name: "Profile",
+      path: "/profile",
+      icon: <PeopleAlt fontSize="small" className="text-white/90" />,
+    },
     {
       name: "Chatbot",
       path: "/chatbot",
@@ -321,17 +326,15 @@ const Sidebar = ({ mobileOpen = false, onMobileClose }) => {
                   <span className={`${lbl} truncate transition-opacity duration-200`}>{item.name}</span>
                 </div>
                 <ExpandMore
-                  className={`shrink-0 transition-transform ${expandVisible} ${
-                    openMenu === item.name ? "rotate-180 text-sky-200" : "text-white/70"
-                  }`}
+                  className={`shrink-0 transition-transform ${expandVisible} ${openMenu === item.name ? "rotate-180 text-sky-200" : "text-white/70"
+                    }`}
                   fontSize="small"
                 />
               </button>
 
               <div
-                className={`overflow-hidden transition-all duration-300 ${
-                  openMenu === item.name ? "mt-1 max-h-[min(60vh,500px)] opacity-100" : "max-h-0 opacity-0"
-                }`}
+                className={`overflow-hidden transition-all duration-300 ${openMenu === item.name ? "mt-1 max-h-[min(60vh,500px)] opacity-100" : "max-h-0 opacity-0"
+                  }`}
               >
                 <div className="ml-2 space-y-0.5 border-l border-white/20 pl-3 sm:ml-4 sm:pl-3">
                   {item.subMenu.map((sub) => {
@@ -341,11 +344,10 @@ const Sidebar = ({ mobileOpen = false, onMobileClose }) => {
                         key={sub.name}
                         to={sub.path}
                         onClick={afterNavigate}
-                        className={`block rounded-lg px-3 py-2.5 text-sm transition sm:py-2 ${
-                          active
+                        className={`block rounded-lg px-3 py-2.5 text-sm transition sm:py-2 ${active
                             ? "bg-white/15 font-semibold text-white shadow-inner ring-1 ring-white/20"
                             : "text-white/80 hover:bg-white/10 hover:text-white"
-                        }`}
+                          }`}
                       >
                         <span className={`${lbl} whitespace-normal break-words`}>{sub.name}</span>
                       </Link>
@@ -359,11 +361,10 @@ const Sidebar = ({ mobileOpen = false, onMobileClose }) => {
               key={item.name}
               to={item.path}
               onClick={afterNavigate}
-              className={`flex items-center justify-center gap-3 rounded-xl px-2 py-2.5 text-sm transition md:group-hover:justify-start md:group-hover:px-4 ${
-                location.pathname === item.path
+              className={`flex items-center justify-center gap-3 rounded-xl px-2 py-2.5 text-sm transition md:group-hover:justify-start md:group-hover:px-4 ${location.pathname === item.path
                   ? "bg-white/15 font-semibold text-white ring-1 ring-white/25 shadow-md"
                   : "text-white/90 hover:bg-white/10 hover:text-white"
-              }`}
+                }`}
             >
               {item.icon}
               <span className={`${lbl} whitespace-nowrap`}>{item.name}</span>

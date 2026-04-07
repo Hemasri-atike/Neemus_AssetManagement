@@ -57,6 +57,7 @@ import AssetClassmaptable from "./components/tables/AssetClassmaptable";
 import Hrassigntable from "./components/tables/Hrassigntable";
 import AdminDashboard from "./pages/AdminDashboard";
 import Profile from "./pages/login/Profile";
+import Password from "./pages/login/Password";
 
 
 
@@ -477,26 +478,44 @@ const App = () => {
             />
           </Route>
 
+          {/* Profile & Password (inside MainLayout) */}
+          <Route
+            path="/profile"
+            element={
+              <RoleRoute
+                allowedRoles={[
+                  "Admin",
+                  "IT Admin",
+                  "HR Admin",
+                  "Approver",
+                  "Auditor",
+                  "Requester",
+                  "Custodian",
+                ]}
+              >
+                <Profile />
+              </RoleRoute>
+            }
+          />
+          <Route
+            path="/password"
+            element={
+              <RoleRoute
+                allowedRoles={[
+                  "Admin",
+                  "IT Admin",
+                  "HR Admin",
+                  "Approver",
+                  "Auditor",
+                  "Requester",
+                  "Custodian",
+                ]}
+              >
+                <Password />
+              </RoleRoute>
+            }
+          />
         </Route>
-        <Route
-  path="/profile"
-  element={
-    <RoleRoute
-      allowedRoles={[
-        "Admin",
-        "IT Admin",
-        "HR Admin",
-        "Approver",
-        "Auditor",
-        "Requester",
-        "Custodian",
-      ]}
-    >
-      <Profile />
-    </RoleRoute>
-  }
-/>
-
       </Routes>
     </Router>
   );

@@ -197,7 +197,7 @@ const Navbar = ({ setIsOpen, onMenuClick }) => {
                 <hr className="my-2" />
 
                 <Link
-                  to="/logout"
+                  to="/"
                   onClick={() => setProfileOpen(false)}
                   className="block px-4 py-2 cursor-pointer hover:bg-gray-100"
                   style={{ color: theme.colors.error }}
