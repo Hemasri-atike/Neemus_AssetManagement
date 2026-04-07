@@ -51,7 +51,6 @@ import ViewDept from "./components/admin/ViewDept";
 import ViewEmpDetails from "./components/admin/ViewEmpDetails";
 import AddAssetClass from "./components/admin/AddAssetClass";
 import AssignEmproletable from "./components/tables/AssignEmproletable";
-
 import AddnonNrluser from "./components/tables/AddnonNrluser";
 import AdAssetClass from "./components/tables/AdAssetClass";
 import AssetClassmaptable from "./components/tables/AssetClassmaptable";
@@ -59,7 +58,6 @@ import Hrassigntable from "./components/tables/Hrassigntable";
 import AdminDashboard from "./pages/AdminDashboard";
 import Profile from "./pages/login/Profile";
 import Password from "./pages/login/Password";
-
 import ViewAudits from "./components/auditor/ViewAudits";
 import AssetAudit from "./components/auditor/AssetAudit";
 import EditAuditAsset from "./components/auditor/EditAuditAsset";
@@ -70,12 +68,6 @@ import AudByAsset from "./components/tables/AudByAsset";
 import AudEditAsset from "./components/tables/AudEditAsset";
 import AudWiseStatus from "./components/tables/AudWiseStatus";
  
-
-
-
-
-
-
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
