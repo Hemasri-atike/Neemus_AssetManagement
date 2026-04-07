@@ -9,69 +9,102 @@ import {
 import SearchIcon from "@mui/icons-material/Search";
 
 import RequestFormCard from "../common/RequestFormCard";
-import AudByAsset from "../tables/AudByAsset";
+import AudWiseStatus from "../tables/AudWiseStatus";
 
-const AuditWiseStatus = () => {
-  const [audit, setAudit] = useState("");
+const AuditWiseStatusPage = () => {
+  const [auditName, setAuditName] = useState("");
+  const [status, setStatus] = useState("");
+  const [auditDate, setAuditDate] = useState("");
 
-  const auditList = ["test audit", "audit 1", "audit 2"];
+  const statusList = ["Good", "Scrap", "Damaged"];
 
   const handleSearch = () => {
-    console.log("Selected Audit:", audit);
+    console.log({
+      auditName,
+      status,
+      auditDate,
+    });
   };
 
   return (
     <Box
       sx={{
         display: "flex",
-        alignItems: "center",
         background: "#f4f6f8",
         p: 3,
-        
       }}
     >
       <Box width="100%" maxWidth="1100px" mx="auto">
-        
+
         {/* 🔹 CARD */}
-        <RequestFormCard >
-            <Typography variant="h6" mb={3} sx={{ fontWeight: 700 }}>
-              Asset Status As Per Auditing
-            </Typography>
-          
+        <RequestFormCard>
+          <Typography variant="h6" mb={3} sx={{ fontWeight: 700 }}>
+            Asset Status As Per Auditing
+          </Typography>
+
           <Box display="flex" flexDirection="column" gap={3}>
 
-            {/* 🔹 Select Audit Row */}
+            {/* 🔹 Row 1 */}
             <Box display="flex" alignItems="center" gap={3}>
-              <Typography sx={{ width: "220px", fontWeight: 500 }}>
-                Select Audit :
+              {/* Audit Name */}
+              <Typography sx={{ width: "150px", fontWeight: 500 }}>
+                Audit Name :
+              </Typography>
+
+              <TextField
+                size="small"
+                value={auditName}
+                onChange={(e) => setAuditName(e.target.value)}
+                sx={{ width: 250 }}
+              />
+
+              {/* Status */}
+              <Typography sx={{ width: "80px", fontWeight: 500 }}>
+                Status :
               </Typography>
 
               <TextField
                 select
-                fullWidth
                 size="small"
-                value={audit}
-                onChange={(e) => setAudit(e.target.value)}
+                value={status}
+                onChange={(e) => setStatus(e.target.value)}
+                sx={{ width: 200 }}
               >
-                {auditList.map((item) => (
+                {statusList.map((item) => (
                   <MenuItem key={item} value={item}>
                     {item}
                   </MenuItem>
                 ))}
               </TextField>
 
-              {/* 🔍 Search Icon */}
+              {/* 🔍 Search */}
               <IconButton color="primary" onClick={handleSearch}>
                 <SearchIcon />
               </IconButton>
             </Box>
 
+            {/* 🔹 Row 2 */}
+            {/* <Box display="flex" alignItems="center" gap={3}>
+              <Typography sx={{ width: "150px", fontWeight: 500 }}>
+                Audit Date :
+              </Typography>
+
+              <TextField
+                type="date"
+                size="small"
+                value={auditDate}
+                onChange={(e) => setAuditDate(e.target.value)}
+                InputLabelProps={{ shrink: true }}
+                sx={{ width: 200 }}
+              />
+            </Box> */}
+
           </Box>
         </RequestFormCard>
 
-        {/* 🔹 TABLE BELOW CARD */}
+        {/* 🔹 TABLE */}
         <Box mt={4}>
-          <AudByAsset />
+          <AudWiseStatus />
         </Box>
 
       </Box>
@@ -79,4 +112,4 @@ const AuditWiseStatus = () => {
   );
 };
 
-export default AuditWiseStatus;
+export default AuditWiseStatusPage;

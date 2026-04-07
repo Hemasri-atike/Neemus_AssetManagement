@@ -4,20 +4,7 @@ import ModernTable from "../common/ModernTable";
 const AudWiseStatus = () => {
   const [search, setSearch] = useState({});
 
-  const rows = [
-    {
-      id: 1,
-      mainAsset: "60030111",
-      subNumber: "0",
-      description: "Entry Level Intel Server",
-      assetClass: "6003",
-      location: "NITROGEN PLANT",
-      auditBy: "Shravani",
-      auditDate: "4/5/2026",
-      auditStatus: "Completed",
-      status: "Verified",
-    },
-  ];
+  const rows = [];
 
   const handleSearch = (field, value) => {
     setSearch((prev) => ({ ...prev, [field]: value }));
@@ -32,16 +19,15 @@ const AudWiseStatus = () => {
     )
   );
 
+  // ✅ MATCHED WITH SCREENSHOT
   const columns = [
+    { field: "auditName", label: "Audit Name" },
+    { field: "assetId", label: "Asset ID" },
+    { field: "assetDesc", label: "Asset Desc" },
     { field: "mainAsset", label: "Main Asset Number" },
-    { field: "subNumber", label: "Sub Number" },
-    { field: "description", label: "Asset Description" },
-    { field: "assetClass", label: "Asset Class" },
-    { field: "location", label: "Location" },
-    { field: "auditBy", label: "Audit By" },
-    { field: "auditDate", label: "Audit Date" },
-    { field: "auditStatus", label: "Audit Status" },
+    { field: "subNumber", label: "Asset Sub Number" },
     { field: "status", label: "Status" },
+    { field: "location", label: "Location" },
   ];
 
   return (
