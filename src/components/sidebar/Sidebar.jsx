@@ -241,13 +241,13 @@ const roleMenus = {
           {
             name: "Audits",
             icon: <Inventory2 fontSize="small" className="text-white/90" />,
-            subMenu: [
-              { name: "View Audits", path: "/audits/view" },
-              { name: "Asset Audits", path: "/assets/request-access" },
-              { name: "Edit Audit Assets", path: "/assets/edit-audit-assets" },
-              { name: "Audit wise status", path: "/assets/audit-wise-status" },
-              { name: "Assets by Audits", path: "/assets/by-audits" },
-            ],
+        subMenu: [
+        { name: "View Audits", path: "/ViewAudits" },
+        { name: "Asset Audits", path: "/AssetAudit" },
+        { name: "Edit Audit Assets", path: "/EditAuditAsset" },
+        { name: "Audit wise status", path: "/AuditWiseStatus" },
+        { name: "Assets by Audits", path: "/AssetByAudit" },
+      ],
           },
         ],
 
@@ -333,7 +333,7 @@ const Sidebar = ({ mobileOpen = false, onMobileClose }) => {
               </button>
 
               <div
-                className={`overflow-hidden transition-all duration-300 ${openMenu === item.name ? "mt-1 max-h-[min(60vh,500px)] opacity-100" : "max-h-0 opacity-0"
+                className={`overflow-hidden transition-all duration-500 ease-in-out ${openMenu === item.name ? "mt-1 max-h-[2000px] opacity-100" : "max-h-0 opacity-0"
                   }`}
               >
                 <div className="ml-2 space-y-0.5 border-l border-white/20 pl-3 sm:ml-4 sm:pl-3">
@@ -429,7 +429,7 @@ const Sidebar = ({ mobileOpen = false, onMobileClose }) => {
         className={`group relative z-40 hidden h-[calc(100vh-4rem)] w-14 shrink-0 overflow-hidden transition-all duration-300 ease-out sm:w-16 md:flex md:hover:w-64 md:hover:shadow-xl ${surfaceClass}`}
         style={{ backgroundColor: SIDEBAR_BG }}
       >
-        <nav className="h-full w-full space-y-1 overflow-y-auto overflow-x-hidden p-2 sm:p-3 scrollbar-hide md:space-y-2">
+        <nav className="h-full w-full space-y-1 overflow-y-auto overflow-x-hidden p-2 sm:p-3 md:space-y-2">
           <NavList alwaysShowLabels={false} />
         </nav>
       </aside>
