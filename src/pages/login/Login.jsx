@@ -133,7 +133,7 @@ navigate(roleRoutes[selectedRole] || "/dashboard");
             "Auditor",
             "Approver",
             "Admin",
-            "IT- Admin",
+            "IT-Admin",
             "HR Admin",
             
           ].map((role) => (

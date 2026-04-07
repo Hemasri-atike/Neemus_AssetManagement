@@ -83,17 +83,7 @@ const Navbar = ({ setIsOpen, onMenuClick }) => {
       Neemus Software Solutions
     </span>
 
-    {/* SUBTITLE */}
-    {/* <span
-      className="text-[10px] md:text-xs tracking-wider uppercase"
-      style={{
-        fontFamily: "Inter, sans-serif",
-        color: theme.colors.border,
-        letterSpacing: "0.08em",
-      }}
-    >
-      Asset Management System
-    </span> */}
+    
     <span
   className="text-[10px] md:text-xs tracking-wider uppercase"
   style={{
@@ -188,23 +178,32 @@ const Navbar = ({ setIsOpen, onMenuClick }) => {
                   borderRadius: theme.borderRadius.large,
                 }}
               >
-                <p className="px-4 py-2 cursor-pointer">
-                  My Profile
-                </p>
+             <Link
+  to="/profile"
+  onClick={() => setProfileOpen(false)}
+  className="block px-4 py-2 cursor-pointer hover:bg-gray-100"
+>
+  My Profile
+</Link>
 
-                <p className="px-4 py-2 cursor-pointer">
+                <Link
+                  to="/settings"
+                  onClick={() => setProfileOpen(false)}
+                  className="block px-4 py-2 cursor-pointer hover:bg-gray-100"
+                >
                   Settings
-                </p>
+                </Link>
 
                 <hr className="my-2" />
 
-                <p
-                  onClick={handleLogout}
-                  className="px-4 py-2 cursor-pointer"
+                <Link
+                  to="/logout"
+                  onClick={() => setProfileOpen(false)}
+                  className="block px-4 py-2 cursor-pointer hover:bg-gray-100"
                   style={{ color: theme.colors.error }}
                 >
                   Logout
-                </p>
+                </Link>
               </div>
             )}
 

@@ -56,7 +56,7 @@ import AdAssetClass from "./components/tables/AdAssetClass";
 import AssetClassmaptable from "./components/tables/AssetClassmaptable";
 import Hrassigntable from "./components/tables/Hrassigntable";
 import AdminDashboard from "./pages/AdminDashboard";
-
+import Profile from "./pages/login/Profile";
 
 
 
@@ -111,7 +111,7 @@ const App = () => {
           <Route
             path="/it-dashboard"
             element={
-              <RoleRoute allowedRoles={["IT- Admin"]}>
+              <RoleRoute allowedRoles={["IT-Admin"]}>
                 <ItDashboard />
               </RoleRoute>
             }
@@ -478,6 +478,24 @@ const App = () => {
           </Route>
 
         </Route>
+        <Route
+  path="/profile"
+  element={
+    <RoleRoute
+      allowedRoles={[
+        "Admin",
+        "IT Admin",
+        "HR Admin",
+        "Approver",
+        "Auditor",
+        "Requester",
+        "Custodian",
+      ]}
+    >
+      <Profile />
+    </RoleRoute>
+  }
+/>
 
       </Routes>
     </Router>

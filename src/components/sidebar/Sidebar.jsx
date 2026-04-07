@@ -15,7 +15,12 @@ import {
   PeopleAlt,
   Settings,
   ShoppingCart,
+  Assignment,
+  BarChart,
+  QrCode
+  
 } from "@mui/icons-material";
+import ItDashboard from "../../pages/ItDashboard";
 
 /** Brand sidebar surface — semi-transparent deep blue */
 const SIDEBAR_BG = "#004b80b8";
@@ -59,46 +64,94 @@ const roleMenus = {
     },
   ],
 
-  "IT Admin": [
-    {
-      name: "Dashboard",
-      path: "/dashboard",
-      icon: <Dashboard fontSize="small" className="text-white/90" />,
-    },
-    {
-      name: "Asset Request",
-      icon: <Inventory2 fontSize="small" className="text-white/90" />,
-      subMenu: [{ name: "Request Asset", path: "/assets/request-access" }],
-    },
-    {
-      name: "Asset Register",
-      icon: <Inventory2 fontSize="small" className="text-white/90" />,
-      subMenu: [
-        { name: "View Assets", path: "/assets/list" },
-        { name: "Add Asset", path: "/assets/add-asset" },
-      ],
-    },
-    {
-      name: "Print QR Codes",
-      icon: <FactCheck fontSize="small" className="text-white/90" />,
-      path: "/assets/print-qr",
-    },
-    {
-      name: "Asset Auditing",
-      icon: <Assessment fontSize="small" className="text-white/90" />,
-      path: "/assets/auditing",
-    },
-    {
-      name: "Audit Reports",
-      icon: <Assessment fontSize="small" className="text-white/90" />,
-      path: "/assets/audit-reports",
-    },
-    {
-      name: "View Reports",
-      icon: <Assessment fontSize="small" className="text-white/90" />,
-      path: "/reports",
-    },
-  ],
+  "IT-Admin": [
+  {
+    name: "Dashboard",
+    path: "/it-dashboard",
+    icon: <Dashboard fontSize="small" className="text-white/90" />,
+  },
+
+  {
+    name: "Asset Register",
+    icon: <Inventory2 fontSize="small" className="text-white/90" />,
+    subMenu: [
+      { name: "View Assets List", path: "/assets/list" },
+      { name: "Asset Status Change", path: "/assets/add-asset" },
+      { name: "Add Asset Documents", path: "/assets/disposal" },
+      { name: "View Asset Export History", path: "/assets/write-off" },
+      { name: "View Asset Location on map", path: "/assets/reinstatement" },
+    ],
+  },
+
+  {
+    name: "Asset Requests",
+    icon: <Assignment fontSize="small" className="text-white/90" />,
+    subMenu: [
+      { name: "Asset Allocation", path: "/assets/list" },
+      { name: "Asset Parking", path: "/assets/add-asset" },
+      { name: "Custodian Transfer", path: "/assets/disposal" },
+      { name: "Asset Return", path: "/assets/write-off" },
+      { name: "Asset Buyback", path: "/assets/reinstatement" },
+      { name: "View All Requests", path: "/assets/location-transfer" },
+    ],
+  },
+
+  {
+    name: "Print QR Codes",
+    icon: <QrCode fontSize="small" className="text-white/90" />,
+    subMenu: [
+      { name: "QRCodes for Double Sticker", path: "/assets/print-qr" },
+      { name: "QRCodes for Single Sticker", path: "/assets/print-qr" },
+      { name: "QRCodes for Single Asset", path: "/assets/print-qr" },
+      { name: "QRCodes for Asset type", path: "/assets/print-qr" },
+      { name: "QRCodes for Asset Create Date", path: "/assets/print-qr" },
+    ],
+  },
+
+  {
+    name: "Asset Auditing",
+    icon: <FactCheck fontSize="small" className="text-white/90" />,
+    subMenu: [
+      { name: "Create Audit", path: "/assets/auditing" },
+      { name: "Approve Audits Assets", path: "/audits/view" },
+      { name: "Edit Audit Assets", path: "/assets/edit-audit-assets" },
+      { name: "Audit wise status", path: "/assets/audit-wise-status" },
+      { name: "Completed Audits", path: "/assets/by-audits" },
+    ],
+  },
+
+  {
+    name: "Audit Reports",
+    icon: <Assessment fontSize="small" className="text-white/90" />,
+    subMenu: [
+      { name: "View All Audits", path: "/assets/audit-reports" },
+      { name: "View Current Audits", path: "/assets/audit-reports" },
+      { name: "View Pending Audits", path: "/assets/audit-reports" },
+      { name: "View Audit Finding", path: "/assets/audit-reports" },
+      { name: "View Approved Audits", path: "/assets/audit-reports" },
+      { name: "Location wise Audits", path: "/assets/audit-reports" },
+      { name: "List of Assets & Status in Audits", path: "/assets/audit-reports" },
+      { name: "View Assets by status in Audits", path: "/assets/audit-reports" },
+    ],
+  },
+
+  {
+    name: "View Reports",
+    icon: <BarChart fontSize="small" className="text-white/90" />,
+    subMenu: [
+      { name: "Dashboard", path: "/reports" },
+      { name: "Asset Available", path: "/reports" },
+      { name: "Asset Damaged but Repaired", path: "/reports" },
+      { name: "Asset Deactivated", path: "/reports" },
+      { name: "Asset Available but Damaged", path: "/reports" },
+      { name: "Asset Location Transferred", path: "/reports" },
+      { name: "Asset by Asset Type", path: "/reports" },
+      { name: "Asset by Location", path: "/reports" },
+      { name: "Asset by Custodian", path: "/reports" },
+      { name: "Asset Documents", path: "/reports" },
+    ],
+  },
+],
 
   "HR Admin": [
     {
