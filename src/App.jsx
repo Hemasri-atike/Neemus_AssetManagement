@@ -52,8 +52,15 @@ import ViewEmpDetails from "./components/admin/ViewEmpDetails";
 import AddAssetClass from "./components/admin/AddAssetClass";
 import AssignEmproletable from "./components/tables/AssignEmproletable";
 
-
-
+import ViewAudits from "./components/auditor/ViewAudits";
+import AssetAudit from "./components/auditor/AssetAudit";
+import EditAuditAsset from "./components/auditor/EditAuditAsset";
+import AuditWiseStatus from "./components/auditor/AuditWiseStatus";
+import AssetByAudit from "./components/auditor/AssetByAudit";
+import AudAssetAudit from "./components/tables/AudAssetAudit";
+import AudByAsset from "./components/tables/AudByAsset";
+import AudEditAsset from "./components/tables/AudEditAsset";
+import AudWiseStatus from "./components/tables/AudWiseStatus";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -161,7 +168,79 @@ const App = () => {
               </RoleRoute>
             }
           />
-          
+          <Route
+            path="/ViewAudits"
+            element={
+              <RoleRoute allowedRoles={["Auditor"]}>
+                <ViewAudits />
+              </RoleRoute>
+            }
+          />
+          <Route
+            path="/AssetAudit"
+            element={
+              <RoleRoute allowedRoles={["Auditor"]}>
+                <AssetAudit />
+              </RoleRoute>
+            }
+          />
+          <Route
+            path="/EditAuditAsset"
+            element={
+              <RoleRoute allowedRoles={["Auditor"]}>
+                <EditAuditAsset />
+              </RoleRoute>
+            }
+          />
+          <Route
+            path="/AuditWiseStatus"
+            element={
+              <RoleRoute allowedRoles={["Auditor"]}>
+                <AuditWiseStatus />
+              </RoleRoute>
+            }
+          />
+          <Route
+            path="/AssetByAudit"
+            element={
+              <RoleRoute allowedRoles={["Auditor"]}>
+                <AssetByAudit />
+              </RoleRoute>
+            }
+          />
+          <Route
+            path="/AudAssetAudit"
+            element={
+              <RoleRoute allowedRoles={["Auditor"]}>
+                <AudAssetAudit />
+              </RoleRoute>
+            }
+          />
+          <Route
+            path="/AudByAsset"
+            element={
+              <RoleRoute allowedRoles={["Auditor"]}>
+                <AudByAsset />
+              </RoleRoute>
+            }
+          />
+          <Route
+            path="/AudEditAsset"
+            element={
+              <RoleRoute allowedRoles={["Auditor"]}>
+                <AudEditAsset />
+              </RoleRoute>
+            }
+          />
+          <Route
+            path="/AudWiseStatus"
+            element={
+              <RoleRoute allowedRoles={["Auditor"]}>
+                <AudWiseStatus />
+              </RoleRoute>
+            }
+          />
+
          <Route
   path="/requestor-dashboard"
   element={
@@ -393,7 +472,6 @@ const App = () => {
   }
 />
 
-
           {/* Other Pages */}
           <Route path="/reports" element={<Reports />} />
           <Route path="/chatbot" element={<Chatbot />} />
@@ -408,6 +486,7 @@ const App = () => {
                 </RoleRoute>
               }
             />
+            
             <Route
               path="add"
               element={
@@ -424,6 +503,7 @@ const App = () => {
                 </RoleRoute>
               }
             />
+    
           </Route>
 
         </Route>
@@ -434,3 +514,8 @@ const App = () => {
 };
 
 export default App;
+
+
+
+
+
