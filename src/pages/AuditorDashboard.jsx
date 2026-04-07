@@ -14,13 +14,11 @@ import {
 import { 
   FaCheckCircle, 
   FaClock, 
-  FaTimesCircle, 
-  FaDesktop, 
-  FaMapMarkerAlt, 
-  FaUserEdit, 
-  FaUndoAlt, 
-  FaHandHoldingUsd, 
-  FaTable,
+  FaClipboardList, 
+  FaSearch, 
+  FaEdit, 
+  FaChartBar, 
+  FaFolderOpen, 
   FaArrowRight
 } from "react-icons/fa";
 
@@ -31,49 +29,43 @@ const AuditorDashboard = () => {
   // Navigation Items Configuration
   const navItems = [
     {
-      title: "Allocated Assets",
-      description: "View and manage all assets currently assigned to you.",
-      icon: <FaDesktop />,
-      path: "/allocatedassets",
+      title: "View Audits",
+      description: "Overview of all scheduled and ongoing audit cycles.",
+      icon: <FaClipboardList />,
+      path: "/ViewAudits",
       color: "#3b82f6", // Blue
     },
     {
-      title: "Asset Request",
-      description: "Raise new asset requests and track their current status.",
-      icon: <FaTable />,
-      path: "/assets/reqassettable",
-      color: "#6366f1", // Indigo
-    },
-    {
-      title: "Location Transfer",
-      description: "Request to move an asset to a different physical location.",
-      icon: <FaMapMarkerAlt />,
-      path: "/assets/location-transfer",
-      color: "#f59e0b", // Amber
-      statusPath: "/assets/reqloctable"
-    },
-    {
-      title: "Custodian Transfer",
-      description: "Transfer asset responsibility to another custodian.",
-      icon: <FaUserEdit />,
-      path: "/assets/custodian-transfer",
-      color: "#8b5cf6", // Violet
-      statusPath: "/assets/reqcustodiantable"
-    },
-    {
-      title: "Asset Return",
-      description: "Initiate return process for assets no longer required.",
-      icon: <FaUndoAlt />,
-      path: "/assets/asset-return",
-      color: "#ef4444", // Red
-    },
-    {
-      title: "Buyback",
-      description: "Check eligibility and request for asset buyback.",
-      icon: <FaHandHoldingUsd />,
-      path: "/assets/buyback",
+      title: "Asset Audits",
+      description: "Conduct physical verification and scan assets.",
+      icon: <FaSearch />,
+      path: "/AssetAudit",
       color: "#10b981", // Emerald
-      statusPath: "/assets/reqbuybacktable"
+      statusPath: "/AudAssetAudit"
+    },
+    {
+      title: "Edit Audit Assets",
+      description: "Modify audit findings and correct asset data.",
+      icon: <FaEdit />,
+      path: "/EditAuditAsset",
+      color: "#8b5cf6", // Violet
+      statusPath: "/AudEditAsset"
+    },
+    {
+      title: "Audit Wise Status",
+      description: "Track progress and completion of specific audits.",
+      icon: <FaChartBar />,
+      path: "/AuditWiseStatus",
+      color: "#f59e0b", // Amber
+      statusPath: "/AudWiseStatus"
+    },
+    {
+      title: "Assets by Audits",
+      description: "View consolidated reports for each audit cycle.",
+      icon: <FaFolderOpen />,
+      path: "/AssetByAudit",
+      color: "#6366f1", // Indigo
+      statusPath: "/AudByAsset"
     },
   ];
 
@@ -90,30 +82,30 @@ const AuditorDashboard = () => {
           Welcome Back, {username}!
         </Typography>
         <Typography variant="body1" sx={{ color: "#64748b" }}>
-          Here's a summary of your asset requests and available actions.
+          Manage your audits and view real-time verification progress.
         </Typography>
       </Box>
 
       {/* STATS SECTION */}
       <Grid container spacing={3} sx={{ mb: 8 }}>
         <Grid item xs={12} sm={6} md={3}>
-          <CompactStatCard title="Total Assets" value="08" icon={<FaDesktop />} color="#3b82f6" />
+          <CompactStatCard title="Total Audits" value="24" icon={<FaClipboardList />} color="#3b82f6" />
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
-          <CompactStatCard title="Pending Requests" value="12" icon={<FaClock />} color="#f59e0b" />
+          <CompactStatCard title="In Progress" value="03" icon={<FaClock />} color="#f59e0b" />
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
-          <CompactStatCard title="Approved" value="45" icon={<FaCheckCircle />} color="#10b981" />
+          <CompactStatCard title="Completed" value="18" icon={<FaCheckCircle />} color="#10b981" />
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
-          <CompactStatCard title="Rejected" value="05" icon={<FaTimesCircle />} color="#ef4444" />
+          <CompactStatCard title="Flagged Findings" value="12" icon={<FaChartBar />} color="#ef4444" />
         </Grid>
       </Grid>
 
       {/* NAVIGATION CARDS GRID */}
       <Box sx={{ mb: 4 }}>
         <Typography variant="h5" fontWeight="700" sx={{ color: "#334155", mb: 4 }}>
-          Quick Actions & Modules
+          Audit Modules & Tools
         </Typography>
         <Grid container spacing={4}>
           {navItems.map((item, index) => (
