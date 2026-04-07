@@ -35,7 +35,7 @@ const BuyBackMailAssign = () => {
   alert("Request Submitted!");
 
   // 🔥 Navigate to table page
-  navigate("/assets/reqcustodiantable");
+  navigate("/hr-assign-table");
 };
 
   return (

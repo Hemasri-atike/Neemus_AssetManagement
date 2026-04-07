@@ -52,15 +52,8 @@ import ViewEmpDetails from "./components/admin/ViewEmpDetails";
 import AddAssetClass from "./components/admin/AddAssetClass";
 import AssignEmproletable from "./components/tables/AssignEmproletable";
 
-import ViewAudits from "./components/auditor/ViewAudits";
-import AssetAudit from "./components/auditor/AssetAudit";
-import EditAuditAsset from "./components/auditor/EditAuditAsset";
-import AuditWiseStatus from "./components/auditor/AuditWiseStatus";
-import AssetByAudit from "./components/auditor/AssetByAudit";
-import AudAssetAudit from "./components/tables/AudAssetAudit";
-import AudByAsset from "./components/tables/AudByAsset";
-import AudEditAsset from "./components/tables/AudEditAsset";
-import AudWiseStatus from "./components/tables/AudWiseStatus";
+
+
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -105,7 +98,7 @@ const App = () => {
             path="/admin-dashboard"
             element={
               <RoleRoute allowedRoles={["Admin"]}>
-                <Dashboard />
+                <AdminDashboard />
               </RoleRoute>
             }
           />
@@ -113,7 +106,7 @@ const App = () => {
           <Route
             path="/it-dashboard"
             element={
-              <RoleRoute allowedRoles={["IT- Admin"]}>
+              <RoleRoute allowedRoles={["IT-Admin"]}>
                 <ItDashboard />
               </RoleRoute>
             }
@@ -282,6 +275,14 @@ const App = () => {
                 </RoleRoute>
               }
             />
+              {/* <Route
+              path="/admin-dashboard"
+              element={
+                <RoleRoute allowedRoles={["Admin"]}>
+                  <AdminDashboard />
+                </RoleRoute>
+              }
+            /> */}
             <Route path="request-access" element={<RequestAccess />} />
             {/* <Route path="reqassettable" element={<ReqAssetTable />} /> */}
             <Route path="add-documents" element={<AddDocuments />} />
@@ -289,9 +290,7 @@ const App = () => {
 
           {/* Roles */}
           <Route path="/roles">
-            <Route
-              path="view"
-              element={
+            <Route path="view" element={
                 <RoleRoute allowedRoles={["Admin"]}>
                   <ViewRoles />
                 </RoleRoute>
@@ -351,11 +350,51 @@ const App = () => {
     </RoleRoute>
   }
 />
-  <Route
+   <Route
   path="/add-employee"
   element={
     <RoleRoute allowedRoles={["Admin"]}>
       <AddEmployee/>
+    </RoleRoute>
+  }
+/>
+ <Route
+  path="/add-non-nrl-user"
+  element={
+    <RoleRoute allowedRoles={["Admin"]}>
+      <AddnonNrluser/>
+    </RoleRoute>
+  }
+/>
+ <Route
+  path="/add-asset-class-table"
+  element={
+    <RoleRoute allowedRoles={["Admin"]}>
+      <AdAssetClass/>
+    </RoleRoute>
+  }
+/>
+<Route
+  path="/assetclass-mapping-table"
+  element={
+    <RoleRoute allowedRoles={["Admin"]}>
+      <AssetClassmaptable/>
+    </RoleRoute>
+  }
+/>
+<Route
+  path="/assetclass-mapping-table"
+  element={
+    <RoleRoute allowedRoles={["Admin"]}>
+      <AssetClassmaptable/>
+    </RoleRoute>
+  }
+/>
+  <Route
+  path="/hr-assign-table"
+  element={
+    <RoleRoute allowedRoles={["Admin"]}>
+      <Hrassigntable/>
     </RoleRoute>
   }
 />
@@ -506,8 +545,44 @@ const App = () => {
     
           </Route>
 
+          {/* Profile & Password (inside MainLayout) */}
+          <Route
+            path="/profile"
+            element={
+              <RoleRoute
+                allowedRoles={[
+                  "Admin",
+                  "IT Admin",
+                  "HR Admin",
+                  "Approver",
+                  "Auditor",
+                  "Requester",
+                  "Custodian",
+                ]}
+              >
+                <Profile />
+              </RoleRoute>
+            }
+          />
+          <Route
+            path="/password"
+            element={
+              <RoleRoute
+                allowedRoles={[
+                  "Admin",
+                  "IT Admin",
+                  "HR Admin",
+                  "Approver",
+                  "Auditor",
+                  "Requester",
+                  "Custodian",
+                ]}
+              >
+                <Password />
+              </RoleRoute>
+            }
+          />
         </Route>
-
       </Routes>
     </Router>
   );

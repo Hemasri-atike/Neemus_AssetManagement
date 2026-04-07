@@ -35,7 +35,7 @@ const AddAssetClass = () => {
   alert("Request Submitted!");
 
   // 🔥 Navigate to table page
-  navigate("/assets/reqcustodiantable");
+  navigate("/add-asset-class-table");
 };
 
   return (

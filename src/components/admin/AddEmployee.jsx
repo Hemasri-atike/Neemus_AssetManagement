@@ -35,7 +35,7 @@ const AddEmployee = () => {
   alert("Request Submitted!");
 
   // 🔥 Navigate to table page
-  navigate("/assets/reqcustodiantable");
+  navigate("/add-non-nrl-user");
 };
 
   return (

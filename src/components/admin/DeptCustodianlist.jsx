@@ -1,9 +1,10 @@
 import React from 'react'
+import DeptwiseCusttable from '../tables/DeptwiseCusttable'
 
 const DeptCustodianlist = () => {
   return (
     <div>
-      <h2>Department Custodian List</h2>
+      <DeptwiseCusttable/>  
     </div>
   )
 }
