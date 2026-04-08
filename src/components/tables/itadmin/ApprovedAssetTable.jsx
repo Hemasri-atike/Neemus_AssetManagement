@@ -7,50 +7,55 @@ const rawData = [
     requestId: "REQ001",
     requestorName: "Devajit Jaradhara",
     location: "NITROGEN PLANT",
-    department: "ERP",
-    designation: "SM(IIS)",
     requestedQty: 5,
     requestedDate: "09-Mar-2026",
     status: "Request Sent To Approver",
 
-    // ✅ Added for mapping
     approverId: "APR1001",
     approverName: "Manager A",
-    approvedRemarks: "Pending",
+    approvedQty: 5,
+    adminId: "ADM001",
+    adminName: "Admin One",
+    adminRemarks: "Approved",
+    adminDate: "10-Mar-2026",
   },
   {
     asset: "Transformer",
     requestId: "REQ002",
     requestorName: "Devajit Jaradhara",
     location: "NITROGEN PLANT",
-    department: "ERP",
-    designation: "SM(IIS)",
     requestedQty: 1,
     requestedDate: "08-Jan-2025",
     status: "Rejected",
 
     approverId: "APR1002",
     approverName: "Manager B",
-    approvedRemarks: "Not required",
+    approvedQty: 0,
+    adminId: "ADM002",
+    adminName: "Admin Two",
+    adminRemarks: "Rejected",
+    adminDate: "09-Jan-2025",
   },
   {
     asset: "Scanner",
     requestId: "REQ003",
     requestorName: "Devajit Jaradhara",
     location: "FIELD OFFICE",
-    department: "ERP",
-    designation: "SM(IIS)",
     requestedQty: 1,
     requestedDate: "08-Jan-2025",
     status: "Approved",
 
     approverId: "APR1003",
     approverName: "Manager C",
-    approvedRemarks: "Approved",
+    approvedQty: 1,
+    adminId: "ADM003",
+    adminName: "Admin Three",
+    adminRemarks: "Approved",
+    adminDate: "09-Jan-2025",
   },
 ];
 
-const ItReqAssetTable = () => {
+const ApprovedAssetTable = () => {
   const [search, setSearch] = useState({});
 
   const handleSearch = (field, value) => {
@@ -66,43 +71,35 @@ const ItReqAssetTable = () => {
     )
   );
 
-  // ❌ Labels unchanged
+  // ✅ UNIQUE fields (labels unchanged)
   const columns = [
     { field: "asset", label: "Asset Type Name" },
     { field: "requestId", label: "Requested ID" },
     { field: "requestorName", label: "Requestor Name" },
     { field: "location", label: " Requested Location" },
-    { field: "department", label: "Approved id" },
-    { field: "designation", label: "Approver Name" },
-    { field: "requestedQty", label: "Approved Remarks" },
-    { field: "requestedDate", label: " Date" },
-    { field: "status", label: "view" },
+    { field: "approverId", label: "Approved id" },
+    { field: "approverName", label: "Approver Name" },
+    { field: "adminId", label: "Admin id" },
+    { field: "adminName", label: " Admin Name" },
+    { field: "requestedQty", label: "Requested Quantity" },
+    { field: "approvedQty", label: "Approved Quantity" },
+    { field: "adminRemarks", label: "Admin Remarks" },
+    { field: "adminDate", label: "Date" },
   ];
 
   const renderCustomCell = (field, row) => {
+    // ✅ Status styling inside Admin Remarks
+    if (field === "adminRemarks") {
+      let statusClass = "status-default";
 
-    // ✅ Approved ID
-    if (field === "department") {
-      return row.approverId;
-    }
+      if (row.adminRemarks === "Approved") statusClass = "status-available";
+      else if (row.adminRemarks === "Rejected")
+        statusClass = "status-rejected";
 
-    // ✅ Approver Name
-    if (field === "designation") {
-      return row.approverName;
-    }
-
-    // ✅ Approved Remarks
-    if (field === "requestedQty") {
-      return row.approvedRemarks;
-    }
-
-    // ✅ View column (buttons)
-    if (field === "status") {
       return (
-        <div style={{ display: "flex", gap: "8px" }}>
-          <button className="btn-view">View</button>
-          <button className="btn-edit">Edit</button>
-        </div>
+        <span className={`status-pill ${statusClass}`}>
+          {row.adminRemarks}
+        </span>
       );
     }
 
@@ -112,7 +109,7 @@ const ItReqAssetTable = () => {
   return (
     <div style={{ padding: "1.5rem" }}>
       <ModernTable
-        title="Requested Assets"
+        title="Approved Assets"
         columns={columns}
         data={filteredData}
         onSearch={handleSearch}
@@ -122,4 +119,4 @@ const ItReqAssetTable = () => {
   );
 };
 
-export default ItReqAssetTable;
+export default ApprovedAssetTable;
