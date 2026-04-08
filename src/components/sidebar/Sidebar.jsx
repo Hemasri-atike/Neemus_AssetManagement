@@ -18,9 +18,7 @@ import {
   Assignment,
   BarChart,
   QrCode
-
 } from "@mui/icons-material";
-import ItDashboard from "../../pages/ItDashboard";
 
 /** Brand sidebar surface — semi-transparent deep blue */
 const SIDEBAR_BG = "#004b80b8";
@@ -56,9 +54,8 @@ const roleMenus = {
     },
     {
       name: "Location Master",
-      icon: <Settings fontSize="small" className="text-white/90" />,
+      icon: <LocationOn fontSize="small" className="text-white/90" />,
       subMenu: [
-
         { name: "View Location", path: "/assets/location" },
       ],
     },
@@ -70,7 +67,6 @@ const roleMenus = {
       path: "/it-dashboard",
       icon: <Dashboard fontSize="small" className="text-white/90" />,
     },
-
     {
       name: "Asset Register",
       icon: <Inventory2 fontSize="small" className="text-white/90" />,
@@ -82,60 +78,36 @@ const roleMenus = {
         { name: "View Asset Location on map", path: "/assets/location" },
       ],
     },
-
-   {
-  name: "Asset Requests",
-  icon: <Assignment fontSize="small" className="text-white/90" />,
-  subMenu: [
     {
-      name: "Asset Allocation",
+      name: "Asset Requests",
+      icon: <Assignment fontSize="small" className="text-white/90" />,
       subMenu: [
         {
-          name: "Approve Allocation of Assets",
-          path: "/AdminViewAssetRequest",
+          name: "Asset Allocation",
+          subMenu: [
+            { name: "Approve Allocation of Assets", path: "/AdminViewAssetRequest" },
+            { name: "View Allocation of Assets", path: "/ViewAssetRequest" },
+          ],
         },
-        {
-          name: "View Allocation of Assets",
-          path: "/ViewAssetRequest",
-        },
+        { name: "Asset Parking", path: "/assets/add-asset" },
+        { name: "Custodian Transfer", path: "/ViewAllRequests" },
+        { name: "Asset Return", path: "/ViewAllRequests" },
+        { name: "Asset Buyback", path: "/ViewAllRequests" },
+        { name: "View All Requests", path: "/ViewAllRequests" },
       ],
     },
-    {
-      name: "Asset Parking",
-      path: "/assets/add-asset",
-    },
-    {
-      name: "Custodian Transfer",
-      path: "/assets/disposal",
-    },
-    {
-      name: "Asset Return",
-      path: "/assets/write-off",
-    },
-    {
-      name: "Asset Buyback",
-      path: "/assets/reinstatement",
-    },
-    {
-      name: "View All Requests",
-      path: "/ViewAllRequests",
-    },
-  ],
-},
-
     {
       name: "Print QR Codes",
       icon: <QrCode fontSize="small" className="text-white/90" />,
       subMenu: [
-        { name: "QRCodes for Double Sticker", path: "/assets/print-qr" },
-        { name: "QRCodes for Single Sticker", path: "/assets/print-qr" },
-        { name: "QRCodes for Single Asset", path: "/assets/print-qr" },
-        { name: "QRCodes for Asset type", path: "/assets/print-qr" },
-        { name: "QRCodes for Asset Create Date", path: "/assets/print-qr" },
+        { name: "QRCodes for Double Sticker", path: "/chatbot" },
+        { name: "QRCodes for Single Sticker", path: "/chatbot" },
+        { name: "QRCodes for Single Asset", path: "/chatbot" },
+        { name: "QRCodes for Asset type", path: "/chatbot" },
+        { name: "QRCodes for Asset Create Date", path: "/chatbot" },
       ],
     },
-
- {
+    {
       name: "Asset Auditing",
       icon: <FactCheck fontSize="small" className="text-white/90" />,
       subMenu: [
@@ -145,22 +117,6 @@ const roleMenus = {
         { name: "Edit Audit Assets", path: "/EditAuditedAsset" },
       ],
     },
-
-    {
-      name: "Audit Reports",
-      icon: <Assessment fontSize="small" className="text-white/90" />,
-      subMenu: [
-        { name: "View All Audits", path: "/assets/audit-reports" },
-        { name: "View Current Audits", path: "/assets/audit-reports" },
-        { name: "View Pending Audits", path: "/assets/audit-reports" },
-        { name: "View Audit Finding", path: "/assets/audit-reports" },
-        { name: "View Approved Audits", path: "/assets/audit-reports" },
-        { name: "Location wise Audits", path: "/assets/audit-reports" },
-        { name: "List of Assets & Status in Audits", path: "/assets/audit-reports" },
-        { name: "View Assets by status in Audits", path: "/assets/audit-reports" },
-      ],
-    },
-
     {
       name: "View Reports",
       icon: <BarChart fontSize="small" className="text-white/90" />,
@@ -179,126 +135,61 @@ const roleMenus = {
     },
   ],
 
-    "HR Admin": [
-      {
-        name: "Dashboard",
-        path: "/dashboard",
-        icon: <Dashboard fontSize="small" className="text-white/90" />,
-      },
-      {
-        name: "Asset Request",
-        icon: <Inventory2 fontSize="small" className="text-white/90" />,
-        subMenu: [{ name: "Request Asset", path: "/assets/request-access" }],
-      },
-      {
-        name: "Asset Register",
-        icon: <Inventory2 fontSize="small" className="text-white/90" />,
-        subMenu: [
-          { name: "View Assets", path: "/assets/list" },
-          { name: "Add Asset", path: "/assets/add-asset" },
-        ],
-      },
-      {
-        name: "Print QR Codes",
-        icon: <FactCheck fontSize="small" className="text-white/90" />,
-        path: "/assets/print-qr",
-      },
-      {
-        name: "Asset Auditing",
-        icon: <Assessment fontSize="small" className="text-white/90" />,
-        path: "/assets/auditing",
-      },
-      {
-        name: "Audit Reports",
-        icon: <Assessment fontSize="small" className="text-white/90" />,
-        path: "/assets/audit-reports",
-      },
-      {
-        name: "View Reports",
-        icon: <Assessment fontSize="small" className="text-white/90" />,
-        path: "/reports",
-      },
-    ],
+  "Requester": [
+    {
+      name: "Dashboard",
+      path: "/requestor-dashboard",
+      icon: <Dashboard fontSize="small" className="text-white/90" />,
+    },
+    {
+      name: "View Allocated Assets",
+      path: "/allocatedassets",
+      icon: <AssignmentTurnedIn fontSize="small" className="text-white/90" />,
+    },
+    {
+      name: "Request Asset",
+      path: "/assets/request-access",
+      icon: <Inventory2 fontSize="small" className="text-white/90" />,
+    },
+    {
+      name: "Buyback",
+      path: "/assets/buyback",
+      icon: <ShoppingCart fontSize="small" className="text-white/90" />,
+    },
+    {
+      name: "Location Transfer",
+      path: "/assets/location-transfer",
+      icon: <LocationOn fontSize="small" className="text-white/90" />,
+    },
+    {
+      name: "Custodian Transfer",
+      path: "/assets/custodian-transfer",
+      icon: <PeopleAlt fontSize="small" className="text-white/90" />,
+    },
+    {
+      name: "Asset Return",
+      path: "/assets/asset-return",
+      icon: <KeyboardReturn fontSize="small" className="text-white/90" />,
+    },
+  ],
 
-      Requester: [
-        {
-          name: "Dashboard",
-          path: "/requestor-dashboard",
-          icon: <Dashboard fontSize="small" className="text-white/90" />,
-        },
-        {
-          name: "View Allocated Assets",
-          path: "/allocatedassets",
-          icon: <AssignmentTurnedIn fontSize="small" className="text-white/90" />,
-        },
-        {
-          name: "Request Asset",
-          path: "/assets/request-access",
-          icon: <Inventory2 fontSize="small" className="text-white/90" />,
-        },
-        {
-          name: "Buyback",
-          path: "/assets/buyback",
-          icon: <ShoppingCart fontSize="small" className="text-white/90" />,
-        },
-        {
-          name: "Location Transfer",
-          path: "/assets/location-transfer",
-          icon: <LocationOn fontSize="small" className="text-white/90" />,
-        },
-        {
-          name: "Custodian Transfer",
-          path: "/assets/custodian-transfer",
-          icon: <PeopleAlt fontSize="small" className="text-white/90" />,
-        },
-        {
-          name: "Asset Return",
-          path: "/assets/asset-return",
-          icon: <KeyboardReturn fontSize="small" className="text-white/90" />,
-        },
-      ],
-
-        Auditor: [
-          {
-            name: "Dashboard",
-            path: "/dashboard",
-            icon: <Dashboard fontSize="small" className="text-white/90" />,
-          },
-          {
-            name: "Audits",
-            icon: <Inventory2 fontSize="small" className="text-white/90" />,
-            subMenu: [
-              { name: "View Audits", path: "/ViewAudits" },
-              { name: "Asset Audits", path: "/AssetAudit" },
-              { name: "Edit Audit Assets", path: "/EditAuditAsset" },
-              { name: "Audit wise status", path: "/AuditWiseStatus" },
-              { name: "Assets by Audits", path: "/AssetByAudit" },
-            ],
-          },
-        ],
-
-          Approver: [
-            {
-              name: "Dashboard",
-              path: "/approver-dashboard",
-              icon: <Dashboard fontSize="small" className="text-white/90" />,
-            },
-            {
-              name: "Asset Requests",
-              icon: <Inventory2 fontSize="small" className="text-white/90" />,
-              path: "/assets/reqassettable",
-            },
-            {
-              name: "Location Transfer Requests",
-              icon: <Inventory2 fontSize="small" className="text-white/90" />,
-              path: "/assets/reqloctable",
-            },
-            {
-              name: "Custodian Transfer Requests",
-              icon: <Inventory2 fontSize="small" className="text-white/90" />,
-              path: "/assets/custodian-transfer-requests",
-            },
-          ],
+  "Approver": [
+    {
+      name: "Dashboard",
+      path: "/approver-dashboard",
+      icon: <Dashboard fontSize="small" className="text-white/90" />,
+    },
+    {
+      name: "Asset Requests",
+      icon: <Inventory2 fontSize="small" className="text-white/90" />,
+      path: "/assets/reqassettable",
+    },
+    {
+      name: "Location Transfer Requests",
+      icon: <LocationOn fontSize="small" className="text-white/90" />,
+      path: "/assets/reqloctable",
+    },
+  ],
 };
 
 const labelVisibility = (alwaysShow) =>
@@ -307,7 +198,7 @@ const labelVisibility = (alwaysShow) =>
 const Sidebar = ({ mobileOpen = false, onMobileClose }) => {
   const role = localStorage.getItem("role") || "";
   const location = useLocation();
-  const [openMenus, setOpenMenus] = useState({ "Asset Requests": true });
+  const [openMenus, setOpenMenus] = useState({ "Asset Requests": true, "Asset Allocation": true });
 
   const menuItems = roleMenus[role] || roleMenus["Requester"] || [];
 
@@ -339,7 +230,7 @@ const Sidebar = ({ mobileOpen = false, onMobileClose }) => {
   const NavItem = ({ item, level = 0, lbl, expandVisible }) => {
     const isOpen = !!openMenus[item.name];
     const hasSubMenu = item.subMenu && item.subMenu.length > 0;
-    const indentation = level * 12; // 12px indent per level
+    const indentation = level * 12;
 
     if (hasSubMenu) {
       return (
@@ -355,25 +246,14 @@ const Sidebar = ({ mobileOpen = false, onMobileClose }) => {
               <span className={`${lbl} truncate transition-opacity duration-200`}>{item.name}</span>
             </div>
             <ExpandMore
-              className={`shrink-0 transition-transform ${expandVisible} ${isOpen ? "rotate-180 text-sky-200" : "text-white/70"
-                }`}
+              className={`shrink-0 transition-transform ${expandVisible} ${isOpen ? "rotate-180 text-sky-200" : "text-white/70"}`}
               fontSize="small"
             />
           </button>
-
-          <div
-            className={`overflow-hidden transition-all duration-500 ease-in-out ${isOpen ? "mt-1 max-h-[2000px] opacity-100" : "max-h-0 opacity-0"
-              }`}
-          >
+          <div className={`overflow-hidden transition-all duration-500 ease-in-out ${isOpen ? "mt-1 max-h-[2000px] opacity-100" : "max-h-0 opacity-0"}`}>
             <div className={`space-y-0.5 ${level === 0 ? "ml-2 border-l border-white/20 pl-1" : "pl-0"}`}>
               {item.subMenu.map((sub) => (
-                <NavItem
-                  key={sub.name}
-                  item={sub}
-                  level={level + 1}
-                  lbl={lbl}
-                  expandVisible={expandVisible}
-                />
+                <NavItem key={sub.name} item={sub} level={level + 1} lbl={lbl} expandVisible={expandVisible} />
               ))}
             </div>
           </div>
@@ -402,27 +282,19 @@ const Sidebar = ({ mobileOpen = false, onMobileClose }) => {
   const NavList = ({ alwaysShowLabels }) => {
     const lbl = labelVisibility(alwaysShowLabels);
     const expandVisible = alwaysShowLabels ? "block" : "hidden md:group-hover:block";
-
     return (
       <div className="space-y-1">
         {finalMenuItems.map((item) => (
-          <NavItem
-            key={item.name}
-            item={item}
-            lbl={lbl}
-            expandVisible={expandVisible}
-          />
+          <NavItem key={item.name} item={item} lbl={lbl} expandVisible={expandVisible} />
         ))}
       </div>
     );
   };
 
-  const surfaceClass =
-    "border-r border-white/15 shadow-[0_8px_32px_rgba(0,30,60,0.25)] backdrop-blur-md";
+  const surfaceClass = "border-r border-white/15 shadow-[0_8px_32px_rgba(0,30,60,0.25)] backdrop-blur-md";
 
   return (
     <>
-      {/* Mobile: MUI Drawer */}
       <Drawer
         anchor="left"
         open={mobileOpen}
@@ -430,50 +302,25 @@ const Sidebar = ({ mobileOpen = false, onMobileClose }) => {
         ModalProps={{ keepMounted: true }}
         sx={{
           display: { xs: "block", md: "none" },
-          "& .MuiBackdrop-root": {
-            backgroundColor: "rgba(0, 20, 40, 0.45)",
-            backdropFilter: "blur(4px)",
-          },
+          "& .MuiBackdrop-root": { backgroundColor: "rgba(0, 20, 40, 0.45)", backdropFilter: "blur(4px)" },
           "& .MuiDrawer-paper": {
             width: "min(18rem, 88vw)",
-            maxWidth: "100%",
             backgroundColor: SIDEBAR_BG,
             backdropFilter: "blur(14px)",
-            WebkitBackdropFilter: "blur(14px)",
             borderRight: "1px solid rgba(255,255,255,0.12)",
-            boxSizing: "border-box",
           },
         }}
       >
-        <div
-          className={`flex h-full flex-col ${surfaceClass}`}
-          style={{ backgroundColor: SIDEBAR_BG }}
-        >
+        <div className={`flex h-full flex-col ${surfaceClass}`} style={{ backgroundColor: SIDEBAR_BG }}>
           <div className="flex items-center justify-between border-b border-white/10 px-3 py-3 sm:px-4">
             <span className="text-sm font-semibold tracking-wide text-white sm:text-base">Navigation</span>
-            <IconButton
-              onClick={() => onMobileClose?.()}
-              aria-label="Close menu"
-              size="small"
-              sx={{ color: "rgba(255,255,255,0.9)" }}
-            >
-              <Close />
-            </IconButton>
+            <IconButton onClick={() => onMobileClose?.()} size="small" sx={{ color: "rgba(255,255,255,0.9)" }}><Close /></IconButton>
           </div>
-          <nav className="min-h-0 flex-1 overflow-y-auto overscroll-contain p-3 sm:p-4">
-            <NavList alwaysShowLabels />
-          </nav>
+          <nav className="min-h-0 flex-1 overflow-y-auto overscroll-contain p-3 sm:p-4"><NavList alwaysShowLabels /></nav>
         </div>
       </Drawer>
-
-      {/* md+: rail sidebar — width animates on hover, pushes main content */}
-      <aside
-        className={`group relative z-40 hidden h-[calc(100vh-4rem)] w-14 shrink-0 overflow-hidden transition-all duration-300 ease-out sm:w-16 md:flex md:hover:w-64 md:hover:shadow-xl ${surfaceClass}`}
-        style={{ backgroundColor: SIDEBAR_BG }}
-      >
-        <nav className="h-full w-full space-y-1 overflow-y-auto overflow-x-hidden p-2 sm:p-3 md:space-y-2">
-          <NavList alwaysShowLabels={false} />
-        </nav>
+      <aside className={`group relative z-40 hidden h-[calc(100vh-4rem)] w-14 shrink-0 overflow-hidden transition-all duration-300 ease-out sm:w-16 md:flex md:hover:w-64 md:hover:shadow-xl ${surfaceClass}`} style={{ backgroundColor: SIDEBAR_BG }}>
+        <nav className="h-full w-full space-y-1 overflow-y-auto overflow-x-hidden p-2 sm:p-3 md:space-y-2"><NavList alwaysShowLabels={false} /></nav>
       </aside>
     </>
   );
