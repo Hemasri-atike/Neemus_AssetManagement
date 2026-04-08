@@ -87,6 +87,7 @@ import ApprovedRequestedAssets from "./components/tables/itadmin/ApprovedRequest
 import RejectedRequestedAssets from "./components/tables/itadmin/RejectedRequestedAssets";
 import ApprovedAllocation from "./components/itadmin/ApprovedAllocation";
 
+import LoctransferReq from "./components/Approver/views/LoctransferReq";
 
 
 const App = () => {
@@ -321,13 +322,14 @@ const App = () => {
             }
           />
           <Route
-            path="/assets/reqloctable"
+            path="/viewlocationtransfer-requests"
             element={
               <RoleRoute allowedRoles={["Approver"]}>
-                <ApproverLocTransfer />
+                <LoctransferReq />
               </RoleRoute>
             }
           />
+
 
           <Route
             path="/auditor-dashboard"

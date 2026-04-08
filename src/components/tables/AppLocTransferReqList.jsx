@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ModernTable from "../common/ModernTable";
+import { useNavigate } from "react-router-dom";
 
 const rawData = [
   {
@@ -39,6 +40,7 @@ const rawData = [
     view: "View",
   },
 ];
+const navigate = useNavigate();
 
 const AppLocTransferReqList = () => {
   const [search, setSearch] = useState({});
@@ -66,27 +68,43 @@ const AppLocTransferReqList = () => {
     { field: "requestedComments", label: "Requested Comments" },
     { field: "requestedDate", label: "Date" },
     { field: "status", label: "Status" },
-    { field: "view ", label: "View" },
+    { field: "view", label: "View" }
   ];
 
-  const renderCustomCell = (field, row) => {
-    if (field === "status") {
-      let statusClass = "status-default";
+const renderCustomCell = (field, row) => {
 
-      if (row.status === "Approved") statusClass = "status-available";
-      else if (row.status === "Rejected") statusClass = "status-rejected";
-      else if (row.status.includes("Approver"))
-        statusClass = "status-transferred";
+  // ✅ Status styling
+  if (field === "status") {
+    let statusClass = "status-default";
 
-      return (
-        <span className={`status-pill ${statusClass}`}>
-          {row.status}
-        </span>
-      );
-    }
+    if (row.status === "Approved") statusClass = "status-available";
+    else if (row.status === "Rejected") statusClass = "status-rejected";
+    else if (row.status.includes("Approver"))
+      statusClass = "status-transferred";
 
-    return row[field];
-  };
+    return (
+      <span className={`status-pill ${statusClass}`}>
+        {row.status}
+      </span>
+    );
+  }
+
+  // ✅ View Button
+  if (field === "view") {
+    return (
+      <button
+        className="btn-view"
+        onClick={() =>
+          navigate("/viewlocationtransfer-requests", { state: row })
+        }
+      >
+        View
+      </button>
+    );
+  }
+
+  return row[field];
+};
 
   return (
     <div style={{ padding: "1.5rem" }}>
