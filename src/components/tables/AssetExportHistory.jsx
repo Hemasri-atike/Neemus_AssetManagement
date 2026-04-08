@@ -38,12 +38,12 @@ const rawData = [
 const AssetExportHistory = () => {
   const [search, setSearch] = useState({});
 
-  // ✅ Handle search
+  //  Handle search
   const handleSearch = (field, value) => {
     setSearch((prev) => ({ ...prev, [field]: value }));
   };
 
-  // ✅ Filter data
+  //  Filter data
   const filteredData = rawData.filter((row) =>
     Object.keys(search).every((key) =>
       row[key]
@@ -53,7 +53,7 @@ const AssetExportHistory = () => {
     )
   );
 
-  // ✅ Columns (match labels exactly)
+  // ✅Columns (match labels exactly)
   const columns = [
     { field: "updateStatus", label: "Update Status" },
     { field: "updateDate", label: "Update Date" },
@@ -104,7 +104,7 @@ const AssetExportHistory = () => {
       </Stack>
 
       <ModernTable
-        title=""
+        title="Asset Export History"
         columns={columns}
         data={filteredData}
         onSearch={handleSearch}
@@ -114,4 +114,4 @@ const AssetExportHistory = () => {
   );
 };
 
-export default AssetExportHistory;
+export default AssetExportHistory;

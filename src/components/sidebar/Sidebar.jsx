@@ -83,18 +83,45 @@ const roleMenus = {
       ],
     },
 
+   {
+  name: "Asset Requests",
+  icon: <Assignment fontSize="small" className="text-white/90" />,
+  subMenu: [
     {
-      name: "Asset Requests",
-      icon: <Assignment fontSize="small" className="text-white/90" />,
+      name: "Asset Allocation",
       subMenu: [
-        { name: "Asset Allocation", path: "/assets/list" },
-        { name: "Asset Parking", path: "/assets/add-asset" },
-        { name: "Custodian Transfer", path: "/assets/disposal" },
-        { name: "Asset Return", path: "/assets/write-off" },
-        { name: "Asset Buyback", path: "/assets/reinstatement" },
-        { name: "View All Requests", path: "/assets/location-transfer" },
+        {
+          name: "Approve Allocation of Assets",
+          path: "/AdminViewAssetRequest",
+        },
+        {
+          name: "View Allocation of Assets",
+          path: "/ViewAssetRequest",
+        },
       ],
     },
+    {
+      name: "Asset Parking",
+      path: "/assets/add-asset",
+    },
+    {
+      name: "Custodian Transfer",
+      path: "/assets/disposal",
+    },
+    {
+      name: "Asset Return",
+      path: "/assets/write-off",
+    },
+    {
+      name: "Asset Buyback",
+      path: "/assets/reinstatement",
+    },
+    {
+      name: "View All Requests",
+      path: "/ViewAllRequests",
+    },
+  ],
+},
 
     {
       name: "Print QR Codes",
@@ -281,7 +308,7 @@ const labelVisibility = (alwaysShow) =>
 const Sidebar = ({ mobileOpen = false, onMobileClose }) => {
   const role = localStorage.getItem("role") || "";
   const location = useLocation();
-  const [openMenu, setOpenMenu] = useState("Asset Request");
+  const [openMenus, setOpenMenus] = useState({ "Asset Requests": true });
 
   const menuItems = roleMenus[role] || roleMenus["Requester"] || [];
 
@@ -300,11 +327,77 @@ const Sidebar = ({ mobileOpen = false, onMobileClose }) => {
   ];
 
   const toggleSubmenu = (menuName) => {
-    setOpenMenu(openMenu === menuName ? null : menuName);
+    setOpenMenus((prev) => ({
+      ...prev,
+      [menuName]: !prev[menuName],
+    }));
   };
 
   const afterNavigate = () => {
     onMobileClose?.();
+  };
+
+  const NavItem = ({ item, level = 0, lbl, expandVisible }) => {
+    const isOpen = !!openMenus[item.name];
+    const hasSubMenu = item.subMenu && item.subMenu.length > 0;
+    const indentation = level * 12; // 12px indent per level
+
+    if (hasSubMenu) {
+      return (
+        <div key={item.name}>
+          <button
+            type="button"
+            onClick={() => toggleSubmenu(item.name)}
+            className="flex w-full items-center justify-between rounded-xl px-2 py-2.5 text-left text-sm text-white/95 transition md:px-2 md:group-hover:px-4 hover:bg-white/10 active:bg-white/15"
+            style={{ paddingLeft: level > 0 ? `${indentation + 8}px` : undefined }}
+          >
+            <div className="flex w-full items-center justify-center gap-3 md:justify-center md:group-hover:justify-start">
+              {item.icon || (level > 0 && <div className="w-5" />)}
+              <span className={`${lbl} truncate transition-opacity duration-200`}>{item.name}</span>
+            </div>
+            <ExpandMore
+              className={`shrink-0 transition-transform ${expandVisible} ${isOpen ? "rotate-180 text-sky-200" : "text-white/70"
+                }`}
+              fontSize="small"
+            />
+          </button>
+
+          <div
+            className={`overflow-hidden transition-all duration-500 ease-in-out ${isOpen ? "mt-1 max-h-[2000px] opacity-100" : "max-h-0 opacity-0"
+              }`}
+          >
+            <div className={`space-y-0.5 ${level === 0 ? "ml-2 border-l border-white/20 pl-1" : "pl-0"}`}>
+              {item.subMenu.map((sub) => (
+                <NavItem
+                  key={sub.name}
+                  item={sub}
+                  level={level + 1}
+                  lbl={lbl}
+                  expandVisible={expandVisible}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    const active = location.pathname === item.path;
+    return (
+      <Link
+        key={item.name}
+        to={item.path}
+        onClick={afterNavigate}
+        className={`flex items-center justify-center gap-3 rounded-xl px-2 py-2.5 text-sm transition md:group-hover:justify-start md:group-hover:px-4 ${active
+            ? "bg-white/15 font-semibold text-white ring-1 ring-white/25 shadow-md"
+            : "text-white/90 hover:bg-white/10 hover:text-white"
+          }`}
+        style={{ paddingLeft: level > 0 ? `${indentation + 12}px` : undefined }}
+      >
+        {item.icon || (level > 0 && <div className="w-5" />)}
+        <span className={`${lbl} ${level > 0 ? "whitespace-normal break-words" : "whitespace-nowrap"}`}>{item.name}</span>
+      </Link>
+    );
   };
 
   const NavList = ({ alwaysShowLabels }) => {
@@ -313,64 +406,14 @@ const Sidebar = ({ mobileOpen = false, onMobileClose }) => {
 
     return (
       <div className="space-y-1">
-        {finalMenuItems.map((item) =>
-          item.subMenu ? (
-            <div key={item.name}>
-              <button
-                type="button"
-                onClick={() => toggleSubmenu(item.name)}
-                className="flex w-full items-center justify-between rounded-xl px-2 py-2.5 text-left text-sm text-white/95 transition md:px-2 md:group-hover:px-4 hover:bg-white/10 active:bg-white/15"
-              >
-                <div className="flex w-full items-center justify-center gap-3 md:justify-center md:group-hover:justify-start">
-                  {item.icon}
-                  <span className={`${lbl} truncate transition-opacity duration-200`}>{item.name}</span>
-                </div>
-                <ExpandMore
-                  className={`shrink-0 transition-transform ${expandVisible} ${openMenu === item.name ? "rotate-180 text-sky-200" : "text-white/70"
-                    }`}
-                  fontSize="small"
-                />
-              </button>
-
-              <div
-                className={`overflow-hidden transition-all duration-500 ease-in-out ${openMenu === item.name ? "mt-1 max-h-[2000px] opacity-100" : "max-h-0 opacity-0"
-                  }`}
-              >
-                <div className="ml-2 space-y-0.5 border-l border-white/20 pl-3 sm:ml-4 sm:pl-3">
-                  {item.subMenu.map((sub) => {
-                    const active = location.pathname === sub.path;
-                    return (
-                      <Link
-                        key={sub.name}
-                        to={sub.path}
-                        onClick={afterNavigate}
-                        className={`block rounded-lg px-3 py-2.5 text-sm transition sm:py-2 ${active
-                            ? "bg-white/15 font-semibold text-white shadow-inner ring-1 ring-white/20"
-                            : "text-white/80 hover:bg-white/10 hover:text-white"
-                          }`}
-                      >
-                        <span className={`${lbl} whitespace-normal break-words`}>{sub.name}</span>
-                      </Link>
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
-          ) : (
-            <Link
-              key={item.name}
-              to={item.path}
-              onClick={afterNavigate}
-              className={`flex items-center justify-center gap-3 rounded-xl px-2 py-2.5 text-sm transition md:group-hover:justify-start md:group-hover:px-4 ${location.pathname === item.path
-                  ? "bg-white/15 font-semibold text-white ring-1 ring-white/25 shadow-md"
-                  : "text-white/90 hover:bg-white/10 hover:text-white"
-                }`}
-            >
-              {item.icon}
-              <span className={`${lbl} whitespace-nowrap`}>{item.name}</span>
-            </Link>
-          )
-        )}
+        {finalMenuItems.map((item) => (
+          <NavItem
+            key={item.name}
+            item={item}
+            lbl={lbl}
+            expandVisible={expandVisible}
+          />
+        ))}
       </div>
     );
   };
