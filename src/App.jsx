@@ -69,6 +69,10 @@ import AudByAsset from "./components/tables/AudByAsset";
 import AudEditAsset from "./components/tables/AudEditAsset";
 import AudWiseStatus from "./components/tables/AudWiseStatus";
 import AssetList from "./components/itadmin/AssetList";
+import AssetChangeUpdate from "./components/itadmin/AssetChangeUpdate";
+import StatusChange from "./components/tables/StatusChange";
+import AssetExportHistory from "./components/tables/AssetExportHistory";
+
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -135,6 +139,35 @@ const App = () => {
             }
           />
 
+          <Route path="/add-documents" element={
+                <RoleRoute allowedRoles={["IT-Admin"]}>
+                  <AddDocuments />
+                </RoleRoute>
+          } />
+ <Route
+            path="/AssetChangeUpdate"
+            element={
+              <RoleRoute allowedRoles={["IT-Admin"]}>
+                <AssetChangeUpdate />
+              </RoleRoute>
+            }
+          />
+           <Route
+            path="/StatusChange"
+            element={
+              <RoleRoute allowedRoles={["IT-Admin"]}>
+                <StatusChange />
+              </RoleRoute>
+            }
+          />
+            <Route
+            path="/ExportHistory"
+            element={
+              <RoleRoute allowedRoles={["IT-Admin"]}>
+                <AssetExportHistory />
+              </RoleRoute>
+            }
+          />
           <Route
             path="/hr-dashboard"
             element={
@@ -285,7 +318,7 @@ const App = () => {
             <Route
               path="list"
               element={
-                <RoleRoute allowedRoles={["Admin", "IT- Admin"]}>
+                <RoleRoute allowedRoles={["Admin", "IT-Admin"]}>
                   <Assets />
                 </RoleRoute>
               }
@@ -308,7 +341,7 @@ const App = () => {
             /> */}
             <Route path="request-access" element={<RequestAccess />} />
             {/* <Route path="reqassettable" element={<ReqAssetTable />} /> */}
-            <Route path="add-documents" element={<AddDocuments />} />
+            {/* <Route path="add-documents" element={<AddDocuments />} /> */}
           </Route>
 
           {/* Roles */}
