@@ -81,6 +81,11 @@ import ApproveAuditedAssets from "./components/itadmin/ApproveAuditedAssets";
 import ITApproveAuditedAssets from "./components/tables/ITApproveAuditedAssets";
 import ITAddApproveAuditedAssets from "./components/tables/ITAddApproveAuditedAssets";
 import ItReqAssetTable from "./components/tables/itadmin/itReqAssetTable";
+import AuditCompletion from "./components/itadmin/AuditCompletion";
+import ITAuditCompletion from "./components/tables/ITAuditCompletion";
+import EditAuditedAsset from "./components/itadmin/EditAuditedAsset";
+import ITEditAuditedAsset from "./components/tables/ITEditAuditedAsset";
+
 import ApprovedAssetTable from "./components/tables/itadmin/ApprovedAssetTable";
 import ReqAllocation from "./components/itadmin/ReqAllocation";
 import ApprovedRequestedAssets from "./components/tables/itadmin/ApprovedRequestedAssets";
@@ -280,6 +285,38 @@ const App = () => {
             }
           />
            <Route
+            path="/EditAuditedAsset"
+            element={
+              <RoleRoute allowedRoles={["IT-Admin"]}>
+                <EditAuditedAsset />
+              </RoleRoute>
+            }
+          />
+           <Route
+            path="/ITEditAuditedAsset"
+            element={
+              <RoleRoute allowedRoles={["IT-Admin"]}>
+                <ITEditAuditedAsset />
+              </RoleRoute>
+            }
+          />
+          <Route
+            path="/AuditCompletion"
+            element={
+              <RoleRoute allowedRoles={["IT-Admin"]}>
+                <AuditCompletion />
+              </RoleRoute>
+            }
+          />
+          <Route
+            path="/ITAuditCompletion"
+            element={
+              <RoleRoute allowedRoles={["IT-Admin"]}>
+                <ITAuditCompletion />
+              </RoleRoute>
+            }
+          />
+          <Route
             path="/ViewImportedAssets"
             element={
               <RoleRoute allowedRoles={["IT-Admin"]}>
