@@ -72,6 +72,8 @@ import AssetList from "./components/itadmin/AssetList";
 import AssetChangeUpdate from "./components/itadmin/AssetChangeUpdate";
 import StatusChange from "./components/tables/StatusChange";
 import AssetExportHistory from "./components/tables/AssetExportHistory";
+import ViewAllRequests from "./components/tables/itadmin/ViewAllRequests";
+
 
 import CreateAudit from "./components/itadmin/CreateAudit";
 import ITCreateAudit from "./components/tables/ITCreateAudit";
@@ -163,6 +165,14 @@ const App = () => {
             element={
               <RoleRoute allowedRoles={["IT-Admin"]}>
                 <StatusChange />
+              </RoleRoute>
+            }
+          />
+            <Route
+            path="/ViewAllRequests"
+            element={
+              <RoleRoute allowedRoles={["IT-Admin"]}>
+                <ViewAllRequests />
               </RoleRoute>
             }
           />
@@ -663,7 +673,7 @@ const App = () => {
               <RoleRoute
                 allowedRoles={[
                   "Admin",
-                  "IT Admin",
+                  "IT-Admin",
                   "HR Admin",
                   "Approver",
                   "Auditor",
