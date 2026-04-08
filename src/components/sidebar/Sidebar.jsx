@@ -76,10 +76,10 @@ const roleMenus = {
       icon: <Inventory2 fontSize="small" className="text-white/90" />,
       subMenu: [
         { name: "View Assets List", path: "/ViewImportedAssets" },
-        { name: "Asset Status Change", path: "/assets/add-asset" },
-        { name: "Add Asset Documents", path: "/assets/disposal" },
-        { name: "View Asset Export History", path: "/assets/write-off" },
-        { name: "View Asset Location on map", path: "/assets/reinstatement" },
+        { name: "Asset Status Change", path: "/AssetChangeUpdate" },
+        { name: "Add Asset Documents", path: "/add-documents" },
+        { name: "View Asset Export History", path: "/ExportHistory" },
+        { name: "View Asset Location on map", path: "/assets/location" },
       ],
     },
 
