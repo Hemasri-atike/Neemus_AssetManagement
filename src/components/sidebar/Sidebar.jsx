@@ -75,7 +75,7 @@ const roleMenus = {
       name: "Asset Register",
       icon: <Inventory2 fontSize="small" className="text-white/90" />,
       subMenu: [
-        { name: "View Assets List", path: "/assets/list" },
+        { name: "View Assets List", path: "/ViewImportedAssets" },
         { name: "Asset Status Change", path: "/assets/add-asset" },
         { name: "Add Asset Documents", path: "/assets/disposal" },
         { name: "View Asset Export History", path: "/assets/write-off" },

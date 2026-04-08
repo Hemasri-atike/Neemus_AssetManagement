@@ -12,6 +12,7 @@ const rawData = [
     requestedComments: "Need relocation",
     requestedDate: "09-Mar-2026",
     status: "Request Sent To Approver",
+      view: "View",
   },
   {
     assetName: "Line Potential Transformer PT V-33000/",
@@ -23,6 +24,7 @@ const rawData = [
     requestedComments: "Urgent transfer",
     requestedDate: "08-Jan-2025",
     status: "Rejected",
+      view: "View",
   },
   {
     assetName: "HP Scanjet G3110",
@@ -34,6 +36,7 @@ const rawData = [
     requestedComments: "Office shift",
     requestedDate: "08-Jan-2025",
     status: "Approved",
+    view: "View",
   },
 ];
 
@@ -63,6 +66,7 @@ const AppLocTransferReqList = () => {
     { field: "requestedComments", label: "Requested Comments" },
     { field: "requestedDate", label: "Date" },
     { field: "status", label: "Status" },
+    { field: "view ", label: "View" },
   ];
 
   const renderCustomCell = (field, row) => {

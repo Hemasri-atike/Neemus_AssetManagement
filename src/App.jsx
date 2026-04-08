@@ -68,6 +68,7 @@ import AudAssetAudit from "./components/tables/AudAssetAudit";
 import AudByAsset from "./components/tables/AudByAsset";
 import AudEditAsset from "./components/tables/AudEditAsset";
 import AudWiseStatus from "./components/tables/AudWiseStatus";
+import AssetList from "./components/itadmin/AssetList";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -122,6 +123,14 @@ const App = () => {
             element={
               <RoleRoute allowedRoles={["IT-Admin"]}>
                 <ItDashboard />
+              </RoleRoute>
+            }
+          />
+           <Route
+            path="/ViewImportedAssets"
+            element={
+              <RoleRoute allowedRoles={["IT-Admin"]}>
+                <AssetList />
               </RoleRoute>
             }
           />
