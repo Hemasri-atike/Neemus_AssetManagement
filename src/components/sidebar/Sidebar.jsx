@@ -108,12 +108,12 @@ const roleMenus = {
       ],
     },
 
-    {
+ {
       name: "Asset Auditing",
       icon: <FactCheck fontSize="small" className="text-white/90" />,
       subMenu: [
-        { name: "Create Audit", path: "/assets/auditing" },
-        { name: "Approve Audits Assets", path: "/audits/view" },
+        { name: "Create Audit", path: "/CreateAudit" },
+        { name: "Approve Audits Assets", path: "/ApproveAuditedAssets" },
         { name: "Edit Audit Assets", path: "/assets/edit-audit-assets" },
         { name: "Audit wise status", path: "/assets/audit-wise-status" },
         { name: "Completed Audits", path: "/assets/by-audits" },

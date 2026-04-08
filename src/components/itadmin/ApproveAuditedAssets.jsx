@@ -49,7 +49,7 @@ const ApproveAuditedAssets = () => {
           </Box>
 
           <Box mt={3}>
-            <Button variant="contained" onClick={handleAdd}>Add</Button>
+            <Button variant="contained" onClick={handleAdd}>View Assets</Button>
           </Box>
 
         </RequestFormCard>

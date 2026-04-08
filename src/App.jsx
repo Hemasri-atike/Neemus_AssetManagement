@@ -73,6 +73,12 @@ import AssetChangeUpdate from "./components/itadmin/AssetChangeUpdate";
 import StatusChange from "./components/tables/StatusChange";
 import AssetExportHistory from "./components/tables/AssetExportHistory";
 
+import CreateAudit from "./components/itadmin/CreateAudit";
+import ITCreateAudit from "./components/tables/ITCreateAudit";
+import ApproveAuditedAssets from "./components/itadmin/ApproveAuditedAssets";
+import ITApproveAuditedAssets from "./components/tables/ITApproveAuditedAssets";
+import ITAddApproveAuditedAssets from "./components/tables/ITAddApproveAuditedAssets";
+
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -144,7 +150,7 @@ const App = () => {
                   <AddDocuments />
                 </RoleRoute>
           } />
- <Route
+          <Route
             path="/AssetChangeUpdate"
             element={
               <RoleRoute allowedRoles={["IT-Admin"]}>
@@ -168,6 +174,55 @@ const App = () => {
               </RoleRoute>
             }
           />
+          <Route
+            path="/CreateAudit"
+            element={
+              <RoleRoute allowedRoles={["IT-Admin"]}>
+                <CreateAudit />
+              </RoleRoute>
+            }
+          />
+          <Route
+            path="/ITCreateAudit"
+            element={
+              <RoleRoute allowedRoles={["IT-Admin"]}>
+                <ITCreateAudit />
+              </RoleRoute>
+            }
+          />
+          <Route
+            path="/ApproveAuditedAssets"
+            element={
+              <RoleRoute allowedRoles={["IT-Admin"]}>
+                <ApproveAuditedAssets />
+              </RoleRoute>
+            }
+          />
+          <Route
+            path="/ITApproveAuditedAssets"
+            element={
+              <RoleRoute allowedRoles={["IT-Admin"]}>
+                <ITApproveAuditedAssets />
+              </RoleRoute>
+            }
+          />
+          <Route
+            path="/ITAddApproveAuditedAssets"
+            element={
+              <RoleRoute allowedRoles={["IT-Admin"]}>
+                <ITAddApproveAuditedAssets />
+              </RoleRoute>
+            }
+          />
+           <Route
+            path="/ViewImportedAssets"
+            element={
+              <RoleRoute allowedRoles={["IT-Admin"]}>
+                <AssetList />
+              </RoleRoute>
+            }
+          />
+          
           <Route
             path="/hr-dashboard"
             element={
