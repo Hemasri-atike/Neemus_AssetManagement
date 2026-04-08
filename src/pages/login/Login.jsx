@@ -26,7 +26,7 @@ const Login = ({ setIsLoggedIn }) => {
 
   const roleRoutes = {
   Admin: "/admin-dashboard",
-  "IT- Admin": "/it-dashboard",
+  "IT-Admin": "/it-dashboard",
   "HR Admin": "/hr-dashboard",
   Approver: "/approver-dashboard",
   Auditor: "/auditor-dashboard",

@@ -139,7 +139,7 @@ const roleMenus = {
       name: "View Reports",
       icon: <BarChart fontSize="small" className="text-white/90" />,
       subMenu: [
-        { name: "Dashboard", path: "/reports" },
+        { name: "Dashboard", path: "/it-dashboard" },
         { name: "Asset Available", path: "/reports" },
         { name: "Asset Damaged but Repaired", path: "/reports" },
         { name: "Asset Deactivated", path: "/reports" },

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ModernTable from "../common/ModernTable";
 import PrintPdfButton from "../common/PrintPdfButton";
 import GenerateQrButton from "../common/GenerateQrButton";
+import { Box, Typography, Stack } from "@mui/material";
 
 const rawData = [
   {
@@ -152,17 +153,21 @@ const columns = [
   return row[field];
 };
   return (
-    <div style={{ padding: "1.5rem" }}>
-      <div style={{ 
-        display: "flex", 
-        justifyContent: "space-between", 
-        alignItems: "center",
-        marginBottom: "1rem" 
-      }}>
-        <h2 style={{ margin: 0, fontSize: "1.5rem", fontWeight: "bold", color: "#1e293b" }}>
+    <Box sx={{ p: 3 }}>
+      <Stack 
+        direction={{ xs: "column", sm: "row" }} 
+        justifyContent="space-between" 
+        alignItems={{ xs: "flex-start", sm: "center" }}
+        spacing={2}
+        sx={{ mb: 2 }}
+      >
+        <Typography 
+          variant="h5" 
+          sx={{ fontWeight: "bold", color: "text.primary" }}
+        >
           Print QrCodes For Selected Assets
-        </h2>
-        <div style={{ display: "flex", gap: "1rem" }}>
+        </Typography>
+        <Stack direction="row" spacing={2}>
           <GenerateQrButton 
             data={rawData.filter(r => selectedRows.includes(r.mainAssetNumber))}
             onGenerated={handleQrGenerated}
@@ -172,8 +177,8 @@ const columns = [
             label={`Print PDF (${selectedRows.length})`}
             onBeforePrint={handlePrint}
           />
-        </div>
-      </div>
+        </Stack>
+      </Stack>
       <ModernTable
         title=""
         columns={columns}
@@ -181,7 +186,7 @@ const columns = [
         onSearch={handleSearch}
         renderCell={renderCustomCell}
       />
-    </div>
+    </Box>
   );
 };
 
