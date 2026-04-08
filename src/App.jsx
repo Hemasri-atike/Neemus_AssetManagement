@@ -80,6 +80,9 @@ import ITCreateAudit from "./components/tables/ITCreateAudit";
 import ApproveAuditedAssets from "./components/itadmin/ApproveAuditedAssets";
 import ITApproveAuditedAssets from "./components/tables/ITApproveAuditedAssets";
 import ITAddApproveAuditedAssets from "./components/tables/ITAddApproveAuditedAssets";
+import ItReqAssetTable from "./components/tables/itadmin/itReqAssetTable";
+import ApprovedAssetTable from "./components/tables/itadmin/ApprovedAssetTable";
+import ReqAllocation from "./components/itadmin/ReqAllocation";
 
 
 const App = () => {
