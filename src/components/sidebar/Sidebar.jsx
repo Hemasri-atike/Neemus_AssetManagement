@@ -141,9 +141,8 @@ const roleMenus = {
       subMenu: [
         { name: "Create Audit", path: "/CreateAudit" },
         { name: "Approve Audits Assets", path: "/ApproveAuditedAssets" },
-        { name: "Edit Audit Assets", path: "/assets/edit-audit-assets" },
-        { name: "Audit wise status", path: "/assets/audit-wise-status" },
-        { name: "Completed Audits", path: "/assets/by-audits" },
+        { name: "Completed Audits", path: "/AuditCompletion" },
+        { name: "Edit Audit Assets", path: "/EditAuditedAsset" },
       ],
     },
 

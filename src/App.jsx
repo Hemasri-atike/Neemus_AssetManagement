@@ -80,6 +80,10 @@ import ITCreateAudit from "./components/tables/ITCreateAudit";
 import ApproveAuditedAssets from "./components/itadmin/ApproveAuditedAssets";
 import ITApproveAuditedAssets from "./components/tables/ITApproveAuditedAssets";
 import ITAddApproveAuditedAssets from "./components/tables/ITAddApproveAuditedAssets";
+import AuditCompletion from "./components/itadmin/AuditCompletion";
+import ITAuditCompletion from "./components/tables/ITAuditCompletion";
+import EditAuditedAsset from "./components/itadmin/EditAuditedAsset";
+import ITEditAuditedAsset from "./components/tables/ITEditAuditedAsset";
 
 
 const App = () => {
@@ -221,6 +225,38 @@ const App = () => {
             element={
               <RoleRoute allowedRoles={["IT-Admin"]}>
                 <ITAddApproveAuditedAssets />
+              </RoleRoute>
+            }
+          />
+          <Route
+            path="/AuditCompletion"
+            element={
+              <RoleRoute allowedRoles={["IT-Admin"]}>
+                <AuditCompletion />
+              </RoleRoute>
+            }
+          />
+          <Route
+            path="/ITAuditCompletion"
+            element={
+              <RoleRoute allowedRoles={["IT-Admin"]}>
+                <ITAuditCompletion />
+              </RoleRoute>
+            }
+          />
+          <Route
+            path="/EditAuditedAsset"
+            element={
+              <RoleRoute allowedRoles={["IT-Admin"]}>
+                <EditAuditedAsset />
+              </RoleRoute>
+            }
+          />
+          <Route
+            path="/ITEditAuditedAsset"
+            element={
+              <RoleRoute allowedRoles={["IT-Admin"]}>
+                <ITEditAuditedAsset />
               </RoleRoute>
             }
           />
