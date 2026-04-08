@@ -83,6 +83,10 @@ import ITAddApproveAuditedAssets from "./components/tables/ITAddApproveAuditedAs
 import ItReqAssetTable from "./components/tables/itadmin/itReqAssetTable";
 import ApprovedAssetTable from "./components/tables/itadmin/ApprovedAssetTable";
 import ReqAllocation from "./components/itadmin/ReqAllocation";
+import ApprovedRequestedAssets from "./components/tables/itadmin/ApprovedRequestedAssets";
+import RejectedRequestedAssets from "./components/tables/itadmin/RejectedRequestedAssets";
+import ApprovedAllocation from "./components/itadmin/ApprovedAllocation";
+
 
 
 const App = () => {
