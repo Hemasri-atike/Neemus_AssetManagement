@@ -189,6 +189,11 @@ const roleMenus = {
       icon: <LocationOn fontSize="small" className="text-white/90" />,
       path: "/assets/reqloctable",
     },
+     {
+      name: "Custodian Transfer Requests",
+      icon: <LocationOn fontSize="small" className="text-white/90" />,
+      path: "/assets/reqcustable",
+    },
   ],
 };
 

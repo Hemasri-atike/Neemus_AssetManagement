@@ -69,7 +69,9 @@ import Hrassigntable from "./components/tables/Hrassigntable";
 // ✅ Approver Components
 import ApproverAsset from "./components/Approver/ApproverAsset";
 import ApproverLocTransfer from "./components/Approver/ApproverLocTransfer";
+import ApproverCustTransfer from "./components/Approver/ApproverCustTransfer";
 import LoctransferReq from "./components/Approver/views/LoctransferReq";
+import CustTransferDetails from "./components/Approver/views/CustTransferDetails";
 import ApprovedAssetList from "./components/tables/ApprovedAssetList";
 
 // ✅ Auditor Components
@@ -174,7 +176,9 @@ const App = () => {
           <Route path="/assets/reqassettable" element={<RoleRoute allowedRoles={["Approver"]}><ApproverAsset /></RoleRoute>} />
           <Route path="/viewlocationtransfer-requests" element={<RoleRoute allowedRoles={["Approver"]}><LoctransferReq /></RoleRoute>} />
           <Route path="/view-location-details" element={<RoleRoute allowedRoles={["Approver"]}><LoctransferReq /></RoleRoute>} />
+          <Route path="/view-custodian-transfer-details" element={<RoleRoute allowedRoles={["Approver"]}><CustTransferDetails /></RoleRoute>} />
           <Route path="/assets/reqloctable" element={<RoleRoute allowedRoles={["Approver"]}><ApproverLocTransfer /></RoleRoute>} />
+          <Route path="/assets/reqcustable" element={<RoleRoute allowedRoles={["Approver"]}><ApproverCustTransfer /></RoleRoute>} />
 
           {/* 🔍 AUDITOR Routes */}
           <Route path="/auditor-dashboard" element={<RoleRoute allowedRoles={["Auditor"]}><AuditorDashboard /></RoleRoute>} />
