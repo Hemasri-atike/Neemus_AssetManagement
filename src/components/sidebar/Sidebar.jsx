@@ -195,6 +195,24 @@ const roleMenus = {
       path: "/assets/reqcustable",
     },
   ],
+   Auditor: [
+    {
+      name: "Dashboard",
+      path: "/auditor-dashboard",
+      icon: <Dashboard fontSize="small" className="text-white/90" />,
+    },
+    {
+      name: "Audits",
+      icon: <Inventory2 fontSize="small" className="text-white/90" />,
+      subMenu: [
+        { name: "View Audits", path: "/ViewAudits" },
+        { name: "Asset Audits", path: "/AssetAudit" },
+        { name: "Edit Audit Assets", path: "/EditAuditAsset" },
+        { name: "Audit wise status", path: "/AuditWiseStatus" },
+        { name: "Assets by Audits", path: "/AssetByAudit" },
+      ],
+    },
+  ],
 };
 
 const labelVisibility = (alwaysShow) =>
