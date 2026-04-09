@@ -89,10 +89,26 @@ const roleMenus = {
             { name: "View Allocation of Assets", path: "/ViewAssetRequest" },
           ],
         },
-        { name: "Asset Parking", path: "/assets/add-asset" },
-        { name: "Custodian Transfer", path: "/ViewAllRequests" },
-        { name: "Asset Return", path: "/ViewAllRequests" },
-        { name: "Asset Buyback", path: "/ViewAllRequests" },
+        { name: "Asset Parking",  subMenu: [
+            { name: "Asset park Screen", path: "/AssetParking" },
+            { name: "Allocate Asset Parked", path: "/ViewAssetParking" },
+          ],},
+        { name: "Custodian Transfer",   subMenu: [
+            { name: "Approve Custodian Transfer", path: "/AdminViewCustodianChangeRequests" },
+            { name: "View Custodian Transfer", path: "/ViewApprovedCustodianTransfer" },
+          ], },
+           { name: "Location Transfer",  subMenu: [
+            { name: "Approve Location Transfer", path: "/AdminViewLocationChange" },
+            { name: "View  Location Transfers", path: "/ViewApprovedLocationTransfer" },
+          ], },
+        { name: "Asset Return",  subMenu: [
+            { name: "Approve Asset Return", path: "AdminViewAssetReturn" },
+            { name: "View  Returned Assets", path: "/ViewApprovedAssetReturn" },
+          ], },
+        { name: "Asset Buyback",  subMenu: [
+            { name: "Approve  Buyback Assets", path: "/AdminViewBuyBackAssets" },
+            { name: "View  Buyback Items", path: "/ViewApprovedBuyBackAssets" },
+          ], },
         { name: "View All Requests", path: "/ViewAllRequests" },
       ],
     },
