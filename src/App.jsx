@@ -43,6 +43,7 @@ import ITApproveAuditedAssets from "./components/tables/ITApproveAuditedAssets";
 import ITAddApproveAuditedAssets from "./components/tables/ITAddApproveAuditedAssets";
 import ITEditAuditedAsset from "./components/tables/ITEditAuditedAsset";
 import ITAuditCompletion from "./components/tables/ITAuditCompletion";
+import Assetreports from "./components/reports/Assetreports";
 
 // ✅ Admin Components
 import AssignRole from "./components/admin/AssignRole";
@@ -108,6 +109,7 @@ import AddStatus from "./components/assetmanagement/AddStatus";
 import "../src/leafletconfig";
 import "leaflet/dist/leaflet.css";
 
+
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -160,6 +162,7 @@ const App = () => {
           <Route path="/ViewAssetRequest" element={<RoleRoute allowedRoles={["IT-Admin"]}><ReqAllocation /></RoleRoute>} />
           <Route path="/approved-requests" element={<RoleRoute allowedRoles={["IT-Admin"]}><ApprovedRequestedAssets /></RoleRoute>} />
           <Route path="/RejectedRequestedAssets" element={<RoleRoute allowedRoles={["IT-Admin"]}><RejectedRequestedAssets /></RoleRoute>} />
+          <Route path="/AssetReports" element={<RoleRoute allowedRoles={["IT-Admin"]}><Assetreports /></RoleRoute>} />
           
           {/* Auditing (IT-Admin) */}
           <Route path="/CreateAudit" element={<RoleRoute allowedRoles={["IT-Admin"]}><CreateAudit /></RoleRoute>} />

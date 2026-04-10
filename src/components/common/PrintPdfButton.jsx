@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "@mui/material";
-import { Printer } from "lucide-react";
+import PrintIcon from "@mui/icons-material/Print";
 
 /**
  * Reusable Print/PDF Button Component
@@ -18,7 +18,7 @@ const PrintPdfButton = ({ label = "Print PDF", onBeforePrint, sx = {} }) => {
   return (
     <Button
       variant="contained"
-      startIcon={<Printer size={18} />}
+      startIcon={<PrintIcon />}
       onClick={handlePrint}
       sx={{
         background: "linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)",
